@@ -10,12 +10,6 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: false },
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@/views/RegisterView.vue'),
-    meta: { requiresAuth: false },
-  },
-  {
     path: '/',
     name: 'Dashboard',
     component: () => import('@/views/DashboardView.vue'),
@@ -75,7 +69,7 @@ router.beforeEach((to, _from, next) => {
 
   if (to.meta.requiresAuth && !auth.isLoggedIn) {
     next({ name: 'Login' })
-  } else if (!to.meta.requiresAuth && auth.isLoggedIn && (to.name === 'Login' || to.name === 'Register')) {
+  } else if (!to.meta.requiresAuth && auth.isLoggedIn && to.name === 'Login') {
     next({ name: 'Dashboard' })
   } else {
     next()

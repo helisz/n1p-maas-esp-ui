@@ -25,7 +25,7 @@ interface DemoUser extends User {
 
 const DEMO_USERS: DemoUser[] = [
   {
-    email: 'admin@example.com',
+    email: 'admin@sample.com',
     password: 'admin123',
     name: '张三',
     company: '中科云数科技有限公司',
