@@ -18,7 +18,8 @@ import CardHeader from '@/components/ui/CardHeader.vue'
 import CardTitle from '@/components/ui/CardTitle.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import CardDescription from '@/components/ui/CardDescription.vue'
-import { ShieldCheck, Package, Settings, FileText, Eye, EyeOff, Loader2 } from 'lucide-vue-next'
+// [AI_START TIMESTAMP=2025-06-15 14:00:00]
+import { ShieldCheck, Package, Settings, FileText, Eye, EyeOff, Loader2, Check, Lock, KeyRound, Fingerprint, Cloud, Zap, Headphones, BarChart3, FileSearch, ClipboardCheck, ArrowRight } from 'lucide-vue-next'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -140,7 +141,6 @@ async function handleRegister() {
         </div>
         <div class="flex items-center gap-4">
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">帮助中心</span>
-          <span class="hidden sm:inline text-muted-foreground">|</span>
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">联系我们</span>
           <Button size="sm" @click="openLogin">登录</Button>
           <Button variant="outline" size="sm" @click="openRegister">注册</Button>
@@ -149,83 +149,275 @@ async function handleRegister() {
     </nav>
 
     <!-- Hero Banner -->
-    <section class="pt-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center min-h-[33vh] justify-center py-16">
-        <h1 class="text-4xl sm:text-5xl font-bold text-center text-foreground">智慧无界，信以致远</h1>
-        <p class="text-lg text-center text-muted-foreground mt-4 max-w-2xl">一站式企业 MaaS API 服务平台，以安全为基，以高效为纲，赋能企业数字化升级</p>
+    <section class="pt-16 relative overflow-hidden bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90">
+      <!-- Decorative background elements -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-20 w-96 h-96 bg-primary/60 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/30 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-24 sm:py-32 lg:py-40">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-4 py-1.5 mb-8">
+          <Zap class="h-3.5 w-3.5 text-primary" />
+          <span class="text-xs font-medium text-background/80">企业级 MaaS API 服务平台</span>
+        </div>
+        <!-- Title -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-center text-background leading-tight tracking-tight">
+          智慧无界，信以致远
+        </h1>
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-center text-background/60 mt-6 max-w-3xl leading-relaxed">
+          一站式企业 MaaS API 服务平台，以安全为基，以高效为纲，赋能企业数字化升级
+        </p>
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row items-center gap-4 mt-10">
+          <Button size="lg" @click="openLogin" class="gap-2">
+            立即体验
+            <ArrowRight class="h-4 w-4" />
+          </Button>
+          <Button variant="outline" size="lg" @click="openRegister" class="border-background/20 text-background hover:bg-background/10  text-black">
+            免费注册
+          </Button>
+        </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-8 sm:gap-16 mt-16 pt-8 border-t border-background/10">
+          <div class="text-center">
+            <p class="text-2xl sm:text-3xl font-bold text-background">99.9%</p>
+            <p class="text-xs sm:text-sm text-background/50 mt-1">服务可用性</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl sm:text-3xl font-bold text-background">50+</p>
+            <p class="text-xs sm:text-sm text-background/50 mt-1">API 接口</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl sm:text-3xl font-bold text-background">7×24</p>
+            <p class="text-xs sm:text-sm text-background/50 mt-1">技术支持</p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Feature Section -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Card 1: Security -->
-        <Card class="hover:shadow-md transition-shadow">
-          <CardHeader>
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <ShieldCheck class="h-5 w-5 text-primary" />
-              </div>
-              <CardTitle class="text-base">安全认证・筑牢企业防线</CardTitle>
-            </div>
-          </CardHeader>
-          <CardContent class="space-y-2 text-sm text-muted-foreground">
-            <p><span class="font-medium text-foreground">核心：</span>对接中信网银 Key，关键操作强制双因子认证</p>
-            <p><span class="font-medium text-foreground">保障：</span>企业身份实名校验、操作全程签名留痕、数据传输加密</p>
-            <p><span class="font-medium text-foreground">场景：</span>登录、支付、服务开通、密钥变更等核心环节</p>
-          </CardContent>
-        </Card>
+    <!-- Feature Section — 4 full-width rows -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-0">
 
-        <!-- Card 2: MaaS Services -->
-        <Card class="hover:shadow-md transition-shadow">
-          <CardHeader>
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Package class="h-5 w-5 text-primary" />
+        <!-- Feature 1: Security Authentication -->
+        <div class="py-12 sm:py-16 border-b border-border">
+          <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+            <!-- Left: Icon + Title + Description -->
+            <div class="flex-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                  <ShieldCheck class="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全认证・筑牢企业防线</h2>
+                  <p class="text-sm text-muted-foreground mt-0.5">Enterprise-Grade Security</p>
+                </div>
               </div>
-              <CardTitle class="text-base">MaaS 服务・一站式采购开通</CardTitle>
+              <p class="text-base text-muted-foreground leading-relaxed mb-6">
+                对接中信网银 Key 认证体系，在登录、支付、服务开通、密钥变更等核心环节实施强制双因子认证，确保每一次关键操作都经过严格的身份核验，为企业数据资产构筑坚实的安全屏障。
+              </p>
             </div>
-          </CardHeader>
-          <CardContent class="space-y-2 text-sm text-muted-foreground">
-            <p><span class="font-medium text-foreground">核心：</span>全品类 MaaS API 套餐展示、在线选购、自动开通</p>
-            <p><span class="font-medium text-foreground">优势：</span>基础版/企业版/旗舰版灵活选择，公有云无缝对接，开通无需人工干预</p>
-            <p><span class="font-medium text-foreground">服务：</span>套餐用量监控、API 在线调试、专属技术支持</p>
-          </CardContent>
-        </Card>
+            <!-- Right: Feature details grid -->
+            <div class="flex-1 w-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Lock class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">数据传输加密</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">全链路 TLS 1.3 加密传输，保障数据在客户端与服务器之间的安全通信</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <KeyRound class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">网银 Key 认证</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">对接中信网银 Key 硬件证书，关键操作强制双因子身份核验</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Fingerprint class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">实名校验</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">企业身份实名认证，操作全程签名留痕，责任可追溯到人</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Check class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">全场景覆盖</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">覆盖登录、支付、服务开通、密钥变更等所有核心业务场景</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- Card 3: Full-process Management -->
-        <Card class="hover:shadow-md transition-shadow">
-          <CardHeader>
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <Settings class="h-5 w-5 text-primary" />
+        <!-- Feature 2: MaaS Services -->
+        <div class="py-12 sm:py-16 border-b border-border">
+          <div class="flex flex-col lg:flex-row-reverse items-start gap-8 lg:gap-16">
+            <!-- Right: Icon + Title + Description -->
+            <div class="flex-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                  <Package class="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold text-foreground">MaaS 服务・一站式采购开通</h2>
+                  <p class="text-sm text-muted-foreground mt-0.5">One-Stop MaaS Procurement</p>
+                </div>
               </div>
-              <CardTitle class="text-base">全流程管理・高效便捷</CardTitle>
+              <p class="text-base text-muted-foreground leading-relaxed mb-6">
+                全品类 MaaS API 套餐集中展示，支持在线选购、自动开通，无需人工干预。从基础版到旗舰版灵活选择，公有云无缝对接，让企业以最快速度接入所需的大模型服务能力。
+              </p>
             </div>
-          </CardHeader>
-          <CardContent class="space-y-2 text-sm text-muted-foreground">
-            <p><span class="font-medium text-foreground">核心：</span>订单管理、服务管理、API 管理、账单管理一体化</p>
-            <p><span class="font-medium text-foreground">功能：</span>订单查询、API 密钥管控、调用量统计、账单明细导出</p>
-            <p><span class="font-medium text-foreground">价值：</span>减少企业运营成本，实现服务全生命周期可视化管理</p>
-          </CardContent>
-        </Card>
+            <!-- Left: Feature details grid -->
+            <div class="flex-1 w-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Package class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">灵活套餐选择</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">基础版 / 企业版 / 旗舰版三档灵活选择，满足不同规模企业需求</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Cloud class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">公有云无缝对接</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">开通即用，无需人工干预，标准 API 接口快速对接企业现有系统</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <BarChart3 class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">用量实时监控</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">套餐用量可视化监控，API 调用统计一目了然，费用透明可控</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Headphones class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">专属技术支持</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">API 在线调试工具，专属客户经理一对一服务，7×24 小时响应</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <!-- Card 4: Security Audit -->
-        <Card class="hover:shadow-md transition-shadow">
-          <CardHeader>
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                <FileText class="h-5 w-5 text-primary" />
+        <!-- Feature 3: Full-process Management -->
+        <div class="py-12 sm:py-16 border-b border-border">
+          <div class="flex flex-col lg:flex-row items-start gap-8 lg:gap-16">
+            <!-- Left: Icon + Title + Description -->
+            <div class="flex-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                  <Settings class="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold text-foreground">全流程管理・高效便捷</h2>
+                  <p class="text-sm text-muted-foreground mt-0.5">Lifecycle Management</p>
+                </div>
               </div>
-              <CardTitle class="text-base">安全审计・可溯可查</CardTitle>
+              <p class="text-base text-muted-foreground leading-relaxed mb-6">
+                订单管理、服务管理、API 管理、账单管理四大模块一体化整合。从下单到开通、从监控到续费，实现服务全生命周期的可视化管理，大幅降低企业运营成本。
+              </p>
             </div>
-          </CardHeader>
-          <CardContent class="space-y-2 text-sm text-muted-foreground">
-            <p><span class="font-medium text-foreground">核心：</span>全流程操作日志记录，满足企业合规要求</p>
-            <p><span class="font-medium text-foreground">功能：</span>登录日志、操作日志、网银 Key 认证日志、API 调用日志</p>
-            <p><span class="font-medium text-foreground">保障：</span>日志不可篡改，支持导出审计，适配企业合规检查</p>
-          </CardContent>
-        </Card>
+            <!-- Right: Feature details grid -->
+            <div class="flex-1 w-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <FileText class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">订单全流程跟踪</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">从下单、审批、支付到开通，订单状态实时追踪，进度透明可视</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <KeyRound class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">API 密钥管控</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">密钥生成、权限配置、调用范围管控，精细化的 API 访问授权管理</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <BarChart3 class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">调用量统计</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">多维度 API 调用统计分析，用量趋势、异常告警、配额管理一站搞定</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <ClipboardCheck class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">账单明细导出</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">透明账单明细，支持按月导出报表，对接企业财务系统，开票便捷</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Security Audit -->
+        <div class="py-12 sm:py-16">
+          <div class="flex flex-col lg:flex-row-reverse items-start gap-8 lg:gap-16">
+            <!-- Right: Icon + Title + Description -->
+            <div class="flex-1">
+              <div class="flex items-center gap-4 mb-6">
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10">
+                  <FileSearch class="h-7 w-7 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全审计・可溯可查</h2>
+                  <p class="text-sm text-muted-foreground mt-0.5">Comprehensive Audit Trail</p>
+                </div>
+              </div>
+              <p class="text-base text-muted-foreground leading-relaxed mb-6">
+                全流程操作日志记录，满足企业合规审查要求。从登录日志到 API 调用日志，所有操作留痕不可篡改，支持多维度检索与导出审计报告，为企业合规检查提供坚实数据支撑。
+              </p>
+            </div>
+            <!-- Left: Feature details grid -->
+            <div class="flex-1 w-full">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <FileText class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">全类型日志</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">覆盖登录日志、操作日志、网银 Key 认证日志、API 调用日志全类型</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <Lock class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">日志不可篡改</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">采用区块链级存储技术，日志一旦写入不可修改或删除，确保审计真实性</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <FileSearch class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">多维度检索</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">按时间、操作人、操作类型等多维度灵活检索，快速定位目标记录</p>
+                </div>
+                <div class="rounded-xl border border-border bg-muted/30 p-4 space-y-2">
+                  <div class="flex items-center gap-2">
+                    <ClipboardCheck class="h-4 w-4 text-primary" />
+                    <span class="text-sm font-medium text-foreground">导出审计报告</span>
+                  </div>
+                  <p class="text-xs text-muted-foreground leading-relaxed">一键导出标准化审计报告，适配企业内控合规检查与外部审计需求</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
