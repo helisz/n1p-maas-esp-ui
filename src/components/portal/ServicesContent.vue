@@ -95,9 +95,8 @@ function handleResetKey(key: typeof apiKeys[0]) {
                     <CardDescription>有效期：{{ pkg.startDate }} 至 {{ pkg.endDate }}</CardDescription>
                   </div>
                 </div>
-                <Badge :variant="pkg.status === 'active' ? 'default' : 'destructive'">
-                  {{ pkg.status === 'active' ? '运行中' : '即将到期' }}
-                </Badge>
+                <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />运行中</Badge>
+                <Badge v-else variant="outline" class="gap-1"><AlertTriangle class="h-3 w-3 text-red-500" />即将到期</Badge>
               </div>
             </CardHeader>
             <CardContent class="space-y-4">
@@ -208,7 +207,7 @@ function handleResetKey(key: typeof apiKeys[0]) {
                   <TableCell class="text-muted-foreground">{{ log.time }}</TableCell>
                   <TableCell class="font-mono text-sm">{{ log.api }}</TableCell>
                   <TableCell><div class="flex items-center gap-2"><AlertTriangle class="h-4 w-4 text-yellow-500" />{{ log.error }}</div></TableCell>
-                  <TableCell><Badge variant="destructive">{{ log.code }}</Badge></TableCell>
+                  <TableCell><Badge variant="outline" class="gap-1 text-red-500">{{ log.code }}</Badge></TableCell>
                 </TableRow>
               </TableBody>
             </Table>

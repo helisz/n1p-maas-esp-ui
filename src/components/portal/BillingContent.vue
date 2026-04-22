@@ -111,7 +111,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
                   <TableCell class="font-medium">¥{{ bill.amount.toLocaleString() }}</TableCell>
                   <TableCell>
                     <Badge v-if="bill.status === 'paid'" variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />已支付</Badge>
-                    <Badge v-else variant="destructive" class="gap-1"><Clock class="h-3 w-3" />待支付</Badge>
+                    <Badge v-else variant="outline" class="gap-1"><Clock class="h-3 w-3 text-yellow-500" />待支付</Badge>
                   </TableCell>
                   <TableCell class="text-right">
                     <div class="flex justify-end gap-2">
@@ -137,7 +137,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
                   <p class="font-medium">{{ stat.package }}</p>
                   <p class="text-sm text-muted-foreground">已用 {{ stat.used.toLocaleString() }} / 额度 {{ stat.quota.toLocaleString() }} 次</p>
                 </div>
-                <Badge v-if="stat.overage > 0" variant="destructive" class="gap-1"><AlertCircle class="h-3 w-3" />超量 {{ stat.overage.toLocaleString() }} 次</Badge>
+                <Badge v-if="stat.overage > 0" variant="outline" class="gap-1"><AlertCircle class="h-3 w-3 text-red-500" />超量 {{ stat.overage.toLocaleString() }} 次</Badge>
               </div>
               <Progress :value="Math.min(Math.round((stat.used / stat.quota) * 100), 100)" />
               <p v-if="stat.overage > 0" class="text-xs text-destructive">超量费用：¥{{ (stat.overage * stat.overagePrice).toLocaleString() }}</p>

@@ -34,7 +34,7 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
       <!-- Notifications -->
       <Button variant="ghost" size="icon" class="relative">
         <Bell class="h-4 w-4" />
-        <Badge class="absolute -right-0.5 -top-0.5 h-4 w-4 rounded-full p-0 text-[10px]">
+        <Badge class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] leading-none">
           3
         </Badge>
       </Button>

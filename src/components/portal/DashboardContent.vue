@@ -18,6 +18,8 @@ import {
   FileText,
   TrendingUp,
   ShieldCheck,
+  CheckCircle2,
+  AlertTriangle,
 } from 'lucide-vue-next'
 
 const router = useRouter()
@@ -166,11 +168,11 @@ function navigate(href: string) {
               <p class="font-medium">{{ pkg.name }}</p>
               <p class="text-sm text-muted-foreground">到期：{{ pkg.expiry }}</p>
             </div>
-            <Badge
-              :variant="pkg.status === 'expiring' ? 'destructive' : 'outline'"
-              class="gap-1"
-            >
-              {{ pkg.status === 'active' ? '运行中' : '即将到期' }}
+            <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1">
+              <CheckCircle2 class="h-3 w-3 text-green-500" />运行中
+            </Badge>
+            <Badge v-else variant="outline" class="gap-1">
+              <AlertTriangle class="h-3 w-3 text-red-500" />即将到期
             </Badge>
           </div>
         </div>

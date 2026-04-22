@@ -39,8 +39,8 @@ const orders = [
 ]
 
 const statusConfig: Record<string, { label: string; variant: 'default' | 'outline' | 'secondary' | 'destructive'; icon: typeof Clock; color: string }> = {
-  pending: { label: '待支付', variant: 'outline', icon: Clock, color: 'text-yellow-600' },
-  paid: { label: '已支付', variant: 'default', icon: CheckCircle2, color: 'text-green-600' },
+  pending: { label: '待支付', variant: 'outline', icon: Clock, color: 'text-yellow-500' },
+  paid: { label: '已支付', variant: 'outline', icon: CheckCircle2, color: 'text-green-500' },
   cancelled: { label: '已取消', variant: 'secondary', icon: XCircle, color: 'text-muted-foreground' },
 }
 
@@ -133,7 +133,7 @@ const stats = computed(() => ({
               <TableCell class="font-medium">¥{{ order.amount.toLocaleString() }}</TableCell>
               <TableCell>
                 <Badge :variant="statusConfig[order.status].variant" class="gap-1">
-                  <component :is="statusConfig[order.status].icon" class="h-3 w-3" />
+                  <component :is="statusConfig[order.status].icon" :class="['h-3 w-3', statusConfig[order.status].color]" />
                   {{ statusConfig[order.status].label }}
                 </Badge>
               </TableCell>
@@ -203,7 +203,7 @@ const stats = computed(() => ({
           <div class="flex justify-between"><span class="text-muted-foreground">下单时间</span><span>{{ selectedOrder.createdAt }}</span></div>
           <div class="flex justify-between"><span class="text-muted-foreground">支付状态</span>
             <Badge :variant="statusConfig[selectedOrder.status].variant" class="gap-1">
-              <component :is="statusConfig[selectedOrder.status].icon" class="h-3 w-3" />
+              <component :is="statusConfig[selectedOrder.status].icon" :class="['h-3 w-3', statusConfig[selectedOrder.status].color]" />
               {{ statusConfig[selectedOrder.status].label }}
             </Badge>
           </div>
