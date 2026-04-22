@@ -1,0 +1,170 @@
+{
+  "classifyName": "Application",
+  "confidence": "High",
+  "techStack": [
+    "Vue 3 (Composition API + <script setup>)",
+    "TypeScript (~5.7)",
+    "Vite (^6.3)",
+    "Vue Router (^4.5, HTML5 History mode)",
+    "Pinia (^3.0)",
+    "Tailwind CSS (^4.1)",
+    "Radix Vue (^1.9)",
+    "Lucide Vue Next (^0.564)",
+    "class-variance-authority (^0.7)",
+    "clsx (^2.1)",
+    "tailwind-merge (^3.2)"
+  ],
+  "projectScale": "Medium",
+  "entrypoints": [
+    "index.html",
+    "src/main.ts",
+    "src/App.vue"
+  ],
+  "modules": [
+    {
+      "name": "Authentication",
+      "relatedSources": [
+        "src/stores/auth.ts",
+        "src/views/LoginView.vue",
+        "src/router/index.ts"
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "relatedSources": [
+        "src/views/DashboardView.vue",
+        "src/components/portal/DashboardContent.vue"
+      ]
+    },
+    {
+      "name": "Packages",
+      "relatedSources": [
+        "src/views/PackagesView.vue",
+        "src/components/portal/PackagesContent.vue"
+      ]
+    },
+    {
+      "name": "Orders",
+      "relatedSources": [
+        "src/views/OrdersView.vue",
+        "src/components/portal/OrdersContent.vue"
+      ]
+    },
+    {
+      "name": "Services",
+      "relatedSources": [
+        "src/views/ServicesView.vue",
+        "src/components/portal/ServicesContent.vue"
+      ]
+    },
+    {
+      "name": "Wallet",
+      "relatedSources": [
+        "src/views/WalletView.vue",
+        "src/components/portal/WalletContent.vue"
+      ]
+    },
+    {
+      "name": "Billing",
+      "relatedSources": [
+        "src/views/BillingView.vue",
+        "src/components/portal/BillingContent.vue"
+      ]
+    },
+    {
+      "name": "Audit",
+      "relatedSources": [
+        "src/views/AuditView.vue",
+        "src/components/portal/AuditContent.vue"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "relatedSources": [
+        "src/views/EnterpriseView.vue",
+        "src/components/portal/EnterpriseContent.vue"
+      ]
+    },
+    {
+      "name": "Accounts",
+      "relatedSources": [
+        "src/views/AccountsView.vue",
+        "src/components/portal/AccountsContent.vue"
+      ]
+    },
+    {
+      "name": "PortalLayout",
+      "relatedSources": [
+        "src/components/portal/PortalLayout.vue",
+        "src/components/portal/Sidebar.vue",
+        "src/components/portal/Header.vue"
+      ]
+    },
+    {
+      "name": "UI Component Library",
+      "relatedSources": [
+        "src/components/ui/Avatar.vue",
+        "src/components/ui/AvatarFallback.vue",
+        "src/components/ui/Badge.vue",
+        "src/components/ui/Button.vue",
+        "src/components/ui/Card.vue",
+        "src/components/ui/CardContent.vue",
+        "src/components/ui/CardDescription.vue",
+        "src/components/ui/CardFooter.vue",
+        "src/components/ui/CardHeader.vue",
+        "src/components/ui/CardTitle.vue",
+        "src/components/ui/Dialog.vue",
+        "src/components/ui/DialogContent.vue",
+        "src/components/ui/DialogDescription.vue",
+        "src/components/ui/DialogFooter.vue",
+        "src/components/ui/DialogHeader.vue",
+        "src/components/ui/DialogTitle.vue",
+        "src/components/ui/DropdownMenu.vue",
+        "src/components/ui/DropdownMenuContent.vue",
+        "src/components/ui/DropdownMenuItem.vue",
+        "src/components/ui/DropdownMenuSeparator.vue",
+        "src/components/ui/DropdownMenuTrigger.vue",
+        "src/components/ui/Input.vue",
+        "src/components/ui/Label.vue",
+        "src/components/ui/Progress.vue",
+        "src/components/ui/Select.vue",
+        "src/components/ui/SelectContent.vue",
+        "src/components/ui/SelectItem.vue",
+        "src/components/ui/SelectTrigger.vue",
+        "src/components/ui/Separator.vue",
+        "src/components/ui/Switch.vue",
+        "src/components/ui/Table.vue",
+        "src/components/ui/TableBody.vue",
+        "src/components/ui/TableCell.vue",
+        "src/components/ui/TableHead.vue",
+        "src/components/ui/TableHeader.vue",
+        "src/components/ui/TableRow.vue",
+        "src/components/ui/Tabs.vue",
+        "src/components/ui/TabsContent.vue",
+        "src/components/ui/TabsList.vue",
+        "src/components/ui/TabsTrigger.vue"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "relatedSources": [
+        "src/lib/utils.ts"
+      ]
+    }
+  ],
+  "complexityLevel": "Medium",
+  "recommendedStrategy": "Standard",
+  "evidence": [
+    "package.json declares private application 'maas-portal-vue' with dev/build/preview scripts — confirming standalone deployable SPA",
+    "10 defined routes in src/router/index.ts with auth guards indicate complete multi-page application with protected workflows",
+    "12 portal business components under src/components/portal/ implement specific MaaS domain logic (packages, orders, services, billing, audit, enterprise, accounts, wallet)",
+    "40 Radix Vue wrapper components under src/components/ui/ form a reusable UI component library within the application",
+    "src/stores/auth.ts implements complete auth flow with demo user login, registration, session persistence via sessionStorage, and logout",
+    "src/main.ts serves as the application bootstrap — initializes Pinia store, restores auth session, registers router, and mounts the Vue app",
+    "No library/framework export patterns found (no index.ts barrel exports, no plugin registration API, no build-to-library config)",
+    "Tailwind CSS v4 integrated via @tailwindcss/vite plugin with class-variance-authority for component variant management",
+    "Vite configured with Vue plugin, Tailwind plugin, and @/ path alias mapping to ./src — standard SPA build configuration",
+    "README.md documents 8 core business modules with Chinese localization, confirming enterprise MaaS portal positioning"
+  ],
+  "summary": "MaaS Portal Vue is an enterprise-grade single-page application (SPA) built with Vue 3 + TypeScript, serving as a Model-as-a-Service management portal. The application provides a complete front-end interface for enterprise users to manage MaaS service packages, orders, service instances, billing, wallets, audit logs, enterprise information, and sub-account permissions. It features 10 business routes with authentication guards, a Pinia-based auth store with session persistence, a comprehensive UI component library (40 components) built on Radix Vue, and a collapsible sidebar layout. The project uses Vite as the build tool with Tailwind CSS v4 for styling. Currently at v0.1.0 with mock/demo authentication and no backend API integration, representing a front-end prototype or early-stage application."
+}

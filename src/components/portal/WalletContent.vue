@@ -99,12 +99,9 @@ async function handleRecharge() {
             <div>
               <div class="text-4xl font-bold text-foreground">
                 {{ formatCredit(balance - frozenAmount) }}
-                <span class="text-lg font-normal text-muted-foreground ml-1">Credit</span>
+                
               </div>
-              <p class="text-xs text-muted-foreground mt-2">
-                总余额 {{ formatCredit(balance) }} Credit
-                <span class="ml-2">冻结 {{ formatCredit(frozenAmount) }} Credit</span>
-              </p>
+              <div class="text-sm pt-2 font-normal text-muted-foreground ml-1">Credit(s)</div>
             </div>
             <Button class="gap-2" @click="rechargeOpen = true">
               <Plus class="h-4 w-4" />

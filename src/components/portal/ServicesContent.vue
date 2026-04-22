@@ -31,9 +31,9 @@ import {
 } from 'lucide-vue-next'
 
 const myPackages = [
-  { id: 'pkg-001', name: 'GPT-4 企业版', status: 'active', startDate: '2024-03-15', endDate: '2024-06-15', usedCalls: 89456, totalCalls: 200000, apiEndpoint: 'https://api.maas-portal.com/v1/gpt4' },
-  { id: 'pkg-002', name: 'Embedding 基础版', status: 'active', startDate: '2024-02-01', endDate: '2024-05-01', usedCalls: 78000, totalCalls: 100000, apiEndpoint: 'https://api.maas-portal.com/v1/embedding' },
-  { id: 'pkg-003', name: 'Claude 基础版', status: 'expiring', startDate: '2024-01-15', endDate: '2024-04-01', usedCalls: 45000, totalCalls: 50000, apiEndpoint: 'https://api.maas-portal.com/v1/claude' },
+  { id: 'pkg-001', name: '高级版', status: 'active', startDate: '2024-03-15', endDate: '2024-06-15', usedCalls: 89456, totalCalls: 200000, apiEndpoint: 'https://api.maas-portal.com/v1' },
+  { id: 'pkg-002', name: '基础版', status: 'active', startDate: '2024-02-01', endDate: '2024-05-01', usedCalls: 78000, totalCalls: 100000, apiEndpoint: 'https://api.maas-portal.com/v1' },
+  { id: 'pkg-003', name: '尊享版', status: 'expiring', startDate: '2024-01-15', endDate: '2024-04-01', usedCalls: 450000, totalCalls: 1000000, apiEndpoint: 'https://api.maas-portal.com/v1' },
 ]
 
 const apiKeys = [
@@ -49,9 +49,9 @@ const apiCallStats = [
 ]
 
 const errorLogs = [
-  { time: '2024-03-15 14:32:15', api: '/v1/gpt4/completions', error: 'Rate limit exceeded', code: 429 },
-  { time: '2024-03-15 12:15:30', api: '/v1/embedding/create', error: 'Invalid input format', code: 400 },
-  { time: '2024-03-14 18:45:00', api: '/v1/gpt4/completions', error: 'Token limit exceeded', code: 400 },
+  { time: '2024-03-15 14:32:15', api: '/v1/completions', error: 'Rate limit exceeded', code: 429 },
+  { time: '2024-03-15 12:15:30', api: '/v1/embedding', error: 'Invalid input format', code: 400 },
+  { time: '2024-03-14 18:45:00', api: '/v1/completions', error: 'Token limit exceeded', code: 400 },
 ]
 
 const showSecretKey = ref<string | null>(null)
@@ -234,4 +234,4 @@ function handleResetKey(key: typeof apiKeys[0]) {
     </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=176 TIMESTAMP=2025-06-15 12:00:00] -->
+<!-- [AI_END LINES=193 TIMESTAMP=2025-06-15 12:00:00] -->

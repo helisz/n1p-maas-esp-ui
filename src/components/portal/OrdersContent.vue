@@ -30,12 +30,12 @@ import {
 } from 'lucide-vue-next'
 
 const orders = [
-  { id: 'ORD202403150001', packageName: 'GPT-4 企业版', amount: 5999, status: 'paid', createdAt: '2024-03-15 14:30:00', paidAt: '2024-03-15 14:35:00' },
-  { id: 'ORD202403150002', packageName: 'Embedding 基础版', amount: 999, status: 'pending', createdAt: '2024-03-15 10:20:00', paidAt: null },
-  { id: 'ORD202403140003', packageName: '视觉 API 企业版', amount: 4999, status: 'pending', createdAt: '2024-03-14 16:45:00', paidAt: null },
-  { id: 'ORD202403130004', packageName: 'GPT-4 基础版', amount: 1999, status: 'paid', createdAt: '2024-03-13 09:15:00', paidAt: '2024-03-13 09:20:00' },
-  { id: 'ORD202403120005', packageName: 'Claude 旗舰版', amount: 19999, status: 'cancelled', createdAt: '2024-03-12 11:30:00', paidAt: null },
-  { id: 'ORD202403100006', packageName: 'GPT-4 企业版', amount: 5999, status: 'paid', createdAt: '2024-03-10 15:00:00', paidAt: '2024-03-10 15:05:00' },
+  { id: 'ORD202403150001', packageName: '高级版', amount: 5999, status: 'paid', createdAt: '2024-03-15 14:30:00', paidAt: '2024-03-15 14:35:00' },
+  { id: 'ORD202403150002', packageName: '基础版', amount: 1999, status: 'pending', createdAt: '2024-03-15 10:20:00', paidAt: null },
+  { id: 'ORD202403140003', packageName: '高级版', amount: 5999, status: 'pending', createdAt: '2024-03-14 16:45:00', paidAt: null },
+  { id: 'ORD202403130004', packageName: '基础版', amount: 1999, status: 'paid', createdAt: '2024-03-13 09:15:00', paidAt: '2024-03-13 09:20:00' },
+  { id: 'ORD202403120005', packageName: '尊享版', amount: 19999, status: 'cancelled', createdAt: '2024-03-12 11:30:00', paidAt: null },
+  { id: 'ORD202403100006', packageName: '高级版', amount: 5999, status: 'paid', createdAt: '2024-03-10 15:00:00', paidAt: '2024-03-10 15:05:00' },
 ]
 
 const statusConfig: Record<string, { label: string; variant: 'default' | 'outline' | 'secondary' | 'destructive'; icon: typeof Clock; color: string }> = {
@@ -214,4 +214,4 @@ const stats = computed(() => ({
     </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=140 TIMESTAMP=2025-06-15 12:00:00] -->
+<!-- [AI_END LINES=177 TIMESTAMP=2025-06-15 12:00:00] -->

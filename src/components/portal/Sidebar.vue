@@ -24,7 +24,7 @@ const collapsed = ref(false)
 
 const menuItems = [
   { title: '控制台首页', href: '/', icon: LayoutDashboard },
-  { title: 'MaaS 套餐中心', href: '/packages', icon: Package },
+  { title: '订购服务', href: '/packages', icon: Package },
   { title: '我的订单', href: '/orders', icon: ShoppingCart },
   { title: '服务管理', href: '/services', icon: Server },
   { title: '智信钱包', href: '/wallet', icon: Wallet },

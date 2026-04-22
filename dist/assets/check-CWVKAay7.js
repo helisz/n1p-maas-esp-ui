@@ -1,6 +1,0 @@
-import{b as c}from"./Input.vue_vue_type_script_setup_true_lang-X3OXEOCz.js";/**
- * @license lucide-vue-next v0.564.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const o=c("check",[["path",{d:"M20 6 9 17l-5-5",key:"1gmf2c"}]]);export{o as C};

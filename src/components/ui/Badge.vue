@@ -3,6 +3,7 @@
 import { computed } from 'vue'
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
+import type { ClassValue } from 'clsx'
 
 const badgeVariants = cva(
   'inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2',
@@ -25,7 +26,7 @@ type BadgeVariants = VariantProps<typeof badgeVariants>
 
 const props = withDefaults(defineProps<{
   variant?: NonNullable<BadgeVariants['variant']>
-  class?: string
+  class?: ClassValue
 }>(), {
   variant: 'default',
 })
