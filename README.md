@@ -1,92 +1,242 @@
-# num1_project
+<!-- [AI_START TIMESTAMP=2025-06-15 12:30:00] -->
+# MaaS Portal Vue — 企业统一服务门户
 
+## 项目简介
 
+**MaaS Portal Vue** 是一个基于 Vue 3 的企业级 **MaaS（Model-as-a-Service）** 服务管理门户前端应用。提供从套餐浏览、订单管理、服务监控到账单结算的全流程操作界面，同时支持企业信息管理和子账号权限控制。
 
-## Getting started
+### 核心功能模块
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+| 模块 | 路由 | 说明 |
+|------|------|------|
+| 📊 控制台首页 | `/` | 仪表盘概览，展示关键运营指标 |
+| 📦 MaaS 套餐中心 | `/packages` | 浏览和选择 MaaS 服务套餐 |
+| 🛒 我的订单 | `/orders` | 查看与管理已提交的订单 |
+| 🖥️ 服务管理 | `/services` | 管理已开通的 MaaS 服务实例 |
+| 💰 账单与计费 | `/billing` | 账单查看、费用统计与支付管理 |
+| 📝 操作审计 | `/audit` | 系统操作日志与安全审计 |
+| 🏢 企业信息管理 | `/enterprise` | 企业资质与联系信息维护 |
+| 👥 子账号与权限 | `/accounts` | 子账号创建、角色与权限管理 |
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+---
 
-## Add your files
+## 技术栈
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| [Vue](https://vuejs.org/) | ^3.5 | 前端框架（Composition API + `<script setup>`） |
+| [TypeScript](https://www.typescriptlang.org/) | ~5.7 | 类型安全 |
+| [Vite](https://vitejs.dev/) | ^6.3 | 构建工具与开发服务器 |
+| [Vue Router](https://router.vuejs.org/) | ^4.5 | 客户端路由（HTML5 History 模式） |
+| [Pinia](https://pinia.vuejs.org/) | ^3.0 | 状态管理 |
+| [Tailwind CSS](https://tailwindcss.com/) | ^4.1 | 原子化 CSS 框架 |
+| [Radix Vue](https://www.radix-vue.com/) | ^1.9 | 无障碍 UI 原语组件 |
+| [Lucide Icons](https://lucide.dev/) | ^0.564 | 图标库 |
+| [class-variance-authority](https://cva.style/) | ^0.7 | 组件样式变体管理 |
+
+---
+
+## 项目结构
 
 ```
-cd existing_repo
-git remote add origin https://srclab.citictel.com/chrishe/num1_project.git
-git branch -M main
-git push -uf origin main
+maas-portal-vue/
+├── public/                     # 静态资源（图标、占位图等）
+├── src/
+│   ├── main.ts                 # 应用入口，初始化 Pinia / Router / Auth
+│   ├── App.vue                 # 根组件（<router-view>）
+│   ├── style.css               # 全局样式（Tailwind 引入）
+│   ├── components/
+│   │   ├── portal/             # 业务组件
+│   │   │   ├── PortalLayout.vue    # 主布局（Sidebar + Header + Content）
+│   │   │   ├── Sidebar.vue         # 可折叠侧边栏导航
+│   │   │   ├── Header.vue          # 顶部导航栏
+│   │   │   ├── DashboardContent.vue
+│   │   │   ├── PackagesContent.vue
+│   │   │   ├── OrdersContent.vue
+│   │   │   ├── ServicesContent.vue
+│   │   │   ├── BillingContent.vue
+│   │   │   ├── AuditContent.vue
+│   │   │   ├── EnterpriseContent.vue
+│   │   │   └── AccountsContent.vue
+│   │   └── ui/                 # 通用 UI 组件（基于 Radix Vue 封装）
+│   │       ├── Avatar.vue / Badge / Button / Card / Dialog /
+│   │       ├── DropdownMenu / Input / Label / Progress / Select /
+│   │       ├── Separator / Switch / Table / Tabs …
+│   ├── lib/
+│   │   └── utils.ts            # 工具函数（cn 类名合并）
+│   ├── router/
+│   │   └── index.ts            # 路由配置 + 导航守卫
+│   ├── stores/
+│   │   └── auth.ts             # 认证状态管理（Pinia Store）
+│   └── views/                  # 页面级视图组件
+│       ├── LoginView.vue
+│       ├── RegisterView.vue
+│       ├── DashboardView.vue
+│       ├── PackagesView.vue
+│       ├── OrdersView.vue
+│       ├── ServicesView.vue
+│       ├── BillingView.vue
+│       ├── AuditView.vue
+│       ├── EnterpriseView.vue
+│       └── AccountsView.vue
+├── index.html                  # HTML 入口
+├── vite.config.ts              # Vite 配置（Vue 插件 + Tailwind + 路径别名）
+├── tsconfig.json               # TypeScript 配置
+└── package.json                # 项目依赖与脚本
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://srclab.citictel.com/chrishe/num1_project/-/settings/integrations)
+## 快速开始
 
-## Collaborate with your team
+### 环境要求
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- **Node.js** >= 18.0.0
+- **npm** >= 9.0.0（或 pnpm / yarn）
 
-## Test and Deploy
+### 安装依赖
 
-Use the built-in continuous integration in GitLab.
+```bash
+npm install
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### 启动开发服务器
 
-***
+```bash
+npm run dev
+```
 
-# Editing this README
+应用默认运行在 `http://localhost:5173`。
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Demo 账号
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+项目内置了演示账号，可直接登录体验：
 
-## Name
-Choose a self-explaining name for your project.
+| 邮箱 | 密码 | 角色 |
+|------|------|------|
+| `admin@example.com` | `admin123` | 超级管理员 |
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+> **注意**：认证状态通过 `sessionStorage` 维持，关闭浏览器后需重新登录。
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+---
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## 构建与部署
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### 生产构建
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+```bash
+npm run build
+```
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+构建产物将输出到 `dist/` 目录。执行流程：
+1. `vue-tsc -b` — TypeScript 类型检查
+2. `vite build` — 打包优化并输出静态文件
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### 本地预览构建产物
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+```bash
+npm run preview
+```
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### 部署方式
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+#### 方式一：静态文件托管（Nginx / CDN）
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+将 `dist/` 目录部署至任意静态文件服务器即可。以 Nginx 为例：
 
-## License
-For open source projects, say how it is licensed.
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    root /usr/share/nginx/html;
+    index index.html;
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+    # SPA 路由 fallback
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 静态资源缓存
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+}
+```
+
+#### 方式二：Docker 容器部署
+
+```dockerfile
+# 构建阶段
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# 运行阶段
+FROM nginx:alpine
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+构建并运行：
+
+```bash
+docker build -t maas-portal .
+docker run -d -p 80:80 maas-portal
+```
+
+#### 方式三：Vercel / Netlify 一键部署
+
+**Vercel**：
+
+```bash
+npx vercel --prod
+```
+
+**Netlify**：在控制台中连接 Git 仓库，设置构建命令为 `npm run build`，发布目录为 `dist`，并添加 `_redirects` 文件：
+
+```
+/*    /index.html    200
+```
+
+---
+
+## 开发指南
+
+### 路径别名
+
+项目配置了 `@` 指向 `src/` 目录，可在任意文件中直接使用：
+
+```ts
+import { useAuthStore } from '@/stores/auth'
+import Button from '@/components/ui/Button.vue'
+```
+
+### 新增页面
+
+1. 在 `src/views/` 下创建视图组件
+2. 在 `src/router/index.ts` 中注册路由
+3. 在 `src/components/portal/Sidebar.vue` 中添加菜单项
+4. 在 `src/components/portal/` 下创建对应的 Content 组件
+
+### UI 组件
+
+通用 UI 组件位于 `src/components/ui/`，基于 [Radix Vue](https://www.radix-vue.com/) 头部组件封装，遵循一致的设计规范。新增 UI 组件时请保持相同的命名和结构风格。
+
+### 样式规范
+
+- 使用 **Tailwind CSS v4** 原子类进行样式编写
+- 使用 `cn()` 工具函数（基于 `clsx` + `tailwind-merge`）合并类名
+- 全局样式变量定义在 `src/style.css` 中
+
+---
+
+## 许可证
+
+Private — 仅供内部使用。
+<!-- [AI_END LINES=172 TIMESTAMP=2025-06-15 12:30:00] -->
