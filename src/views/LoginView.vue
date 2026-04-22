@@ -149,22 +149,39 @@ async function handleRegister() {
     </nav>
 
     <!-- Hero Banner -->
-    <section class="pt-16 relative overflow-hidden bg-gradient-to-br from-foreground via-foreground/95 to-foreground/90">
-      <!-- Decorative background elements -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-20 w-96 h-96 bg-primary/60 rounded-full blur-3xl"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/30 rounded-full blur-3xl"></div>
+    <section class="pt-16 relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900">
+      <!-- Dot grid texture -->
+      <svg class="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="dot-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+            <circle cx="1.5" cy="1.5" r="0.8" fill="white" />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#dot-pattern)" />
+      </svg>
+
+      <!-- Animated blurred orbs -->
+      <div class="absolute -top-20 left-1/4 w-[500px] h-[500px] bg-indigo-500/20 rounded-full blur-[120px] animate-blob" />
+      <div class="absolute -bottom-20 right-1/4 w-[600px] h-[600px] bg-blue-500/15 rounded-full blur-[120px] animate-blob animation-delay-2000" />
+      <div class="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] animate-blob animation-delay-4000" />
+
+      <!-- Animated SVG rings -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <svg class="w-[600px] h-[600px] opacity-[0.08] animate-spin-slow" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="4 4" />
+          <circle cx="100" cy="100" r="70" fill="none" stroke="white" stroke-width="0.3" stroke-dasharray="2 6" />
+          <circle cx="100" cy="100" r="50" fill="none" stroke="white" stroke-width="0.2" stroke-dasharray="1 8" />
+        </svg>
       </div>
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-24 sm:py-32 lg:py-40">
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-4 py-1.5 mb-8">
-          <Zap class="h-3.5 w-3.5 text-primary" />
+          <Zap class="h-3.5 w-3.5 text-secondary" />
           <span class="text-xs font-medium text-background/80">企业级 MaaS API 服务平台</span>
         </div>
         <!-- Title -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-center text-background leading-tight tracking-tight">
-          智慧无界，信以致远
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-center text-background leading-tight tracking-tight">
+          智慧无界 · 信以致远
         </h1>
         <!-- Subtitle -->
         <p class="text-lg sm:text-xl text-center text-background/60 mt-6 max-w-3xl leading-relaxed">
@@ -548,3 +565,28 @@ async function handleRegister() {
     </DialogContent>
   </Dialog>
 </template>
+
+<style scoped>
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+</style>

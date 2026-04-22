@@ -1,0 +1,1 @@
+import{a as t}from"./Input.vue_vue_type_script_setup_true_lang-BfPD12rr.js";import{d as r,o as n,c,n as l,x as p,b as m}from"./index-BhveZgel.js";const f=r({__name:"CardDescription",props:{class:{}},setup(s){const e=s,o=m(()=>t("text-sm text-muted-foreground",e.class));return(a,d)=>(n(),c("p",{class:l(o.value)},[p(a.$slots,"default")],2))}});export{f as _};
