@@ -52,7 +52,7 @@ function navigate(href: string) {
         <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
           <span class="text-sm font-bold text-background">M</span>
         </div>
-        <span v-if="!collapsed" class="text-sm font-semibold text-foreground">MaaS Portal</span>
+        <span v-if="!collapsed" class="text-sm font-semibold text-foreground">LOGO</span>
       </div>
     </div>
 
