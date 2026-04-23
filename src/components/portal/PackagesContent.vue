@@ -27,8 +27,6 @@ const packages = [
     period: '月',
     features: [
       '大语言模型 API 50,000 次/月',
-      '向量服务 API 100,000 次/月',
-      '视觉服务 API 30,000 次/月',
       '标准响应速度',
       '基础技术支持',
       'API 文档访问',
@@ -46,8 +44,6 @@ const packages = [
     period: '月',
     features: [
       '大语言模型 API 200,000 次/月',
-      '向量服务 API 500,000 次/月',
-      '视觉服务 API 150,000 次/月',
       '优先响应队列',
       '7×24 技术支持',
       '专属客户经理',
@@ -66,8 +62,6 @@ const packages = [
     period: '月',
     features: [
       '大语言模型 API 1,000,000 次/月',
-      '向量服务 API 2,000,000 次/月',
-      '视觉服务 API 500,000 次/月',
       '最高响应优先级',
       '专属技术团队支持',
       'SLA 99.99% 保障',
@@ -104,7 +98,7 @@ function handlePurchase(pkg: typeof packages[0]) {
     </div>
 
     <!-- Package Cards -->
-    <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 items-stretch">
+    <div class="grid gap-6 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 xxl:grid-cols-4 items-stretch">
       <Card
         v-for="pkg in packages"
         :key="pkg.id"
@@ -123,7 +117,7 @@ function handlePurchase(pkg: typeof packages[0]) {
 
         <!-- Card Header with Gradient -->
         <CardHeader :class="['relative pb-6 pt-7', pkg.popular ? 'bg-indigo-50/60' : 'bg-muted/30']">
-          <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r" :class="tierConfig[pkg.tier].gradient" />
+          <!-- <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r" :class="tierConfig[pkg.tier].gradient" /> -->
           <div class="flex items-center gap-3">
             <div
               class="flex h-12 w-12 items-center justify-center rounded-xl ring-1"
