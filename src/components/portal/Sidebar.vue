@@ -68,14 +68,19 @@ function navigate(href: string) {
     )"
   >
     <!-- Logo -->
+    <!-- [AI_START TIMESTAMP=2025-06-18 08:00:00] -->
     <div class="flex h-14 items-center border-b border-border px-4">
       <div class="flex items-center gap-2">
-        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
-          <span class="text-sm font-bold text-background">M</span>
-        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-8 w-8 rounded-lg">
+          <rect width="32" height="32" rx="8" fill="#18181B"/>
+          <path d="M16 7L7 12.5l9 5.5 9-5.5z" fill="#fff" opacity="0.95"/>
+          <path d="M7 16.5l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.55" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 20l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <span v-if="!collapsed" class="text-sm font-semibold text-foreground">智信MaaS服务管理平台</span>
       </div>
     </div>
+    <!-- [AI_END LINES=16 TIMESTAMP=2025-06-18 08:00:00] -->
 
     <!-- Search -->
     <div v-if="!collapsed" class="border-r bg-sidebar p-3">

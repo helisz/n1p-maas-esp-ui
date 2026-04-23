@@ -19,7 +19,8 @@ import CardTitle from '@/components/ui/CardTitle.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import CardDescription from '@/components/ui/CardDescription.vue'
 // [AI_START TIMESTAMP=2025-06-15 14:00:00]
-import { ShieldCheck, Package, Settings, FileText, Eye, EyeOff, Loader2, Check, Lock, KeyRound, Fingerprint, Cloud, Zap, Headphones, BarChart3, FileSearch, ClipboardCheck, ArrowRight } from 'lucide-vue-next'
+// [AI_START TIMESTAMP=2025-06-17 11:00:00]
+import { ShieldCheck, Package, Settings, FileText, Eye, EyeOff, Loader2, Check, Lock, KeyRound, Fingerprint, Cloud, Zap, Headphones, BarChart3, FileSearch, ClipboardCheck, ArrowRight, LogIn } from 'lucide-vue-next'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -134,33 +135,89 @@ async function handleRegister() {
     <!-- Top Navigation Bar -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <!-- [AI_START TIMESTAMP=2025-06-18 08:01:00] -->
         <div class="flex items-center gap-3">
-          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
-            <span class="text-sm font-bold text-background">M</span>
-          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-8 w-8 rounded-lg">
+            <rect width="32" height="32" rx="8" fill="#18181B"/>
+            <path d="M16 7L7 12.5l9 5.5 9-5.5z" fill="#fff" opacity="0.95"/>
+            <path d="M7 16.5l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.55" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7 20l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
           <span class="text-base font-semibold text-foreground">智信 MaaS</span>
         </div>
+        <!-- [AI_END LINES=17 TIMESTAMP=2025-06-18 08:01:00] -->
         <div class="flex items-center gap-4">
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">帮助中心</span>
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">联系我们</span>
-          <Button size="sm" @click="openLogin">登录</Button>
-          <Button variant="outline" size="sm" @click="openRegister">注册</Button>
+          <Button size="sm" @click="openLogin" class="gap-1.5"><LogIn class="h-4 w-4" />登录</Button>
+          <!-- <Button variant="outline" size="sm" @click="openRegister">注册</Button> -->
         </div>
       </div>
     </nav>
+<!-- [AI_START TIMESTAMP=2025-06-18 08:30:00] -->
+<!-- Hero Banner with Black Thin Curve Tech Animation -->
+<section class="pt-16 relative overflow-hidden bg-gray-100">
+  <!-- Flowing wave curves - Layer 1 -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.15]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <path d="M0,300 Q150,200 300,300 T600,300 T900,300 T1200,300" fill="none" stroke="#000" stroke-width="0.6" class="animate-wave-flow-1"/>
+    <path d="M0,350 Q150,450 300,350 T600,350 T900,350 T1200,350" fill="none" stroke="#000" stroke-width="0.5" class="animate-wave-flow-2"/>
+    <path d="M0,250 Q200,150 400,250 T800,250 T1200,250" fill="none" stroke="#000" stroke-width="0.7" class="animate-wave-flow-3"/>
+    <path d="M0,400 Q200,500 400,400 T800,400 T1200,400" fill="none" stroke="#000" stroke-width="0.4" class="animate-wave-flow-1"/>
+  </svg>
 
-    <!-- Hero Banner -->
-    <!-- [AI_START TIMESTAMP=2025-06-17 10:10:00] -->
-    <section class="pt-16 relative overflow-hidden bg-gray-100">
-      <!-- Dot grid texture -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.18]" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <pattern id="dot-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
-            <circle cx="1.5" cy="1.5" r="0.8" fill="#9CA3AF" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#dot-pattern)" />
-      </svg>
+  <!-- Diagonal data stream lines - Layer 2 -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <line x1="-100" y1="500" x2="400" y2="-100" stroke="#000" stroke-width="0.5" stroke-dasharray="4 12" class="animate-stream-1"/>
+    <line x1="0" y1="600" x2="500" y2="0" stroke="#000" stroke-width="0.4" stroke-dasharray="6 18" class="animate-stream-2"/>
+    <line x1="100" y1="600" x2="600" y2="0" stroke="#000" stroke-width="0.6" stroke-dasharray="3 15" class="animate-stream-3"/>
+    <line x1="200" y1="600" x2="700" y2="0" stroke="#000" stroke-width="0.5" stroke-dasharray="8 20" class="animate-stream-1"/>
+    <line x1="700" y1="600" x2="1200" y2="0" stroke="#000" stroke-width="0.4" stroke-dasharray="5 15" class="animate-stream-2"/>
+    <line x1="800" y1="600" x2="1300" y2="0" stroke="#000" stroke-width="0.5" stroke-dasharray="4 16" class="animate-stream-3"/>
+  </svg>
+
+  <!-- Curved connection network - Layer 3 -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.18]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
+    <!-- Central hub connections -->
+    <path d="M600,300 Q500,200 400,250" fill="none" stroke="#000" stroke-width="0.8" class="animate-network-pulse"/>
+    <path d="M600,300 Q700,200 800,150" fill="none" stroke="#000" stroke-width="0.6" class="animate-network-pulse-delayed"/>
+    <path d="M600,300 Q500,400 350,450" fill="none" stroke="#000" stroke-width="0.7" class="animate-network-pulse-slow"/>
+    <path d="M600,300 Q700,400 850,480" fill="none" stroke="#000" stroke-width="0.5" class="animate-network-pulse-delayed"/>
+    <path d="M400,250 Q300,180 200,220" fill="none" stroke="#000" stroke-width="0.5" class="animate-network-pulse"/>
+    <path d="M800,150 Q900,100 1000,140" fill="none" stroke="#000" stroke-width="0.4" class="animate-network-pulse-slow"/>
+    <!-- Connection nodes -->
+    <circle cx="600" cy="300" r="2" fill="#000" class="animate-node-glow"/>
+    <circle cx="400" cy="250" r="1.5" fill="#000" class="animate-node-glow-delayed"/>
+    <circle cx="800" cy="150" r="1.5" fill="#000" class="animate-node-glow-slow"/>
+    <circle cx="350" cy="450" r="1.5" fill="#000" class="animate-node-glow-delayed"/>
+    <circle cx="200" cy="220" r="1" fill="#000" class="animate-node-glow"/>
+    <circle cx="1000" cy="140" r="1" fill="#000" class="animate-node-glow-slow"/>
+  </svg>
+
+  <!-- Horizontal flowing energy lines - Layer 4 -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.10]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <line x1="-100" y1="100" x2="1300" y2="100" stroke="#000" stroke-width="0.3" class="animate-energy-flow-1"/>
+    <line x1="-100" y1="180" x2="1300" y2="180" stroke="#000" stroke-width="0.4" class="animate-energy-flow-2"/>
+    <line x1="-100" y1="420" x2="1300" y2="420" stroke="#000" stroke-width="0.4" class="animate-energy-flow-3"/>
+    <line x1="-100" y1="520" x2="1300" y2="520" stroke="#000" stroke-width="0.3" class="animate-energy-flow-1"/>
+  </svg>
+
+  <!-- Spiral vortex curves - Layer 5 -->
+  <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.08]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <path d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0" fill="none" stroke="#000" stroke-width="0.5" class="animate-vortex-spin"/>
+    <path d="M200,200 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0" fill="none" stroke="#000" stroke-width="0.4" class="animate-vortex-spin-reverse"/>
+    <path d="M200,200 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0" fill="none" stroke="#000" stroke-width="0.6" class="animate-vortex-spin-slow"/>
+    <path d="M200,200 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0" fill="none" stroke="#000" stroke-width="0.5" class="animate-vortex-spin-reverse-slow"/>
+  </svg>
+
+  <!-- Floating particles with trails - Layer 6 -->
+  <svg class="absolute inset-0 w-full h-full opacity-[0.14]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <circle cx="150" cy="150" r="1.2" fill="#000" class="animate-particle-float-1"/>
+    <circle cx="1050" cy="200" r="1" fill="#000" class="animate-particle-float-2"/>
+    <circle cx="200" cy="450" r="1.5" fill="#000" class="animate-particle-float-3"/>
+    <circle cx="1000" cy="400" r="1.2" fill="#000" class="animate-particle-float-1"/>
+    <circle cx="600" cy="100" r="1" fill="#000" class="animate-particle-float-2"/>
+    <circle cx="500" cy="500" r="1.3" fill="#000" class="animate-particle-float-3"/>
+  </svg>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-18 sm:py-24 lg:py-32">
         <!-- Badge -->
@@ -220,7 +277,7 @@ async function handleRegister() {
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全认证・筑牢企业防线</h2>
-                  <p class="text-sm text-muted-foreground mt-0.5">Enterprise-Grade Security</p>
+                  <p class="text-sm text-muted-foreground mt-1">Enterprise-Grade Security</p>
                 </div>
               </div>
               <p class="text-base text-muted-foreground leading-relaxed mb-6">
@@ -274,7 +331,7 @@ async function handleRegister() {
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">MaaS 服务・一站式采购开通</h2>
-                  <p class="text-sm text-muted-foreground mt-0.5">One-Stop MaaS Procurement</p>
+                  <p class="text-sm text-muted-foreground mt-1">One-Stop MaaS Procurement</p>
                 </div>
               </div>
               <p class="text-base text-muted-foreground leading-relaxed mb-6">
@@ -328,7 +385,7 @@ async function handleRegister() {
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">全流程管理・高效便捷</h2>
-                  <p class="text-sm text-muted-foreground mt-0.5">Lifecycle Management</p>
+                  <p class="text-sm text-muted-foreground mt-1">Lifecycle Management</p>
                 </div>
               </div>
               <p class="text-base text-muted-foreground leading-relaxed mb-6">
@@ -382,7 +439,7 @@ async function handleRegister() {
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全审计・可溯可查</h2>
-                  <p class="text-sm text-muted-foreground mt-0.5">Comprehensive Audit Trail</p>
+                  <p class="text-sm text-muted-foreground mt-1">Comprehensive Audit Trail</p>
                 </div>
               </div>
               <p class="text-base text-muted-foreground leading-relaxed mb-6">
@@ -555,4 +612,202 @@ async function handleRegister() {
     </DialogContent>
   </Dialog>
 </template>
+<style scoped>
+/* [AI_START TIMESTAMP=2025-06-18 08:35:00] */
+/* Wave curves flowing animation */
+@keyframes wave-flow-1 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -4800; }
+}
+@keyframes wave-flow-2 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -4800; }
+}
+@keyframes wave-flow-3 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -3600; }
+}
+.animate-wave-flow-1 {
+  stroke-dasharray: 1200 3600;
+  animation: wave-flow-1 20s linear infinite;
+}
+.animate-wave-flow-2 {
+  stroke-dasharray: 1200 3600;
+  animation: wave-flow-2 25s linear infinite;
+}
+.animate-wave-flow-3 {
+  stroke-dasharray: 900 2700;
+  animation: wave-flow-3 18s linear infinite;
+}
 
+/* Diagonal data stream animation */
+@keyframes stream-1 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -160; }
+}
+@keyframes stream-2 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -240; }
+}
+@keyframes stream-3 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -180; }
+}
+.animate-stream-1 {
+  animation: stream-1 4s linear infinite;
+}
+.animate-stream-2 {
+  animation: stream-2 5s linear infinite;
+}
+.animate-stream-3 {
+  animation: stream-3 3.5s linear infinite;
+}
+
+/* Network pulse animation */
+@keyframes network-pulse {
+  0%, 100% { stroke-dashoffset: 300; opacity: 0.3; }
+  50% { stroke-dashoffset: 0; opacity: 0.8; }
+}
+@keyframes network-pulse-delayed {
+  0%, 100% { stroke-dashoffset: 300; opacity: 0.2; }
+  40%, 60% { stroke-dashoffset: 0; opacity: 0.7; }
+}
+@keyframes network-pulse-slow {
+  0%, 100% { stroke-dashoffset: 300; opacity: 0.25; }
+  45%, 55% { stroke-dashoffset: 0; opacity: 0.6; }
+}
+.animate-network-pulse {
+  stroke-dasharray: 300;
+  animation: network-pulse 6s ease-in-out infinite;
+}
+.animate-network-pulse-delayed {
+  stroke-dasharray: 300;
+  animation: network-pulse-delayed 7s ease-in-out infinite;
+  animation-delay: 1s;
+}
+.animate-network-pulse-slow {
+  stroke-dasharray: 300;
+  animation: network-pulse-slow 8s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+/* Node glow animation */
+@keyframes node-glow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+@keyframes node-glow-delayed {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+@keyframes node-glow-slow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.4); }
+}
+.animate-node-glow {
+  animation: node-glow 3s ease-in-out infinite;
+  transform-origin: center;
+}
+.animate-node-glow-delayed {
+  animation: node-glow-delayed 4s ease-in-out infinite;
+  animation-delay: 0.5s;
+  transform-origin: center;
+}
+.animate-node-glow-slow {
+  animation: node-glow-slow 5s ease-in-out infinite;
+  animation-delay: 1s;
+  transform-origin: center;
+}
+
+/* Energy flow animation */
+@keyframes energy-flow-1 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1400; }
+}
+@keyframes energy-flow-2 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1400; }
+}
+@keyframes energy-flow-3 {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -1400; }
+}
+.animate-energy-flow-1 {
+  stroke-dasharray: 100 1300;
+  animation: energy-flow-1 12s linear infinite;
+}
+.animate-energy-flow-2 {
+  stroke-dasharray: 150 1250;
+  animation: energy-flow-2 15s linear infinite;
+}
+.animate-energy-flow-3 {
+  stroke-dasharray: 80 1320;
+  animation: energy-flow-3 10s linear infinite;
+}
+
+/* Vortex spin animation */
+@keyframes vortex-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes vortex-spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+@keyframes vortex-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes vortex-spin-reverse-slow {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+.animate-vortex-spin {
+  animation: vortex-spin 40s linear infinite;
+  transform-origin: center;
+}
+.animate-vortex-spin-reverse {
+  animation: vortex-spin-reverse 35s linear infinite;
+  transform-origin: center;
+}
+.animate-vortex-spin-slow {
+  animation: vortex-spin-slow 50s linear infinite;
+  transform-origin: center;
+}
+.animate-vortex-spin-reverse-slow {
+  animation: vortex-spin-reverse-slow 45s linear infinite;
+  transform-origin: center;
+}
+
+/* Particle float animation */
+@keyframes particle-float-1 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+  25% { transform: translate(30px, -20px); opacity: 0.8; }
+  50% { transform: translate(60px, 0); opacity: 0.5; }
+  75% { transform: translate(30px, 20px); opacity: 0.9; }
+}
+@keyframes particle-float-2 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.2; }
+  33% { transform: translate(-40px, 30px); opacity: 0.7; }
+  66% { transform: translate(-20px, -30px); opacity: 0.4; }
+}
+@keyframes particle-float-3 {
+  0%, 100% { transform: translate(0, 0); opacity: 0.25; }
+  20% { transform: translate(20px, 40px); opacity: 0.6; }
+  40% { transform: translate(-20px, 20px); opacity: 0.9; }
+  60% { transform: translate(-40px, -10px); opacity: 0.5; }
+  80% { transform: translate(10px, -30px); opacity: 0.8; }
+}
+.animate-particle-float-1 {
+  animation: particle-float-1 15s ease-in-out infinite;
+}
+.animate-particle-float-2 {
+  animation: particle-float-2 18s ease-in-out infinite;
+  animation-delay: 2s;
+}
+.animate-particle-float-3 {
+  animation: particle-float-3 20s ease-in-out infinite;
+  animation-delay: 4s;
+}
+/* [AI_END LINES=130 TIMESTAMP=2025-06-18 08:35:00] */
+</style>
