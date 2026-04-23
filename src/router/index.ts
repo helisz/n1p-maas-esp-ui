@@ -2,15 +2,16 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
+// [AI_START TIMESTAMP=2025-06-17 10:00:00]
 const routes: RouteRecordRaw[] = [
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
-    component: () => import('@/views/LoginView.vue'),
+    component: () => import('@/views/HomeView.vue'),
     meta: { requiresAuth: false },
   },
   {
-    path: '/',
+    path: '/dashboard',
     name: 'Dashboard',
     component: () => import('@/views/DashboardView.vue'),
     meta: { requiresAuth: true },

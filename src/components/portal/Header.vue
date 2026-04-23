@@ -16,9 +16,10 @@ import { useAuthStore } from '@/stores/auth'
 const router = useRouter()
 const auth = useAuthStore()
 
+// [AI_START TIMESTAMP=2025-06-17 10:15:00]
 function handleLogout() {
   auth.logout()
-  router.push('/login')
+  router.push('/')
 }
 
 const initials = auth.user?.name?.charAt(0) ?? '企'

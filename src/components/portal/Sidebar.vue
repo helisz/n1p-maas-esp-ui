@@ -24,8 +24,9 @@ const router = useRouter()
 const collapsed = ref(false)
 const menuGroups = [
   {
+// [AI_START TIMESTAMP=2025-06-17 10:15:00]
     items: [
-      { title: '控制台首页', href: '/', icon: LayoutDashboard },
+      { title: '控制台首页', href: '/dashboard', icon: LayoutDashboard },
     ],
   },
   {
