@@ -137,7 +137,7 @@ async function handleRegister() {
           <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
             <span class="text-sm font-bold text-background">M</span>
           </div>
-          <span class="text-base font-semibold text-foreground">企业统一服务门户</span>
+          <span class="text-base font-semibold text-foreground">智信 MaaS</span>
         </div>
         <div class="flex items-center gap-4">
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">帮助中心</span>
@@ -177,7 +177,7 @@ async function handleRegister() {
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 rounded-full border border-background/20 bg-background/10 px-4 py-1.5 mb-8">
           <Zap class="h-3.5 w-3.5 text-secondary" />
-          <span class="text-xs font-medium text-background/80">企业级 MaaS API 服务平台</span>
+          <span class="text-sm font-medium text-background/80">智信 MaaS 服务平台</span>
         </div>
         <!-- Title -->
         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold text-center text-background leading-tight tracking-tight">
@@ -448,7 +448,7 @@ async function handleRegister() {
     <!-- Footer -->
     <footer class="bg-foreground text-background">
       <div class="max-w-7xl mx-auto px-4 py-8 text-center space-y-2">
-        <p class="text-sm">© 2026 企业统一服务门户 版权所有</p>
+        <p class="text-sm">© 2026 中信国际电讯 版权所有</p>
         <p class="text-sm text-background/60">服务热线：400-XXXX-XXXX | 工作时间：9:00-18:00（工作日）</p>
         <p class="text-sm text-background/60">
           <span class="cursor-pointer hover:text-background">隐私政策</span>
@@ -468,7 +468,7 @@ async function handleRegister() {
     <DialogContent>
       <DialogHeader>
         <DialogTitle>用您的智信ID登入</DialogTitle>
-        <DialogDescription>输入您的账号信息登录企业服务门户</DialogDescription>
+        <DialogDescription>输入您的账号信息登录智信MaaS服务管理平台</DialogDescription>
       </DialogHeader>
       <form @submit.prevent="handleLogin" class="space-y-4">
         <div class="space-y-1.5">

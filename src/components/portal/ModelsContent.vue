@@ -9,12 +9,6 @@ import CardContent from '@/components/ui/CardContent.vue'
 import Button from '@/components/ui/Button.vue'
 import Badge from '@/components/ui/Badge.vue'
 import Input from '@/components/ui/Input.vue'
-import Table from '@/components/ui/Table.vue'
-import TableHeader from '@/components/ui/TableHeader.vue'
-import TableBody from '@/components/ui/TableBody.vue'
-import TableRow from '@/components/ui/TableRow.vue'
-import TableHead from '@/components/ui/TableHead.vue'
-import TableCell from '@/components/ui/TableCell.vue'
 import Dialog from '@/components/ui/Dialog.vue'
 import DialogContent from '@/components/ui/DialogContent.vue'
 import DialogHeader from '@/components/ui/DialogHeader.vue'
@@ -23,14 +17,18 @@ import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
   Search, Brain, Eye, ExternalLink, Cpu, Layers, Hash,
-  DollarSign, ChevronRight, Sparkles, Globe, Zap,
+  DollarSign, Sparkles, Globe, Zap,
 } from 'lucide-vue-next'
 
-interface ModelPricing {
+interface TierPricing {
   prompt: number
   completion: number
-  image?: number
-  request?: number
+}
+
+interface ModelPricing {
+  basic: TierPricing
+  advanced: TierPricing
+  premium: TierPricing
 }
 
 interface Model {
@@ -55,7 +53,11 @@ const models: Model[] = [
     tags: ['旗舰', '多模态', '推荐'],
     contextLength: 128000,
     maxOutput: 16384,
-    pricing: { prompt: 2.5, completion: 10.0 },
+    pricing: {
+      basic: { prompt: 2.5, completion: 10.0 },
+      advanced: { prompt: 2.25, completion: 9.0 },
+      premium: { prompt: 2.0, completion: 8.0 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Function Calling', 'JSON Mode', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -67,7 +69,11 @@ const models: Model[] = [
     tags: ['高性价比', '多模态'],
     contextLength: 128000,
     maxOutput: 16384,
-    pricing: { prompt: 0.15, completion: 0.6 },
+    pricing: {
+      basic: { prompt: 0.15, completion: 0.6 },
+      advanced: { prompt: 0.135, completion: 0.54 },
+      premium: { prompt: 0.12, completion: 0.48 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Function Calling', 'JSON Mode', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -79,7 +85,11 @@ const models: Model[] = [
     tags: ['编程强', '推理优'],
     contextLength: 200000,
     maxOutput: 8192,
-    pricing: { prompt: 3.0, completion: 15.0 },
+    pricing: {
+      basic: { prompt: 3.0, completion: 15.0 },
+      advanced: { prompt: 2.7, completion: 13.5 },
+      premium: { prompt: 2.4, completion: 12.0 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Function Calling', 'Code Generation', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -91,7 +101,11 @@ const models: Model[] = [
     tags: ['极速', '轻量'],
     contextLength: 200000,
     maxOutput: 4096,
-    pricing: { prompt: 0.25, completion: 1.25 },
+    pricing: {
+      basic: { prompt: 0.25, completion: 1.25 },
+      advanced: { prompt: 0.225, completion: 1.125 },
+      premium: { prompt: 0.2, completion: 1.0 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -103,7 +117,11 @@ const models: Model[] = [
     tags: ['超长上下文', '多模态'],
     contextLength: 2000000,
     maxOutput: 8192,
-    pricing: { prompt: 3.5, completion: 10.5 },
+    pricing: {
+      basic: { prompt: 3.5, completion: 10.5 },
+      advanced: { prompt: 3.15, completion: 9.45 },
+      premium: { prompt: 2.8, completion: 8.4 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Audio', 'Video', 'Function Calling', 'Streaming'],
     modality: 'Text + Vision + Audio',
   },
@@ -115,7 +133,11 @@ const models: Model[] = [
     tags: ['高速', '高效'],
     contextLength: 1000000,
     maxOutput: 8192,
-    pricing: { prompt: 0.35, completion: 0.7 },
+    pricing: {
+      basic: { prompt: 0.35, completion: 0.7 },
+      advanced: { prompt: 0.315, completion: 0.63 },
+      premium: { prompt: 0.28, completion: 0.56 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Audio', 'Function Calling', 'Streaming'],
     modality: 'Text + Vision + Audio',
   },
@@ -127,7 +149,11 @@ const models: Model[] = [
     tags: ['国产', '开源', '高性价比'],
     contextLength: 64000,
     maxOutput: 8192,
-    pricing: { prompt: 0.1, completion: 0.5 },
+    pricing: {
+      basic: { prompt: 0.1, completion: 0.5 },
+      advanced: { prompt: 0.09, completion: 0.45 },
+      premium: { prompt: 0.08, completion: 0.4 },
+    },
     capabilities: ['Text Generation', 'Code Generation', 'Function Calling', 'Streaming'],
     modality: 'Text',
   },
@@ -139,7 +165,11 @@ const models: Model[] = [
     tags: ['深度推理', '国产'],
     contextLength: 64000,
     maxOutput: 8192,
-    pricing: { prompt: 0.5, completion: 2.0 },
+    pricing: {
+      basic: { prompt: 0.5, completion: 2.0 },
+      advanced: { prompt: 0.45, completion: 1.8 },
+      premium: { prompt: 0.4, completion: 1.6 },
+    },
     capabilities: ['Text Generation', 'Reasoning', 'Code Generation', 'Streaming'],
     modality: 'Text',
   },
@@ -151,7 +181,11 @@ const models: Model[] = [
     tags: ['中文强', '长文本'],
     contextLength: 128000,
     maxOutput: 8192,
-    pricing: { prompt: 0.5, completion: 1.0 },
+    pricing: {
+      basic: { prompt: 0.5, completion: 1.0 },
+      advanced: { prompt: 0.45, completion: 0.9 },
+      premium: { prompt: 0.4, completion: 0.8 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Function Calling', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -163,7 +197,11 @@ const models: Model[] = [
     tags: ['开源', '多语言'],
     contextLength: 128000,
     maxOutput: 8192,
-    pricing: { prompt: 1.5, completion: 3.0 },
+    pricing: {
+      basic: { prompt: 1.5, completion: 3.0 },
+      advanced: { prompt: 1.35, completion: 2.7 },
+      premium: { prompt: 1.2, completion: 2.4 },
+    },
     capabilities: ['Text Generation', 'Function Calling', 'Streaming'],
     modality: 'Text',
   },
@@ -175,7 +213,11 @@ const models: Model[] = [
     tags: ['多语言', '代码'],
     contextLength: 128000,
     maxOutput: 8192,
-    pricing: { prompt: 2.0, completion: 6.0 },
+    pricing: {
+      basic: { prompt: 2.0, completion: 6.0 },
+      advanced: { prompt: 1.8, completion: 5.4 },
+      premium: { prompt: 1.6, completion: 4.8 },
+    },
     capabilities: ['Text Generation', 'Function Calling', 'JSON Mode', 'Streaming'],
     modality: 'Text',
   },
@@ -187,7 +229,11 @@ const models: Model[] = [
     tags: ['超长上下文', '中文'],
     contextLength: 256000,
     maxOutput: 16384,
-    pricing: { prompt: 0.5, completion: 2.0 },
+    pricing: {
+      basic: { prompt: 0.5, completion: 2.0 },
+      advanced: { prompt: 0.45, completion: 1.8 },
+      premium: { prompt: 0.4, completion: 1.6 },
+    },
     capabilities: ['Text Generation', 'Vision', 'Function Calling', 'Streaming'],
     modality: 'Text + Vision',
   },
@@ -200,8 +246,21 @@ const providers = computed(() => {
 
 const searchQuery = ref('')
 const selectedProvider = ref<string>('全部')
+const selectedTier = ref<'basic' | 'advanced' | 'premium'>('basic')
 const selectedModel = ref<Model | null>(null)
 const detailOpen = ref(false)
+
+const tierLabels: Record<string, string> = {
+  basic: '基础版',
+  advanced: '高级版',
+  premium: '尊享版',
+}
+
+const tierBadgeClasses: Record<string, string> = {
+  basic: 'bg-slate-100 text-slate-700',
+  advanced: 'bg-indigo-100 text-indigo-700',
+  premium: 'bg-amber-100 text-amber-700',
+}
 
 const filteredModels = computed(() => {
   let result = models
@@ -235,6 +294,10 @@ function formatContext(len: number) {
   return `${len}`
 }
 
+function discountRate(basic: number, tier: number) {
+  return Math.round((tier / basic) * 100)
+}
+
 const providerColors: Record<string, string> = {
   'OpenAI': 'bg-emerald-100 text-emerald-700',
   'Anthropic': 'bg-orange-100 text-orange-700',
@@ -252,14 +315,28 @@ const providerColors: Record<string, string> = {
     <!-- Header -->
     <div class="flex flex-col gap-2">
       <h2 class="text-2xl font-semibold text-foreground">模型广场</h2>
-      <p class="text-muted-foreground">浏览和比较平台接入的各类大语言模型，查看详细规格与定价信息</p>
+      <p class="text-muted-foreground">浏览和比较平台接入的各类大语言模型，查看详细规格与分级定价信息</p>
     </div>
 
     <!-- Filters -->
-    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-      <div class="relative w-full sm:w-80">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+      <div class="relative w-full lg:w-80">
         <Search class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Input v-model="searchQuery" placeholder="搜索模型名称、提供商或标签..." class="h-10 pl-9 text-sm" />
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="text-xs text-muted-foreground">查看价格：</span>
+        <button
+          v-for="tier in ['basic', 'advanced', 'premium'] as const"
+          :key="tier"
+          @click="selectedTier = tier"
+          :class="[
+            'rounded-full px-4 py-1.5 text-xs font-medium transition-colors',
+            selectedTier === tier ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+          ]"
+        >
+          {{ tierLabels[tier] }}
+        </button>
       </div>
       <div class="flex flex-wrap gap-2">
         <button
@@ -291,6 +368,9 @@ const providerColors: Record<string, string> = {
         <Brain class="h-5 w-5 text-primary" />
         模型列表
         <span class="text-sm font-normal text-muted-foreground">（共 {{ filteredModels.length }} 个）</span>
+        <span :class="['ml-2 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', tierBadgeClasses[selectedTier]]">
+          {{ tierLabels[selectedTier] }}价格
+        </span>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
         <Card
@@ -334,11 +414,11 @@ const providerColors: Record<string, string> = {
             <div class="grid grid-cols-2 gap-3 rounded-lg bg-muted/40 p-3">
               <div>
                 <div class="text-[10px] text-muted-foreground">Prompt / 1M</div>
-                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing.prompt) }}</div>
+                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing[selectedTier].prompt) }}</div>
               </div>
               <div>
                 <div class="text-[10px] text-muted-foreground">Completion / 1M</div>
-                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing.completion) }}</div>
+                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing[selectedTier].completion) }}</div>
               </div>
             </div>
             <div class="flex items-center justify-between">
@@ -363,7 +443,7 @@ const providerColors: Record<string, string> = {
         计费说明
       </div>
       <p class="mt-2 text-xs leading-relaxed text-muted-foreground">
-        价格单位：每百万 Tokens（1M Tokens）。Prompt 价格为输入文本计费单价，Completion 价格为模型生成文本计费单价。实际费用按调用量实时结算。
+        价格单位：每百万 Tokens（1M Tokens）。基础版按标准价计费，高级版享约 9 折优惠，尊享版享约 8 折优惠。实际费用按调用量实时结算。
       </p>
     </div>
 
@@ -421,17 +501,57 @@ const providerColors: Record<string, string> = {
             </div>
           </div>
 
-          <!-- Pricing -->
+          <!-- Tiered Pricing -->
           <div class="space-y-3">
-            <h4 class="text-sm font-semibold text-foreground">定价详情（每 1M Tokens）</h4>
-            <div class="grid grid-cols-2 gap-3">
+            <h4 class="text-sm font-semibold text-foreground">分级定价（每 1M Tokens）</h4>
+            <div class="grid grid-cols-3 gap-3">
               <div class="rounded-lg border border-border p-3">
-                <div class="text-xs text-muted-foreground">Prompt（输入）</div>
-                <div class="mt-1 text-lg font-bold text-foreground">{{ formatPrice(selectedModel.pricing.prompt) }}</div>
+                <div class="flex items-center justify-between">
+                  <div class="text-xs text-muted-foreground">基础版</div>
+                  <Badge variant="secondary" class="text-[10px]">标准价</Badge>
+                </div>
+                <div class="mt-2 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Prompt</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.basic.prompt) }}</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Completion</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.basic.completion) }}</span>
+                  </div>
+                </div>
               </div>
               <div class="rounded-lg border border-border p-3">
-                <div class="text-xs text-muted-foreground">Completion（输出）</div>
-                <div class="mt-1 text-lg font-bold text-foreground">{{ formatPrice(selectedModel.pricing.completion) }}</div>
+                <div class="flex items-center justify-between">
+                  <div class="text-xs text-muted-foreground">高级版</div>
+                  <Badge variant="secondary" class="text-[10px]">约 {{ discountRate(selectedModel.pricing.basic.prompt, selectedModel.pricing.advanced.prompt) }}%</Badge>
+                </div>
+                <div class="mt-2 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Prompt</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.advanced.prompt) }}</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Completion</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.advanced.completion) }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="rounded-lg border border-border p-3">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs text-muted-foreground">尊享版</div>
+                  <Badge variant="secondary" class="text-[10px]">约 {{ discountRate(selectedModel.pricing.basic.prompt, selectedModel.pricing.premium.prompt) }}%</Badge>
+                </div>
+                <div class="mt-2 space-y-1">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Prompt</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.premium.prompt) }}</span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] text-muted-foreground">Completion</span>
+                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.premium.completion) }}</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -463,4 +583,4 @@ const providerColors: Record<string, string> = {
     </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=318 TIMESTAMP=2025-06-16 08:00:00] -->
+<!-- [AI_END LINES=370 TIMESTAMP=2025-06-16 08:00:00] -->

@@ -93,7 +93,7 @@ function handlePurchase(pkg: typeof packages[0]) {
   <div class="space-y-8">
     <!-- Header -->
     <div>
-      <h2 class="text-2xl font-semibold text-foreground">订购服务</h2>
+      <h2 class="text-2xl font-semibold text-foreground">服务订购</h2>
       <p class="text-muted-foreground">一站式 AI 能力套餐，整合大语言模型、向量服务与视觉服务，按需选择，即刻启程</p>
     </div>
 

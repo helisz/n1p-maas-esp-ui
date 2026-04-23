@@ -1,9 +1,10 @@
-<!-- [AI_START TIMESTAMP=2025-06-15 15:00:00] -->
+<!-- [AI_START TIMESTAMP=2025-06-16 08:00:00] -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import Card from '@/components/ui/Card.vue'
 import CardHeader from '@/components/ui/CardHeader.vue'
 import CardTitle from '@/components/ui/CardTitle.vue'
+import CardDescription from '@/components/ui/CardDescription.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import Button from '@/components/ui/Button.vue'
 import Badge from '@/components/ui/Badge.vue'
@@ -24,12 +25,11 @@ import Label from '@/components/ui/Label.vue'
 import {
   Wallet, Plus, History, ShieldCheck, AlertTriangle,
   CheckCircle2, Clock, XCircle, ArrowUpRight, ArrowDownRight,
-  ExternalLink,
+  ExternalLink, TrendingUp, CircleDollarSign, Activity,
 } from 'lucide-vue-next'
 
 // Wallet state
 const balance = ref(12850.50)
-const frozenAmount = ref(2000.00)
 
 // Recharge dialog
 const rechargeOpen = ref(false)
@@ -46,6 +46,13 @@ const transactions = ref([
   { id: 'TXN20240302001', time: '2024-03-02 17:12:40', type: '充值', amount: 3000.00, balanceChange: '+3,000.00', balanceAfter: 2349.50, status: 'pending' },
   { id: 'TXN20240228001', time: '2024-02-28 13:05:33', type: '消费', amount: -650.00, balanceChange: '-650.00', balanceAfter: -650.50, status: 'failed' },
 ])
+
+const spendingStats = [
+  { label: '模型调用', value: 4230.50, percent: 58 },
+  { label: '套餐订购', value: 1999.00, percent: 27 },
+  { label: '增值服务', value: 720.00, percent: 10 },
+  { label: '其他', value: 350.00, percent: 5 },
+]
 
 function getStatusBadge(status: string) {
   switch (status) {
@@ -77,57 +84,103 @@ async function handleRecharge() {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-8">
     <!-- Page Title -->
     <div>
-      <h2 class="text-2xl font-semibold text-foreground flex items-center gap-2">
-        <Wallet class="h-6 w-6" />
-        智信钱包
-      </h2>
-      <p class="text-muted-foreground mt-1">管理您的账户余额、充值与交易记录</p>
+      <h2 class="text-2xl font-semibold text-foreground">智信钱包</h2>
+      <p class="mt-1 text-muted-foreground">管理您的账户余额、充值与交易记录</p>
     </div>
 
-    <!-- Balance Cards -->
-    <div class="grid gap-4 md:grid-cols-3">
-      <!-- Available Balance -->
-      <Card class="md:col-span-2">
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium text-muted-foreground">可用余额</CardTitle>
+    <!-- Balance Overview -->
+    <div class="grid gap-5 lg:grid-cols-3">
+      <div class="lg:col-span-1 relative overflow-hidden rounded-xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 text-white shadow-lg">
+        <!-- Card texture decorations -->
+        <div class="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-white/[0.07]" />
+        <div class="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-white/[0.05]" />
+        <div class="pointer-events-none absolute -left-4 bottom-8 h-20 w-20 rounded-full bg-white/[0.04]" />
+        <!-- Diagonal stripe pattern -->
+        <div class="pointer-events-none absolute inset-0 opacity-[0.03]" style="background: repeating-linear-gradient(135deg, transparent, transparent 20px, white 20px, white 21px);" />
+        <!-- Chip icon -->
+        <div class="pointer-events-none absolute right-5 top-5 h-8 w-8 rounded-md bg-gradient-to-br from-amber-400/30 to-amber-600/30 ring-1 ring-amber-400/20" />
+
+        <div class="relative z-10">
+          <div class="text-sm font-medium text-slate-300">账户余额</div>
+          <div class="mt-4">
+            <div class="text-3xl font-bold tracking-tight text-white">{{ formatCredit(balance) }}</div>
+            <div class="mt-1 text-xs text-slate-400">Credits</div>
+          </div>
+          <Button class="mt-6 w-full gap-2 bg-white text-slate-900 hover:bg-slate-100" @click="rechargeOpen = true">
+            <Plus class="h-4 w-4" />
+            充值
+          </Button>
+        </div>
+      </div>
+
+      <Card class="lg:col-span-2">
+        <CardHeader class="pb-3">
+          <CardTitle class="flex items-center gap-2 text-base">
+            <TrendingUp class="h-4 w-4 text-primary" />
+            本月消费构成
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div class="flex items-end justify-between">
-            <div>
-              <div class="text-4xl font-bold text-foreground">
-                {{ formatCredit(balance - frozenAmount) }}
-                
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div v-for="item in spendingStats" :key="item.label" class="space-y-2">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-muted-foreground">{{ item.label }}</span>
+                <span class="font-medium text-foreground">{{ formatCredit(item.value) }}</span>
               </div>
-              <div class="text-sm pt-2 font-normal text-muted-foreground ml-1">Credit(s)</div>
+              <div class="h-2 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  class="h-full rounded-full bg-primary transition-all"
+                  :style="{ width: item.percent + '%' }"
+                />
+              </div>
+              <div class="text-right text-xs text-muted-foreground">{{ item.percent }}%</div>
             </div>
-            <Button class="gap-2" @click="rechargeOpen = true">
-              <Plus class="h-4 w-4" />
-              充值
-            </Button>
           </div>
         </CardContent>
       </Card>
+    </div>
 
-      <!-- Quick Info -->
+    <!-- Quick Stats -->
+    <div class="grid gap-5 md:grid-cols-3">
       <Card>
-        <CardHeader class="pb-2">
-          <CardTitle class="text-sm font-medium text-muted-foreground">账户概览</CardTitle>
-        </CardHeader>
-        <CardContent class="space-y-3">
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-muted-foreground">本月充值</span>
-            <span class="font-medium text-green-600">+18,000.00</span>
+        <CardContent class="flex items-center gap-4 p-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+            <CircleDollarSign class="h-5 w-5" />
           </div>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-muted-foreground">本月消费</span>
-            <span class="font-medium text-destructive">-5,649.50</span>
+          <div>
+            <div class="text-xs text-muted-foreground">本月充值</div>
+            <div class="flex items-center gap-1 text-lg font-semibold text-emerald-600">
+              <ArrowUpRight class="h-4 w-4" />
+              +18,000.00
+            </div>
           </div>
-          <div class="flex items-center justify-between text-sm">
-            <span class="text-muted-foreground">累计充值</span>
-            <span class="font-medium">48,000.00</span>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent class="flex items-center gap-4 p-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-rose-600">
+            <Activity class="h-5 w-5" />
+          </div>
+          <div>
+            <div class="text-xs text-muted-foreground">本月消费</div>
+            <div class="flex items-center gap-1 text-lg font-semibold text-rose-600">
+              <ArrowDownRight class="h-4 w-4" />
+              -5,649.50
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent class="flex items-center gap-4 p-5">
+          <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+            <Wallet class="h-5 w-5" />
+          </div>
+          <div>
+            <div class="text-xs text-muted-foreground">累计充值</div>
+            <div class="text-lg font-semibold text-foreground">48,000.00</div>
           </div>
         </CardContent>
       </Card>
@@ -139,10 +192,10 @@ async function handleRecharge() {
         <div class="flex items-center justify-between">
           <div>
             <CardTitle class="flex items-center gap-2">
-              <History class="h-5 w-5" />
-              充值记录
+              <History class="h-5 w-5 text-primary" />
+              交易记录
             </CardTitle>
-            <p class="text-sm text-muted-foreground mt-1">查看历史充值明细、到账状态</p>
+            <CardDescription>查看历史充值、消费与退款明细</CardDescription>
           </div>
           <Button variant="outline" size="sm" class="gap-1">
             <ExternalLink class="h-3.5 w-3.5" />
@@ -202,7 +255,7 @@ async function handleRecharge() {
 
     <!-- Security Tips -->
     <Card class="border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-950/20">
-      <CardHeader>
+      <CardHeader class="pb-3">
         <CardTitle class="flex items-center gap-2 text-base">
           <ShieldCheck class="h-5 w-5 text-amber-600" />
           安全提示
@@ -210,15 +263,15 @@ async function handleRecharge() {
       </CardHeader>
       <CardContent class="space-y-3 text-sm text-muted-foreground">
         <div class="flex items-start gap-2">
-          <AlertTriangle class="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
+          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
           <p>账户资金仅用于本平台 MaaS 套餐订购、服务续费，不支持其他用途</p>
         </div>
         <div class="flex items-start gap-2">
-          <AlertTriangle class="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
-          <p>所有充值、提现、消费操作均需中信网银 Key 认证，且全程留痕，可在「<router-link to="/audit" class="text-primary font-medium hover:underline">操作审计</router-link>」中查询</p>
+          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+          <p>所有充值、消费操作均需中信网银 Key 认证，且全程留痕，可在「<router-link to="/audit" class="font-medium text-primary hover:underline">操作审计</router-link>」中查询</p>
         </div>
         <div class="flex items-start gap-2">
-          <AlertTriangle class="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
+          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
           <p>若有资金异常，请立即联系客服：<span class="font-medium text-foreground">400-XXXX-XXXX</span></p>
         </div>
       </CardContent>
@@ -260,14 +313,14 @@ async function handleRecharge() {
             />
           </div>
           <!-- Summary -->
-          <div v-if="rechargeAmount && Number(rechargeAmount) > 0" class="rounded-lg bg-muted/50 p-3 text-sm space-y-1">
+          <div v-if="rechargeAmount && Number(rechargeAmount) > 0" class="space-y-1 rounded-lg bg-muted/50 p-3 text-sm">
             <div class="flex justify-between">
               <span class="text-muted-foreground">充值金额</span>
               <span class="font-medium">{{ formatCredit(Number(rechargeAmount)) }} Credit</span>
             </div>
             <div class="flex justify-between">
               <span class="text-muted-foreground">充值后余额</span>
-              <span class="font-medium">{{ formatCredit(balance - frozenAmount + Number(rechargeAmount)) }} Credit</span>
+              <span class="font-medium">{{ formatCredit(balance + Number(rechargeAmount)) }} Credit</span>
             </div>
           </div>
         </div>
@@ -284,4 +337,5 @@ async function handleRecharge() {
     </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=220 TIMESTAMP=2025-06-15 15:00:00] -->
+<!-- [AI_END LINES=290 TIMESTAMP=2025-06-16 08:00:00] -->
+
