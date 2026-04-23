@@ -1,6 +1,8 @@
 <!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
 <script setup lang="ts">
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 import Card from '@/components/ui/Card.vue'
 import CardHeader from '@/components/ui/CardHeader.vue'
 import CardTitle from '@/components/ui/CardTitle.vue'
@@ -8,6 +10,12 @@ import CardDescription from '@/components/ui/CardDescription.vue'
 import CardContent from '@/components/ui/CardContent.vue'
 import Button from '@/components/ui/Button.vue'
 import Badge from '@/components/ui/Badge.vue'
+import Dialog from '@/components/ui/Dialog.vue'
+import DialogContent from '@/components/ui/DialogContent.vue'
+import DialogHeader from '@/components/ui/DialogHeader.vue'
+import DialogTitle from '@/components/ui/DialogTitle.vue'
+import DialogDescription from '@/components/ui/DialogDescription.vue'
+import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
   Server,
   Activity,
@@ -20,9 +28,24 @@ import {
   ShieldCheck,
   CheckCircle2,
   AlertTriangle,
+  Building2,
+  Upload,
+  UserCheck,
+  Zap,
+  Lock,
+  HeadphonesIcon,
 } from 'lucide-vue-next'
 
 const router = useRouter()
+const auth = useAuthStore()
+const showVerifyDialog = ref(false)
+
+onMounted(() => {
+  if (auth.justLoggedIn) {
+    showVerifyDialog.value = true
+    auth.clearJustLoggedIn()
+  }
+})
 
 const stats = [
   { title: '已开通服务', value: '5', unit: '个', icon: Server, change: '+2', changeLabel: '本月新增' },
@@ -53,6 +76,11 @@ const activePackages = [
 
 function navigate(href: string) {
   router.push(href)
+}
+
+function goToEnterprise() {
+  showVerifyDialog.value = false
+  router.push('/enterprise')
 }
 </script>
 
@@ -178,6 +206,82 @@ function navigate(href: string) {
         </div>
       </CardContent>
     </Card>
+
+    <!-- Enterprise Verification Dialog -->
+    <Dialog v-model:open="showVerifyDialog">
+      <DialogContent class="sm:max-w-lg">
+        <DialogHeader class="text-center">
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 mb-4">
+            <Building2 class="h-8 w-8 text-indigo-600" />
+          </div>
+          <DialogTitle class="text-xl">完善企业信息，解锁全部服务</DialogTitle>
+          <DialogDescription>
+            为了保障平台安全与合规，请您尽快完成企业资质验证
+          </DialogDescription>
+        </DialogHeader>
+
+        <div class="space-y-5 py-2">
+          <!-- Steps -->
+          <div class="space-y-3">
+            <p class="text-sm font-semibold text-foreground">验证流程</p>
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">1</div>
+              <div>
+                <p class="text-sm font-medium">进入「企业信息管理」</p>
+                <p class="text-xs text-muted-foreground">填写企业基本信息与联系人资料</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">2</div>
+              <div>
+                <p class="text-sm font-medium">上传企业资质材料</p>
+                <p class="text-xs text-muted-foreground">营业执照、法人身份证等必要文件</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-700">3</div>
+              <div>
+                <p class="text-sm font-medium">等待审核通过</p>
+                <p class="text-xs text-muted-foreground">平台将在 1-2 个工作日内完成审核</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benefits -->
+          <div class="rounded-lg bg-muted/50 p-4 space-y-3">
+            <p class="text-sm font-semibold text-foreground">验证后可享受</p>
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-2">
+                <Zap class="h-4 w-4 text-amber-500" />
+                <span class="text-xs">更高 API 调用额度</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <HeadphonesIcon class="h-4 w-4 text-indigo-500" />
+                <span class="text-xs">专属客户经理</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <Lock class="h-4 w-4 text-emerald-500" />
+                <span class="text-xs">企业级 SLA 保障</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <CheckCircle2 class="h-4 w-4 text-blue-500" />
+                <span class="text-xs">优先技术支持</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <DialogFooter class="flex-col sm:flex-row gap-2">
+          <Button variant="outline" class="w-full sm:w-auto" @click="showVerifyDialog = false">
+            我知道了
+          </Button>
+          <Button class="w-full sm:w-auto gap-2" @click="goToEnterprise">
+            <ShieldCheck class="h-4 w-4" />
+            验证企业资质
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=152 TIMESTAMP=2025-06-15 12:00:00] -->
+<!-- [AI_END LINES=213 TIMESTAMP=2025-06-15 12:00:00] -->

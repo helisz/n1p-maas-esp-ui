@@ -36,6 +36,7 @@ const DEMO_USERS: DemoUser[] = [
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<User | null>(null)
   const isLoading = ref(true)
+  const justLoggedIn = ref(false)
 
   const isLoggedIn = computed(() => !!user.value)
 
@@ -64,6 +65,7 @@ export const useAuthStore = defineStore('auth', () => {
 
     const { password: _p, ...userData } = found
     user.value = userData
+    justLoggedIn.value = true
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(userData))
     return { success: true }
   }
@@ -92,17 +94,24 @@ export const useAuthStore = defineStore('auth', () => {
 
   function logout() {
     user.value = null
+    justLoggedIn.value = false
     sessionStorage.removeItem(STORAGE_KEY)
+  }
+
+  function clearJustLoggedIn() {
+    justLoggedIn.value = false
   }
 
   return {
     user,
     isLoading,
     isLoggedIn,
+    justLoggedIn,
     restoreSession,
     login,
     register,
     logout,
+    clearJustLoggedIn,
   }
 })
 // [AI_END LINES=89 TIMESTAMP=2025-06-15 12:00:00]
