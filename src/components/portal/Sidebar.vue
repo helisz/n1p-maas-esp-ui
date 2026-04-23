@@ -8,6 +8,7 @@ import {
   Package,
   ShoppingCart,
   Server,
+  Brain,
   Wallet,
   Receipt,
   FileText,
@@ -21,12 +22,12 @@ import Input from '@/components/ui/Input.vue'
 const route = useRoute()
 const router = useRouter()
 const collapsed = ref(false)
-
 const menuItems = [
   { title: '控制台首页', href: '/', icon: LayoutDashboard },
   { title: '订购服务', href: '/packages', icon: Package },
   { title: '我的订单', href: '/orders', icon: ShoppingCart },
   { title: '服务管理', href: '/services', icon: Server },
+  { title: '模型', href: '/models', icon: Brain },
   { title: '智信钱包', href: '/wallet', icon: Wallet },
   { title: '账单与计费', href: '/billing', icon: Receipt },
   { title: '操作审计', href: '/audit', icon: FileText },
@@ -52,7 +53,7 @@ function navigate(href: string) {
         <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-foreground">
           <span class="text-sm font-bold text-background">M</span>
         </div>
-        <span v-if="!collapsed" class="text-sm font-semibold text-foreground">LOGO</span>
+        <span v-if="!collapsed" class="text-sm font-semibold text-foreground">企业统一服务门户</span>
       </div>
     </div>
 

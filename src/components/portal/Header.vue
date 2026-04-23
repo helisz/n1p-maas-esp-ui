@@ -27,7 +27,7 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
 <template>
   <header class="flex h-14 items-center justify-between border-b border-border bg-background px-6">
     <div class="flex items-center gap-2">
-      <h1 class="text-lg font-semibold text-foreground">企业统一服务门户</h1>
+      <h1 class="text-lg font-semibold text-foreground"></h1>
     </div>
 
     <div class="flex items-center gap-2">

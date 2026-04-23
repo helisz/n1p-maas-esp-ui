@@ -1,4 +1,4 @@
-// [AI_START TIMESTAMP=2025-06-15 12:00:00]
+// [AI_START TIMESTAMP=2025-06-16 08:00:00]
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
@@ -31,6 +31,12 @@ const routes: RouteRecordRaw[] = [
     path: '/services',
     name: 'Services',
     component: () => import('@/views/ServicesView.vue'),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/models',
+    name: 'Models',
+    component: () => import('@/views/ModelsView.vue'),
     meta: { requiresAuth: true },
   },
   {
@@ -83,4 +89,4 @@ router.beforeEach((to, _from, next) => {
 })
 
 export default router
-// [AI_END LINES=64 TIMESTAMP=2025-06-15 12:00:00]
+// [AI_END LINES=82 TIMESTAMP=2025-06-16 08:00:00]
