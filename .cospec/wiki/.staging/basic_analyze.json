@@ -25,7 +25,7 @@
       "name": "Authentication",
       "relatedSources": [
         "src/stores/auth.ts",
-        "src/views/LoginView.vue",
+        "src/views/HomeView.vue",
         "src/router/index.ts"
       ]
     },
@@ -55,6 +55,13 @@
       "relatedSources": [
         "src/views/ServicesView.vue",
         "src/components/portal/ServicesContent.vue"
+      ]
+    },
+    {
+      "name": "Models",
+      "relatedSources": [
+        "src/views/ModelsView.vue",
+        "src/components/portal/ModelsContent.vue"
       ]
     },
     {
@@ -156,15 +163,15 @@
   "recommendedStrategy": "Standard",
   "evidence": [
     "package.json declares private application 'maas-portal-vue' with dev/build/preview scripts — confirming standalone deployable SPA",
-    "10 defined routes in src/router/index.ts with auth guards indicate complete multi-page application with protected workflows",
-    "12 portal business components under src/components/portal/ implement specific MaaS domain logic (packages, orders, services, billing, audit, enterprise, accounts, wallet)",
+    "11 defined routes in src/router/index.ts with auth guards indicate complete multi-page application with protected workflows",
+    "13 portal business components under src/components/portal/ implement specific MaaS domain logic (dashboard, packages, orders, services, models, billing, audit, enterprise, accounts, wallet)",
     "40 Radix Vue wrapper components under src/components/ui/ form a reusable UI component library within the application",
     "src/stores/auth.ts implements complete auth flow with demo user login, registration, session persistence via sessionStorage, and logout",
     "src/main.ts serves as the application bootstrap — initializes Pinia store, restores auth session, registers router, and mounts the Vue app",
     "No library/framework export patterns found (no index.ts barrel exports, no plugin registration API, no build-to-library config)",
     "Tailwind CSS v4 integrated via @tailwindcss/vite plugin with class-variance-authority for component variant management",
     "Vite configured with Vue plugin, Tailwind plugin, and @/ path alias mapping to ./src — standard SPA build configuration",
-    "README.md documents 8 core business modules with Chinese localization, confirming enterprise MaaS portal positioning"
+    "README.md documents core business modules with Chinese localization, confirming enterprise MaaS portal positioning"
   ],
-  "summary": "MaaS Portal Vue is an enterprise-grade single-page application (SPA) built with Vue 3 + TypeScript, serving as a Model-as-a-Service management portal. The application provides a complete front-end interface for enterprise users to manage MaaS service packages, orders, service instances, billing, wallets, audit logs, enterprise information, and sub-account permissions. It features 10 business routes with authentication guards, a Pinia-based auth store with session persistence, a comprehensive UI component library (40 components) built on Radix Vue, and a collapsible sidebar layout. The project uses Vite as the build tool with Tailwind CSS v4 for styling. Currently at v0.1.0 with mock/demo authentication and no backend API integration, representing a front-end prototype or early-stage application."
+  "summary": "MaaS Portal Vue is an enterprise-grade single-page application (SPA) built with Vue 3 + TypeScript, serving as a Model-as-a-Service management portal. The application provides a complete front-end interface for enterprise users to manage MaaS service packages, orders, service instances, models, billing, wallets, audit logs, enterprise information, and sub-account permissions. It features 11 business routes with authentication guards, a Pinia-based auth store with session persistence, a comprehensive UI component library (40 components) built on Radix Vue, and a collapsible sidebar layout. The project uses Vite as the build tool with Tailwind CSS v4 for styling. Currently at v0.1.0 with mock/demo authentication and no backend API integration, representing a front-end prototype or early-stage application."
 }

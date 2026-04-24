@@ -1,18 +1,21 @@
-<!-- [AI_START TIMESTAMP=2025-06-15 12:30:00] -->
+<!-- [AI_START TIMESTAMP=2025-06-19 08:00:00] -->
 # MaaS Portal Vue — 企业统一服务门户
 
 ## 项目简介
 
-**MaaS Portal Vue** 是一个基于 Vue 3 的企业级 **MaaS（Model-as-a-Service）** 服务管理门户前端应用。提供从套餐浏览、订单管理、服务监控到账单结算的全流程操作界面，同时支持企业信息管理和子账号权限控制。
+**MaaS Portal Vue** 是一个基于 Vue 3 的企业级 **MaaS（Model-as-a-Service）** 服务管理门户前端应用。提供从套餐浏览、模型广场、订单管理、服务监控到账单结算的全流程操作界面，同时支持企业信息管理和子账号权限控制。
 
 ### 核心功能模块
 
 | 模块 | 路由 | 说明 |
 |------|------|------|
-| 📊 控制台首页 | `/` | 仪表盘概览，展示关键运营指标 |
-| 📦 订购服务 | `/packages` | 浏览和选择 MaaS 服务套餐 |
+| 🔐 登录页 | `/` | 用户登录与注册入口 |
+| 📊 控制台首页 | `/dashboard` | 仪表盘概览，展示关键运营指标 |
+| 📦 服务订购 | `/packages` | 浏览和选择 MaaS 服务套餐 |
+| 🧠 模型广场 | `/models` | 浏览与管理可用 AI 模型 |
 | 🛒 我的订单 | `/orders` | 查看与管理已提交的订单 |
 | 🖥️ 服务管理 | `/services` | 管理已开通的 MaaS 服务实例 |
+| 💳 智信钱包 | `/wallet` | 账户余额、充值与消费管理 |
 | 💰 账单与计费 | `/billing` | 账单查看、费用统计与支付管理 |
 | 📝 操作审计 | `/audit` | 系统操作日志与安全审计 |
 | 🏢 企业信息管理 | `/enterprise` | 企业资质与联系信息维护 |
@@ -33,6 +36,7 @@
 | [Radix Vue](https://www.radix-vue.com/) | ^1.9 | 无障碍 UI 原语组件 |
 | [Lucide Icons](https://lucide.dev/) | ^0.564 | 图标库 |
 | [class-variance-authority](https://cva.style/) | ^0.7 | 组件样式变体管理 |
+| [tw-animate-css](https://github.com/Wombosvideo/tw-animate-css) | ^1.2 | Tailwind CSS 动画工具类 |
 
 ---
 
@@ -52,8 +56,10 @@ maas-portal-vue/
 │   │   │   ├── Header.vue          # 顶部导航栏
 │   │   │   ├── DashboardContent.vue
 │   │   │   ├── PackagesContent.vue
+│   │   │   ├── ModelsContent.vue
 │   │   │   ├── OrdersContent.vue
 │   │   │   ├── ServicesContent.vue
+│   │   │   ├── WalletContent.vue
 │   │   │   ├── BillingContent.vue
 │   │   │   ├── AuditContent.vue
 │   │   │   ├── EnterpriseContent.vue
@@ -69,12 +75,13 @@ maas-portal-vue/
 │   ├── stores/
 │   │   └── auth.ts             # 认证状态管理（Pinia Store）
 │   └── views/                  # 页面级视图组件
-│       ├── LoginView.vue
-│       ├── RegisterView.vue
+│       ├── HomeView.vue        # 登录/注册页
 │       ├── DashboardView.vue
 │       ├── PackagesView.vue
+│       ├── ModelsView.vue
 │       ├── OrdersView.vue
 │       ├── ServicesView.vue
+│       ├── WalletView.vue
 │       ├── BillingView.vue
 │       ├── AuditView.vue
 │       ├── EnterpriseView.vue
@@ -106,7 +113,7 @@ npm install
 npm run dev
 ```
 
-应用默认运行在 `http://localhost:5173`。
+应用运行在 `http://localhost:3000`。
 
 ### Demo 账号
 
@@ -114,7 +121,7 @@ npm run dev
 
 | 邮箱 | 密码 | 角色 |
 |------|------|------|
-| `admin@example.com` | `admin123` | 超级管理员 |
+| `admin@sample.com` | `admin123` | 超级管理员 |
 
 > **注意**：认证状态通过 `sessionStorage` 维持，关闭浏览器后需重新登录。
 
@@ -221,7 +228,7 @@ import Button from '@/components/ui/Button.vue'
 
 1. 在 `src/views/` 下创建视图组件
 2. 在 `src/router/index.ts` 中注册路由
-3. 在 `src/components/portal/Sidebar.vue` 中添加菜单项
+3. 在 `src/components/portal/Sidebar.vue` 的 `menuGroups` 中添加菜单项
 4. 在 `src/components/portal/` 下创建对应的 Content 组件
 
 ### UI 组件
@@ -239,4 +246,4 @@ import Button from '@/components/ui/Button.vue'
 ## 许可证
 
 Private — 仅供内部使用。
-<!-- [AI_END LINES=172 TIMESTAMP=2025-06-15 12:30:00] -->
+<!-- [AI_END LINES=197 TIMESTAMP=2025-06-19 08:00:00] -->

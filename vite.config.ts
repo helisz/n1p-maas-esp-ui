@@ -14,5 +14,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    port: 3000,
+  },
 })
 // [AI_END LINES=15 TIMESTAMP=2025-06-15 12:00:00]

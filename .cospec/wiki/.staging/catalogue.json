@@ -1,187 +1,187 @@
 [
   {
-    "title": "1、Project Overview & Quick Start",
-    "prompt": "Create a comprehensive project overview and quick start guide for the MaaS Portal Vue application. Explain the project's core purpose as an enterprise Model-as-a-Service management portal. Detail the technology stack composition (Vue 3 Composition API with <script setup>, TypeScript ~5.7, Vite ^6.3, Vue Router ^4.5, Pinia ^3.0, Tailwind CSS ^4.1, Radix Vue ^1.9, Lucide Vue Next ^0.564). Provide environment setup instructions including Node.js requirements, dependency installation via npm, and the available scripts (dev, build, preview). Include a quick start walkthrough from cloning to running the development server, explaining the demo authentication credentials (admin@sample.com / admin123). Describe the project structure (src/views, src/components/portal, src/components/ui, src/stores, src/router, src/lib) and target user groups (enterprise MaaS customers, administrators).",
+    "title": "1、Project Overview",
+    "prompt": "Provide a comprehensive project overview for the maas-portal-vue application. Explain that this is an enterprise-grade Model-as-a-Service (MaaS) management portal built with Vue 3 + TypeScript, serving as a frontend SPA for enterprise users to browse service packages, manage orders, monitor services, handle billing, and administer enterprise accounts. Detail the core value proposition (one-stop AI API service platform), the target user groups (enterprise administrators, developers, procurement teams), the project's current stage (v0.1.0 frontend prototype with demo authentication), and summarize all 11 business functional modules: Dashboard, Packages, Models, Orders, Services, Wallet, Billing, Enterprise, Accounts, and Audit. Reference the package.json name and version, and the README.md project description.",
     "sections": [
       {
-        "title": "project-introduction",
-        "name": "Project Introduction",
-        "prompt": "Write a detailed project introduction explaining the MaaS Portal Vue application. Describe its role as an enterprise-grade single-page application for managing Model-as-a-Service offerings. Cover the core value proposition: centralized management of service packages, orders, service instances, billing, wallet, audit logs, enterprise information, and sub-account permissions. Explain the current state as a frontend prototype at v0.1.0 with mock/demo authentication and no backend API integration. Reference the README.md for localization and module descriptions."
+        "title": "project-positioning",
+        "name": "Project Positioning & Value Proposition",
+        "prompt": "Analyze the project's business positioning by examining README.md, package.json, and HomeView.vue. Explain how the portal positions itself as a 'one-stop enterprise MaaS API service platform' (智信MaaS服务管理平台). Detail the core value proposition: secure authentication, flexible package procurement, full lifecycle service management, transparent billing, and comprehensive audit trails. Reference the Chinese branding, the target enterprise market, and the competitive advantages highlighted in the landing page feature sections."
       },
       {
-        "title": "technology-stack",
-        "name": "Technology Stack",
-        "prompt": "Provide an in-depth analysis of the technology stack. For each technology, explain its role in the project: Vue 3 (Composition API with <script setup> pattern), TypeScript (~5.7 for type safety), Vite (^6.3 as build tool), Vue Router (^4.5 with HTML5 History mode), Pinia (^3.0 for state management), Tailwind CSS (^4.1 for styling via @tailwindcss/vite plugin), Radix Vue (^1.9 as headless UI primitives), Lucide Vue Next (^0.564 for icons), class-variance-authority (^0.7 for component variant management), clsx (^2.1), and tailwind-merge (^3.2). Explain how these choices form a modern, maintainable frontend architecture."
+        "title": "tech-stack",
+        "name": "Technology Stack & Dependencies",
+        "prompt": "Provide a detailed breakdown of the complete technology stack by analyzing package.json, vite.config.ts, and tsconfig.json. Cover: Vue 3.5 with Composition API and <script setup>, TypeScript 5.7, Vite 6.3 as build tool, Vue Router 4.5 with HTML5 History mode, Pinia 3.0 for state management, Tailwind CSS 4.1 with @tailwindcss/vite plugin, Radix Vue 1.9 as UI primitive foundation, Lucide Vue Next 0.564 for icons, and class-variance-authority 0.7 with clsx and tailwind-merge for component variant management. Explain the role and integration of each technology."
       },
       {
-        "title": "environment-setup",
-        "name": "Environment Setup & Installation",
-        "prompt": "Detail the environment setup and installation process. Cover prerequisites (Node.js version requirements), cloning the repository, running npm install, and configuring the development environment. Explain the Vite configuration including the @/ path alias mapping to ./src, Vue plugin setup, and Tailwind CSS plugin integration. Describe the tsconfig.json setup and any IDE-specific recommendations for Vue 3 + TypeScript development."
+        "title": "core-modules",
+        "name": "Core Functional Modules",
+        "prompt": "Systematically document all 11 business functional modules identified in the codebase. For each module, list its route path, view component, content component, and core purpose. Modules are: Dashboard (/dashboard), Packages (/packages), Models (/models), Orders (/orders), Services (/services), Wallet (/wallet), Billing (/billing), Audit (/audit), Enterprise (/enterprise), Accounts (/accounts), and the Login/Landing page (/). Reference src/router/index.ts for route definitions and src/components/portal/Sidebar.vue for the navigation grouping structure (服务, 费用, 管理)."
       },
       {
-        "title": "quick-start",
-        "name": "Quick Start Guide",
-        "prompt": "Create a practical quick start guide. Walk through running npm run dev to start the Vite development server. Explain how to access the application, navigate to the login page, and authenticate using the demo credentials (admin@sample.com / admin123). Describe the main navigation flow through the dashboard and key business modules. Include common development workflows and tips for working with the codebase."
+        "title": "project-structure",
+        "name": "Project Directory Structure",
+        "prompt": "Document the complete file organization and directory structure. Explain the purpose of each directory: public/ for static assets, src/main.ts as the application bootstrap, src/App.vue as the root router-view container, src/router/ for routing configuration, src/stores/ for Pinia state management, src/views/ for page-level view components, src/components/portal/ for business layout and content components, src/components/ui/ for the reusable UI component library, and src/lib/ for utility functions. Reference the actual file tree and explain the view-to-content component pattern used throughout the application."
       }
     ]
   },
   {
-    "title": "2、Application Architecture",
-    "prompt": "Provide a comprehensive analysis of the MaaS Portal Vue application architecture. Explain the SPA (Single Page Application) architecture pattern, component-based design, and the directory structure. Analyze the bootstrap flow in src/main.ts (Pinia initialization, auth session restoration, router registration, app mounting). Examine the App.vue root component structure. Detail the Vite build configuration in vite.config.ts (plugins, aliases, build optimizations). Analyze the TypeScript configuration and type definitions. Cover the styling architecture using Tailwind CSS v4 and the global style.css file. Explain how the view layer (src/views), component layer (src/components/portal and src/components/ui), state layer (src/stores), and routing layer (src/router) interact to form a cohesive architecture.",
+    "title": "2、Environment Setup & Development Guide",
+    "prompt": "Create a practical guide for setting up the development environment and working with the maas-portal-vue project. Cover system prerequisites, dependency installation, available npm scripts, development server configuration, build process, and deployment options. Reference package.json scripts, vite.config.ts server port configuration (3000), README.md quick start section, and the deployment examples (Nginx, Docker, Vercel/Netlify). Include the demo login credentials and explain session behavior.",
     "sections": [
       {
-        "title": "spa-architecture",
-        "name": "SPA Architecture Pattern",
-        "prompt": "Analyze the Single Page Application architecture. Explain how the application uses Vue Router with HTML5 History mode to manage 10 distinct routes without page reloads. Describe the lazy loading pattern used for route components via dynamic imports. Cover the application lifecycle from index.html entry point through main.ts bootstrap to component rendering. Explain the unauthenticated (login) vs authenticated (portal) page flows."
+        "title": "prerequisites",
+        "name": "System Prerequisites",
+        "prompt": "Document the system requirements for developing this project. Based on README.md and package.json, specify Node.js >= 18.0.0 and npm >= 9.0.0 as minimum requirements. Explain the ES module setup (type: module in package.json) and any global tooling expectations."
       },
       {
-        "title": "directory-structure",
-        "name": "Directory Structure & Code Organization",
-        "prompt": "Examine the project directory structure in detail. Explain the purpose of each directory: src/views (page-level components), src/components/portal (business-specific components for 8 modules), src/components/ui (40 reusable UI primitives), src/stores (Pinia state management), src/router (navigation configuration), src/lib (shared utilities). Analyze the separation of concerns between views (routing targets) and content components (reusable business logic). Discuss the file naming conventions and component organization patterns."
+        "title": "installation",
+        "name": "Installation & Dependency Management",
+        "prompt": "Provide step-by-step installation instructions. Reference the README.md installation section: running npm install to install dependencies including Vue, Vite, Pinia, Vue Router, Tailwind CSS, Radix Vue, Lucide icons, and development tools (vue-tsc, @vitejs/plugin-vue, @tailwindcss/vite). Explain the purpose of key dependencies and devDependencies."
       },
       {
-        "title": "routing-architecture",
-        "name": "Routing & Navigation Architecture",
-        "prompt": "Deep dive into the routing architecture defined in src/router/index.ts. Analyze the 10 route definitions (Login, Dashboard, Packages, Orders, Services, Wallet, Billing, Audit, Enterprise, Accounts). Explain the meta.requiresAuth flag system and how it integrates with the global beforeEach navigation guard. Detail the redirect logic for unauthenticated users and logged-in users accessing the login page. Explain the route naming convention and component lazy loading strategy."
+        "title": "development-workflow",
+        "name": "Development Workflow & Scripts",
+        "prompt": "Document all available npm scripts from package.json: dev (vite - development server on port 3000), build (vue-tsc -b && vite build - type checking followed by production build), and preview (vite preview - preview production build). Explain the build pipeline, how Vite processes Vue SFCs and Tailwind CSS, and the role of vue-tsc in type checking. Include the demo account credentials (admin@sample.com / admin123) for testing authentication."
       },
       {
-        "title": "state-management",
-        "name": "State Management Architecture",
-        "prompt": "Analyze the state management approach using Pinia. Explain the Composition API pattern with defineStore, refs, and computed properties. Focus on the auth store as the primary state management example. Describe how state is initialized in main.ts before router registration. Cover the reactivity model and how components consume store state. Discuss the current state management scope and potential expansion patterns for future business state."
+        "title": "configuration-overview",
+        "name": "Project Configuration Overview",
+        "prompt": "Explain the key configuration files: vite.config.ts (Vue plugin, Tailwind plugin, @/ alias to ./src, server port 3000), tsconfig.json (TypeScript compiler options and path mapping), and index.html (HTML entry point). Reference the actual configuration values and explain how the @/ path alias is used throughout the codebase for imports."
       },
       {
-        "title": "build-configuration",
-        "name": "Build System & Configuration",
-        "prompt": "Examine the Vite build configuration in vite.config.ts. Explain the plugin setup (@vitejs/plugin-vue for Vue SFC compilation, @tailwindcss/vite for CSS processing). Detail the path alias configuration (@ -> ./src) using fileURLToPath and URL. Analyze the package.json scripts (dev, build with vue-tsc type checking, preview). Discuss the build output configuration and deployment considerations for the SPA."
+        "title": "deployment",
+        "name": "Build & Deployment Options",
+        "prompt": "Document the deployment strategies described in README.md. Cover: static file hosting with Nginx (SPA fallback configuration), Docker multi-stage build (node:20-alpine builder + nginx:alpine runtime), and Vercel/Netlify deployment with redirect rules. Explain the dist/ output directory, asset caching strategies, and the importance of SPA route fallback for HTML5 History mode."
       }
     ]
   },
   {
-    "title": "3、Authentication System",
-    "prompt": "Create a comprehensive technical analysis of the authentication system in the MaaS Portal Vue application. Focus on src/stores/auth.ts as the core implementation. Explain the Pinia store structure using the Composition API pattern with refs, computed properties, and functions. Detail the User interface (name, company, role, email) and RegisterData interface. Analyze the session persistence mechanism using sessionStorage with the 'maas_portal_user' key. Examine the demo user system with hardcoded credentials (admin@sample.com / admin123) and the in-memory DEMO_USERS array. Explain the login flow with simulated 800ms async delay, password verification logic, and session creation. Detail the registration flow with email uniqueness validation and automatic post-registration login. Explain the logout mechanism and session cleanup. Analyze the session restoration on app bootstrap. Discuss the router integration via route guards in src/router/index.ts that redirect unauthenticated users to Login and logged-in users away from Login. Cover the LoginView.vue UI implementation and form handling. Address current security limitations (client-side demo auth, plaintext passwords in memory) and discuss production migration patterns.",
+    "title": "3、Application Architecture",
+    "prompt": "Provide a comprehensive architectural analysis of the maas-portal-vue application. Analyze the system design patterns, component hierarchy, data flow, and file organization. Reference src/main.ts (bootstrap sequence), src/App.vue (root container), src/router/index.ts (routing architecture), src/components/portal/PortalLayout.vue (layout system), and the view-to-content component pattern. Explain how the application initializes Pinia before Vue Router, restores authentication sessions, and mounts the app. Detail the lazy-loaded route components and the auth guard mechanism.",
     "sections": [
       {
-        "title": "auth-store-design",
-        "name": "Auth Store Design",
-        "prompt": "Deep dive into the Pinia auth store implementation in src/stores/auth.ts. Explain the defineStore('auth', ...) setup using Composition API pattern. Analyze the reactive state (user ref, isLoading ref), computed property (isLoggedIn), and exported functions (restoreSession, login, register, logout). Detail the User and RegisterData TypeScript interfaces. Explain the sessionStorage-based persistence with STORAGE_KEY constant and the JSON serialization/deserialization flow."
+        "title": "system-design",
+        "name": "System Design & Architectural Patterns",
+        "prompt": "Analyze the overall architectural pattern of the application. Explain that it follows a classic Single Page Application (SPA) layered architecture with: a presentation layer (Vue components), a state management layer (Pinia stores), a routing layer (Vue Router), and a utility layer (lib/utils.ts). Detail the bootstrap sequence in src/main.ts: createApp -> createPinia -> use(pinia) -> restoreSession -> use(router) -> mount. Explain why Pinia must be initialized before restoring the session or using the router."
+      },
+      {
+        "title": "component-hierarchy",
+        "name": "Component Hierarchy & Relationships",
+        "prompt": "Map the complete component hierarchy tree. Start from App.vue (<router-view/>), through route-level views (DashboardView.vue, etc.), to PortalLayout.vue (Sidebar + Header + main slot), down to business Content components (DashboardContent.vue, PackagesContent.vue, etc.), and finally to UI primitive components (Button.vue, Card.vue, Dialog.vue, etc. from src/components/ui/). Explain the layout wrapping pattern where all authenticated views use PortalLayout, while the landing page (HomeView.vue) is standalone."
+      },
+      {
+        "title": "data-flow",
+        "name": "Data Flow & State Communication",
+        "prompt": "Analyze how data flows through the application. Explain the unidirectional data flow from Pinia stores (auth.ts) to components via composables (useAuthStore), prop passing from views to content components, event emission for user interactions, and router navigation for page transitions. Detail the auth state flow: login action -> sessionStorage persistence -> route guard evaluation -> conditional rendering in PortalLayout.vue. Explain the mock data patterns used in content components (stats arrays, package definitions, activity lists)."
+      },
+      {
+        "title": "file-organization",
+        "name": "File Organization & Module Boundaries",
+        "prompt": "Document the file organization principles and module boundaries. Explain the separation between views/ (thin page wrappers), components/portal/ (business logic and layout), components/ui/ (reusable design system primitives), stores/ (state management), router/ (routing logic), and lib/ (shared utilities). Analyze how this structure enforces separation of concerns and enables parallel development of business features and UI components."
+      }
+    ]
+  },
+  {
+    "title": "4、Authentication & Authorization System",
+    "prompt": "Provide an in-depth technical analysis of the authentication and authorization system. Analyze src/stores/auth.ts (Pinia store with User/RegisterData interfaces, demo users, session persistence), src/router/index.ts (navigation guards with meta.requiresAuth), src/components/portal/PortalLayout.vue (auth state watcher), and src/views/HomeView.vue (login/register dialogs with form validation). Explain the complete authentication flow from user input through validation, demo credential matching, session storage, route protection, and logout.",
+    "sections": [
+      {
+        "title": "auth-store",
+        "name": "Authentication Store (Pinia)",
+        "prompt": "Deep dive into src/stores/auth.ts. Explain the store implementation using Pinia's Composition API style (defineStore with ref/computed). Document the User interface (name, company, role, email) and RegisterData interface (company, name, email, phone, password). Analyze the DEMO_USERS array with hardcoded demo credentials, the STORAGE_KEY constant for sessionStorage, and all store methods: restoreSession (reads from sessionStorage), login (async with 800ms delay, credential matching), register (async with 1000ms delay, email uniqueness check), logout (clears state and storage), clearJustLoggedIn, and the isLoggedIn computed property."
       },
       {
         "title": "login-flow",
-        "name": "Login & Registration Flow",
-        "prompt": "Analyze the authentication flows in detail. For login: explain the email/password validation against DEMO_USERS array, the 800ms simulated network delay, the password stripping before storage, and the sessionStorage persistence. For registration: explain the email uniqueness check, the 1000ms delay simulation, automatic role assignment ('超级管理员'), the DEMO_USERS.push mutation, and automatic login after successful registration. Detail the error handling and user feedback patterns."
+        "name": "Login Flow & Form Validation",
+        "prompt": "Analyze the login implementation in src/views/HomeView.vue. Document the login dialog state management (showLogin ref), form fields (email, password, showPassword, rememberMe), validation logic (required field checks), error handling (loginError display), loading states (loginSubmitting with Loader2 spinner), and the handleLogin async function that calls auth.login() and redirects to /dashboard on success. Explain the watch on auth.isLoggedIn that auto-redirects authenticated users away from the login page."
+      },
+      {
+        "title": "register-flow",
+        "name": "Registration Flow & Validation Rules",
+        "prompt": "Analyze the registration implementation in src/views/HomeView.vue. Document the register dialog state (showRegister), form fields (company, name, regEmail, phone, regPassword, confirmPassword, agreed), the validateRegister function with comprehensive validation rules (required fields, email regex format, Chinese phone number regex /^1[3-9]\\d{9}$/, password minimum 6 characters, password matching, terms agreement), error display per field, and the handleRegister async flow."
       },
       {
         "title": "route-guards",
         "name": "Route Guards & Access Control",
-        "prompt": "Examine the router-based access control in src/router/index.ts. Explain the global beforeEach navigation guard that checks to.meta.requiresAuth against auth.isLoggedIn. Detail the redirect logic: unauthenticated users sent to Login, authenticated users accessing Login redirected to Dashboard. Analyze how this integrates with the lazy-loaded route components and the route meta field pattern. Discuss the auth initialization timing (restoreSession called before router registration in main.ts)."
+        "prompt": "Deep dive into src/router/index.ts navigation guards. Explain the router.beforeEach implementation that checks to.meta.requiresAuth against auth.isLoggedIn. Document the three guard branches: (1) redirecting unauthenticated users to Login when accessing protected routes, (2) redirecting authenticated users to Dashboard when accessing Login, and (3) allowing all other navigation. Analyze how the route meta fields ({ requiresAuth: true/false }) define access levels for all 11 routes."
       },
       {
-        "title": "login-ui",
-        "name": "Login View Implementation",
-        "prompt": "Analyze the LoginView.vue component implementation. Explain the form structure, input bindings, validation approach, and integration with the auth store. Detail the UI components used (likely from the UI component library). Explain the loading state handling during login submission. Cover the registration toggle/link if present, and the overall user experience design for the authentication entry point."
-      },
-      {
-        "title": "security-considerations",
-        "name": "Security Considerations & Production Migration",
-        "prompt": "Discuss the current security model and its limitations. Address the client-side-only demo authentication, plaintext password storage in DEMO_USERS array, lack of password hashing, sessionStorage-based persistence (cleared on tab close), and absence of CSRF/XSS protections. Provide guidance on migrating to a production authentication backend: API integration patterns, JWT token handling, http-only cookies vs localStorage, password hashing requirements, and session invalidation strategies."
+        "title": "session-management",
+        "name": "Session Management & Persistence",
+        "prompt": "Analyze the session persistence mechanism. Explain how auth.restoreSession() in src/main.ts runs before router initialization to prevent flash-of-unauthenticated-content. Document the sessionStorage-based persistence (JSON serialization/deserialization), the isLoading state that prevents premature route evaluation, and the PortalLayout.vue watch on [auth.isLoading, auth.isLoggedIn] that redirects to / when the session expires or user logs out. Explain why sessionStorage (not localStorage) was chosen and its security implications."
       }
     ]
   },
   {
-    "title": "4、Portal Layout & Navigation System",
-    "prompt": "Analyze the portal layout and navigation system that forms the visual framework of the authenticated application experience. Focus on src/components/portal/PortalLayout.vue, Sidebar.vue, and Header.vue. Explain how these components work together to create the main application shell. Detail the collapsible sidebar navigation design including the navigation menu items mapping to the 10 application routes. Analyze the Header component for user information display and action buttons. Explain the layout structure using Tailwind CSS utility classes. Cover the responsive design considerations. Describe the Sidebar menu item structure with icons (from Lucide Vue Next), labels, and active state handling via Vue Router integration. Analyze the user avatar/profile display in the Header. Explain how the layout components integrate with the auth store for user data display. Cover the navigation flow from layout perspective: how clicking sidebar items triggers route transitions, how active route highlighting works, and how the layout persists across route changes.",
+    "title": "5、Portal Layout & Navigation System",
+    "prompt": "Provide comprehensive documentation of the portal layout and navigation system. Analyze src/components/portal/PortalLayout.vue (the master layout with auth-based conditional rendering), src/components/portal/Sidebar.vue (collapsible navigation with grouped menu items), and src/components/portal/Header.vue (top bar with user menu, notifications, and logout). Explain how these three components form the consistent authenticated user experience across all 10 business modules.",
     "sections": [
       {
-        "title": "layout-architecture",
-        "name": "Layout Architecture",
-        "prompt": "Analyze the PortalLayout.vue component as the master layout for authenticated pages. Explain the overall layout structure: sidebar area, main content area, header positioning. Detail how it wraps all route views (Dashboard, Packages, Orders, etc.). Explain the Tailwind CSS class composition for the layout grid/flex structure. Discuss the slot-based or direct component composition pattern used."
+        "title": "portal-layout",
+        "name": "Portal Layout Component",
+        "prompt": "Deep dive into src/components/portal/PortalLayout.vue. Explain its role as the master layout wrapper for all authenticated pages. Document the auth state watcher that redirects to /login when the user is not authenticated, the loading state display (Loader2 spinner), the three-zone layout structure (Sidebar + Header + main content slot), and how it provides consistent layout while allowing variable content through the <slot>. Analyze the CSS classes used for full-height flex layout and overflow handling."
       },
       {
         "title": "sidebar-navigation",
         "name": "Sidebar Navigation",
-        "prompt": "Deep dive into the Sidebar.vue component. Explain the navigation menu structure with items for Dashboard, Packages, Orders, Services, Wallet, Billing, Audit, Enterprise, and Accounts. Analyze how each menu item links to its corresponding route using Vue Router (router-link or programmatic navigation). Detail the icon integration using Lucide Vue Next icons. Explain the active route highlighting mechanism. Cover the collapsible/expandable behavior if present. Discuss the visual design using Tailwind CSS and the UI component library."
+        "prompt": "Analyze src/components/portal/Sidebar.vue in detail. Document the menuGroups array structure with four groups (no label for Dashboard, 服务 for Packages/Models/Orders/Services, 费用 for Wallet/Billing, 管理 for Enterprise/Accounts/Audit). Explain the collapsible sidebar implementation (collapsed ref with w-16/w-60 transition), active route highlighting using route.path comparison, the logo and branding section (智信MaaS服务管理平台), the search input placeholder, and the Lucide icon integration for each menu item. Analyze the transition-all duration-300 CSS animation."
       },
       {
-        "title": "header-component",
-        "name": "Header Component",
-        "prompt": "Analyze the Header.vue component. Explain its role in displaying user information from the auth store (name, company, role, email). Detail the user avatar/profile section using the Avatar and AvatarFallback components from the UI library. Analyze any action buttons such as logout functionality and how it integrates with authStore.logout(). Explain the Header's positioning within the layout and its responsive behavior. Cover the visual styling approach."
+        "title": "header-system",
+        "name": "Header & User Menu System",
+        "prompt": "Analyze src/components/portal/Header.vue. Document the three main header elements: notification bell with badge (showing count of 3), help button, and user dropdown menu. Explain the user dropdown implementation using DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, and DropdownMenuItem components from the UI library. Detail the avatar display with initials extraction (auth.user?.name?.charAt(0)), company and role display, and the logout handler that calls auth.logout() and redirects to /. Reference the Badge component for the notification counter."
       },
       {
-        "title": "view-integration",
-        "name": "View & Content Integration",
-        "prompt": "Explain how the layout system integrates with views and content components. Describe the pattern where each route view (src/views/*.vue) likely wraps its corresponding content component (src/components/portal/*Content.vue) within the PortalLayout. Analyze the component hierarchy: App.vue -> RouterView -> View (e.g., DashboardView.vue) -> PortalLayout -> DashboardContent.vue. Discuss the consistency benefits of this pattern and how it enables uniform layout across all authenticated pages."
+        "title": "route-structure",
+        "name": "Route Structure & Lazy Loading",
+        "prompt": "Document the complete routing architecture from src/router/index.ts. List all 11 RouteRecordRaw definitions with their paths, names, lazy-loaded component imports (() => import('@/views/...')), and meta.requiresAuth flags. Explain the HTML5 History mode configuration (createWebHistory) and the performance benefit of lazy loading each view component. Analyze the route naming convention and how route names are used in navigation guards and programmatic navigation."
       }
     ]
   },
   {
-    "title": "5、Dashboard Module",
-    "prompt": "Create a comprehensive analysis of the Dashboard module, which serves as the application's home page and primary entry point after authentication. Focus on src/views/DashboardView.vue and src/components/portal/DashboardContent.vue. Explain the dashboard's role in providing an overview of the MaaS portal's key metrics and activities. Analyze the component structure, data display patterns, and UI components used. Detail the Tailwind CSS styling approach for dashboard cards, metrics, and layout grids. Examine any chart or visualization components. Explain how the dashboard summarizes information from other modules (packages, orders, services, wallet, billing). Cover the user experience design choices for presenting high-density information. Analyze the interaction patterns and any quick action elements.",
+    "title": "6、Dashboard Module",
+    "prompt": "Provide comprehensive documentation of the Dashboard module. Analyze src/views/DashboardView.vue (thin wrapper) and src/components/portal/DashboardContent.vue (the actual dashboard implementation). Document the welcome section with personalized greeting, the four stats cards (已开通服务, 本月API调用, 待支付订单, 即将到期套餐), quick action shortcuts to common pages, the recent activities timeline, the active packages display with usage progress and status badges, and the enterprise verification dialog that appears on first login.",
     "sections": [
       {
         "title": "dashboard-overview",
-        "name": "Dashboard Overview",
-        "prompt": "Analyze the DashboardContent.vue component in detail. Explain the dashboard's layout structure: metric cards, activity sections, summary widgets. Detail the UI components used (Card, CardHeader, CardTitle, CardContent, Badge, etc.). Explain the data presentation patterns and how mock/demo data is displayed. Cover the Tailwind CSS grid/flex layout for organizing dashboard sections."
+        "name": "Dashboard Overview & Welcome Section",
+        "prompt": "Analyze the DashboardContent.vue top section. Document the personalized welcome message with hardcoded company name (中科云数科技), the 已认证企业 badge using the Badge component with ShieldCheck icon, and the overall page structure using the space-y-6 Tailwind utility for vertical spacing."
       },
       {
-        "title": "metrics-display",
-        "name": "Metrics & Summary Display",
-        "prompt": "Examine how the dashboard presents key metrics and summaries. Analyze the metric card components showing counts or statuses for packages, orders, services, wallet balance, billing status, etc. Explain the visual hierarchy and information density management. Detail any progress indicators, status badges, or trend displays. Discuss the design choices for at-a-glance information consumption."
+        "title": "stats-cards",
+        "name": "Statistics Cards Grid",
+        "prompt": "Deep dive into the stats cards implementation. Document the stats array with four metrics: 已开通服务 (5个, +2本月新增), 本月API调用 (128,456次, +12.5%), 待支付订单 (2笔, ¥3,600), 即将到期套餐 (1个, 15天后). Explain the responsive grid layout (grid-cols-4 on large screens), the Card/CardHeader/CardTitle/CardContent component composition, the TrendingUp icon for change indicators, and the visual hierarchy using text size and color utilities."
       },
       {
         "title": "quick-actions",
-        "name": "Quick Actions & Navigation",
-        "prompt": "Analyze any quick action elements on the dashboard that provide shortcuts to other modules. Explain button components, link cards, or action panels that navigate to Packages, Orders, Services, or other modules. Discuss the user experience rationale for providing these shortcuts from the home page."
+        "name": "Quick Actions Panel",
+        "prompt": "Analyze the quickActions array and its rendering. Document the three shortcuts: 订购套餐 (/packages), 查看API密钥 (/services), 查看账单 (/billing). Explain the interactive button design with hover states (hover:bg-accent), icon containers with rounded-lg bg-muted backgrounds, and the ArrowRight indicator. Analyze how these shortcuts improve user workflow efficiency."
+      },
+      {
+        "title": "recent-activities",
+        "name": "Recent Activities Timeline",
+        "prompt": "Document the recentActivities array with five mock activities covering service activation, payment success, auth completion, order creation, and admin login. Explain the status-based color coding (green for success, yellow for pending, blue for info) using conditional CSS classes on small dots, and the time display format. Analyze the lg:col-span-2 responsive layout that gives the activities panel more width than quick actions."
+      },
+      {
+        "title": "enterprise-verification",
+        "name": "Enterprise Verification Dialog",
+        "prompt": "Analyze the enterprise verification dialog triggered by auth.justLoggedIn. Document the Dialog component usage, the three-step verification flow (企业信息管理, 上传资质材料, 等待审核), the four benefits grid (更高API调用额度, 专属客户经理, 企业级SLA保障, 优先技术支持), and the DialogFooter with two actions (我知道了 dismiss, 验证企业资质 navigation to /enterprise). Explain the onMounted lifecycle hook that checks justLoggedIn and clears the flag after showing."
       }
     ]
   },
   {
-    "title": "6、Service Packages & Orders Management",
-    "prompt": "Provide an in-depth analysis of the Service Packages and Orders management modules, which form the core commercial workflow of the MaaS portal. For the Packages module (src/views/PackagesView.vue, src/components/portal/PackagesContent.vue), explain how MaaS service packages are displayed, categorized, and presented to users. Analyze the package card designs, pricing displays, feature lists, and selection/purchase interactions. Detail the UI components used for package presentation (Card components, Badge for status, Button for actions). For the Orders module (src/views/OrdersView.vue, src/components/portal/OrdersContent.vue), explain the order management interface: order list display, status tracking, order details, and history. Analyze the Table components used for order listing, including Table, TableHeader, TableBody, TableRow, TableCell, TableHead. Detail filtering, sorting, and search capabilities if present. Explain the order lifecycle states and how they are visually represented. Cover the relationship between packages and orders: how selecting a package leads to order creation. Discuss the business logic implementation and data flow patterns.",
+    "title": "7、Service Ecosystem Modules",
+    "prompt": "Provide comprehensive documentation of the four core service ecosystem modules: Packages, Models, Orders, and Services. Analyze src/components/portal/PackagesContent.vue (tiered pricing cards with purchase flow), src/components/portal/ModelsContent.vue, src/components/portal/OrdersContent.vue, and src/components/portal/ServicesContent.vue. Explain how these modules form the complete service procurement and management lifecycle within the MaaS platform.",
     "sections": [
       {
-        "title": "packages-module",
-        "name": "Packages Module",
-        "prompt": "Deep dive into the Packages module. Analyze PackagesContent.vue component structure. Explain how service packages are displayed: card grid layout, package tiers, pricing information, feature lists. Detail the UI components used (Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter, Button, Badge). Analyze any package selection, comparison, or subscription flow. Cover the mock data structure and display patterns. Discuss how packages represent the MaaS service offerings."
+        "title": "packages-system",
+        "name": "Packages & Subscription System",
+        "prompt": "Deep dive into src/components/portal/PackagesContent.vue. Document the packages array with three tiers (基础版 ¥1,999/月, 高级版 ¥5,999/月, 尊享版 ¥19,999/月), each with feature lists and popularity flags. Analyze the tierConfig object that maps tier IDs to icon components (Sparkles, Rocket, Crown) and gradient color schemes. Explain the responsive card grid, the '最受欢迎' badge on the advanced tier, the price display formatting with toLocaleString(), the feature checklist with Check icons in green circles, the hover animations (hover:-translate-y-1 hover:shadow-xl), and the purchase confirmation Dialog flow."
       },
       {
-        "title": "orders-module",
-        "name": "Orders Module",
-        "prompt": "Deep dive into the Orders module. Analyze OrdersContent.vue component structure. Explain the order list/table implementation using the Table component family (Table, TableHeader, TableBody, TableHead, TableRow, TableCell). Detail the order information displayed: order ID, package name, date, amount, status. Analyze status representation using Badge components with different variants. Explain any filtering, pagination, or search functionality. Cover the order detail view if present. Discuss the order lifecycle and state management."
-      },
-      {
-        "title": "package-order-flow",
-        "name": "Package-to-Order Business Flow",
-        "prompt": "Analyze the relationship and workflow between Packages and Orders modules. Explain the user journey from browsing packages to placing an order. Detail any shared data patterns or state interactions between these modules. Discuss how the UI guides users through the commercial workflow. Cover any cart, checkout, or order confirmation patterns if implemented."
-      }
-    ]
-  },
-  {
-    "title": "7、Service Instances & Wallet Management",
-    "prompt": "Analyze the Service Instances and Wallet management modules that handle the operational and financial aspects of the MaaS portal. For the Services module (src/views/ServicesView.vue, src/components/portal/ServicesContent.vue), explain how active MaaS service instances are displayed and managed. Analyze the service list/table structure, status indicators, configuration details, and operational controls. Detail any service lifecycle states (active, suspended, expired, etc.). For the Wallet module (src/views/WalletView.vue, src/components/portal/WalletContent.vue), explain the wallet interface: balance display, transaction history, recharge/payment options. Analyze the financial data presentation using Cards, Tables, and currency formatting. Detail transaction types and their visual representation. Explain the relationship between wallet balance and service/package purchases. Cover the UI components used and the Tailwind CSS styling for financial data. Discuss the business logic for wallet operations and transaction recording.",
-    "sections": [
-      {
-        "title": "services-module",
-        "name": "Services Module",
-        "prompt": "Deep dive into the Services module. Analyze ServicesContent.vue component structure. Explain how active MaaS service instances are displayed: list or grid layout, service names, package associations, status indicators. Detail the UI components used (Table, Card, Badge, Button, etc.). Analyze service status management and operational controls. Cover any service detail views, configuration panels, or management actions. Discuss the service lifecycle and how it relates to package subscriptions and orders."
-      },
-      {
-        "title": "wallet-module",
-        "name": "Wallet Module",
-        "prompt": "Deep dive into the Wallet module. Analyze WalletContent.vue component structure. Explain the wallet balance display using prominent Card components. Detail the transaction history table with columns for date, type, amount, description, and status. Analyze the UI components used (Table, Card, Badge, Button, Progress if present). Cover any recharge, withdrawal, or payment action interfaces. Discuss currency formatting and financial data presentation patterns. Explain the relationship between wallet transactions and orders/services."
-      },
-      {
-        "title": "service-wallet-integration",
-        "name": "Service & Financial Integration",
-        "prompt": "Analyze how the Services and Wallet modules integrate with the broader application. Explain the dependency chain: wallet balance affects ability to purchase packages, which creates services. Detail any shared state or cross-module data flow. Discuss the user experience for managing services and monitoring financial status. Cover any alerts or notifications related to low balance or service expiration."
-      }
-    ]
-  },
-  {
-    "title": "8、Billing, Audit & Administration Modules",
-    "prompt": "Provide a comprehensive analysis of the Billing, Audit, Enterprise, and Accounts modules that handle financial records, compliance, and administrative functions. For the Billing module (src/views/BillingView.vue, src/components/portal/BillingContent.vue), explain the billing interface: invoice/bill list, payment records, billing cycles, amount details. Analyze the table-based display and status tracking. For the Audit module (src/views/AuditView.vue, src/components/portal/AuditContent.vue), explain the audit log interface: activity records, timestamps, user actions, resource changes. Detail the log filtering and search capabilities. For the Enterprise module (src/views/EnterpriseView.vue, src/components/portal/EnterpriseContent.vue), explain the enterprise information management: company details, contact information, configuration settings. For the Accounts module (src/views/AccountsView.vue, src/components/portal/AccountsContent.vue), explain the sub-account/user management interface: user list, role assignments, permission management, account creation/editing. Analyze the UI patterns shared across these administrative modules (Table displays, Card layouts, Dialog for forms, Select for filtering). Detail the relationship between these modules and the auth system (role-based access implications). Discuss the data presentation patterns and Tailwind CSS styling consistency.",
-    "sections": [
-      {
-        "title": "billing-module",
+        "title": "models-marketplace",
+        "name": "Models Marketplace",
         "name": "Billing Module",
         "prompt": "Deep dive into the Billing module. Analyze BillingContent.vue component structure. Explain the billing record display: invoice/bill listing with Table components, payment status tracking with Badge variants, amount and date formatting. Detail any filtering by date range, status, or amount. Cover the relationship between billing records, orders, and wallet transactions. Discuss billing cycle visualization and payment history patterns."
       },
