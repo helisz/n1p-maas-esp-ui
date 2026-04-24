@@ -186,65 +186,65 @@ async function handleRegister() {
   :style="{ '--parallax-x': mouseX * 30 + 'px', '--parallax-y': mouseY * 20 + 'px', '--parallax-x-reverse': -mouseX * 20 + 'px', '--parallax-y-reverse': -mouseY * 15 + 'px' }"
 >
   <!-- Flowing wave curves - Layer 1 -->
-  <svg class="absolute inset-0 w-full h-full opacity-[0.15]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
-    <path d="M0,300 Q150,200 300,300 T600,300 T900,300 T1200,300" fill="none" stroke="#374151" stroke-width="0.6" class="animate-wave-flow-1"/>
-    <path d="M0,350 Q150,450 300,350 T600,350 T900,350 T1200,350" fill="none" stroke="#374151" stroke-width="0.5" class="animate-wave-flow-2"/>
-    <path d="M0,250 Q200,150 400,250 T800,250 T1200,250" fill="none" stroke="#374151" stroke-width="0.7" class="animate-wave-flow-3"/>
-    <path d="M0,400 Q200,500 400,400 T800,400 T1200,400" fill="none" stroke="#374151" stroke-width="0.4" class="animate-wave-flow-1"/>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.35]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <path d="M0,300 Q150,200 300,300 T600,300 T900,300 T1200,300" fill="none" stroke="#000000" stroke-width="0.6" class="animate-wave-flow-1"/>
+    <path d="M0,350 Q150,450 300,350 T600,350 T900,350 T1200,350" fill="none" stroke="#000000" stroke-width="0.5" class="animate-wave-flow-2"/>
+    <path d="M0,250 Q200,150 400,250 T800,250 T1200,250" fill="none" stroke="#000000" stroke-width="0.7" class="animate-wave-flow-3"/>
+    <path d="M0,400 Q200,500 400,400 T800,400 T1200,400" fill="none" stroke="#000000" stroke-width="0.4" class="animate-wave-flow-1"/>
   </svg>
 
   <!-- Diagonal data stream lines - Layer 2 -->
-  <svg class="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
-    <line x1="-100" y1="500" x2="400" y2="-100" stroke="#374151" stroke-width="0.5" stroke-dasharray="4 12" class="animate-stream-1"/>
-    <line x1="0" y1="600" x2="500" y2="0" stroke="#374151" stroke-width="0.4" stroke-dasharray="6 18" class="animate-stream-2"/>
-    <line x1="100" y1="600" x2="600" y2="0" stroke="#374151" stroke-width="0.6" stroke-dasharray="3 15" class="animate-stream-3"/>
-    <line x1="200" y1="600" x2="700" y2="0" stroke="#374151" stroke-width="0.5" stroke-dasharray="8 20" class="animate-stream-1"/>
-    <line x1="700" y1="600" x2="1200" y2="0" stroke="#374151" stroke-width="0.4" stroke-dasharray="5 15" class="animate-stream-2"/>
-    <line x1="800" y1="600" x2="1300" y2="0" stroke="#374151" stroke-width="0.5" stroke-dasharray="4 16" class="animate-stream-3"/>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.22]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <line x1="-100" y1="500" x2="400" y2="-100" stroke="#000000" stroke-width="0.5" stroke-dasharray="4 12" class="animate-stream-1"/>
+    <line x1="0" y1="600" x2="500" y2="0" stroke="#000000" stroke-width="0.4" stroke-dasharray="6 18" class="animate-stream-2"/>
+    <line x1="100" y1="600" x2="600" y2="0" stroke="#000000" stroke-width="0.6" stroke-dasharray="3 15" class="animate-stream-3"/>
+    <line x1="200" y1="600" x2="700" y2="0" stroke="#000000" stroke-width="0.5" stroke-dasharray="8 20" class="animate-stream-1"/>
+    <line x1="700" y1="600" x2="1200" y2="0" stroke="#000000" stroke-width="0.4" stroke-dasharray="5 15" class="animate-stream-2"/>
+    <line x1="800" y1="600" x2="1300" y2="0" stroke="#000000" stroke-width="0.5" stroke-dasharray="4 16" class="animate-stream-3"/>
   </svg>
 
   <!-- Curved connection network - Layer 3 -->
-  <svg class="absolute inset-0 w-full h-full opacity-[0.18]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
+  <svg class="absolute inset-0 w-full h-full opacity-[0.28]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
     <!-- Central hub connections -->
-    <path d="M600,300 Q500,200 400,250" fill="none" stroke="#374151" stroke-width="0.8" class="animate-network-pulse"/>
-    <path d="M600,300 Q700,200 800,150" fill="none" stroke="#374151" stroke-width="0.6" class="animate-network-pulse-delayed"/>
-    <path d="M600,300 Q500,400 350,450" fill="none" stroke="#374151" stroke-width="0.7" class="animate-network-pulse-slow"/>
-    <path d="M600,300 Q700,400 850,480" fill="none" stroke="#374151" stroke-width="0.5" class="animate-network-pulse-delayed"/>
-    <path d="M400,250 Q300,180 200,220" fill="none" stroke="#374151" stroke-width="0.5" class="animate-network-pulse"/>
-    <path d="M800,150 Q900,100 1000,140" fill="none" stroke="#374151" stroke-width="0.4" class="animate-network-pulse-slow"/>
+    <path d="M600,300 Q500,200 400,250" fill="none" stroke="#000000" stroke-width="0.8" class="animate-network-pulse"/>
+    <path d="M600,300 Q700,200 800,150" fill="none" stroke="#000000" stroke-width="0.6" class="animate-network-pulse-delayed"/>
+    <path d="M600,300 Q500,400 350,450" fill="none" stroke="#000000" stroke-width="0.7" class="animate-network-pulse-slow"/>
+    <path d="M600,300 Q700,400 850,480" fill="none" stroke="#000000" stroke-width="0.5" class="animate-network-pulse-delayed"/>
+    <path d="M400,250 Q300,180 200,220" fill="none" stroke="#000000" stroke-width="0.5" class="animate-network-pulse"/>
+    <path d="M800,150 Q900,100 1000,140" fill="none" stroke="#000000" stroke-width="0.4" class="animate-network-pulse-slow"/>
     <!-- Connection nodes -->
-    <circle cx="600" cy="300" r="2" fill="#374151" class="animate-node-glow"/>
-    <circle cx="400" cy="250" r="1.5" fill="#374151" class="animate-node-glow-delayed"/>
-    <circle cx="800" cy="150" r="1.5" fill="#374151" class="animate-node-glow-slow"/>
-    <circle cx="350" cy="450" r="1.5" fill="#374151" class="animate-node-glow-delayed"/>
-    <circle cx="200" cy="220" r="1" fill="#374151" class="animate-node-glow"/>
-    <circle cx="1000" cy="140" r="1" fill="#374151" class="animate-node-glow-slow"/>
+    <circle cx="600" cy="300" r="2" fill="#000000" class="animate-node-glow"/>
+    <circle cx="400" cy="250" r="1.5" fill="#000000" class="animate-node-glow-delayed"/>
+    <circle cx="800" cy="150" r="1.5" fill="#000000" class="animate-node-glow-slow"/>
+    <circle cx="350" cy="450" r="1.5" fill="#000000" class="animate-node-glow-delayed"/>
+    <circle cx="200" cy="220" r="1" fill="#000000" class="animate-node-glow"/>
+    <circle cx="1000" cy="140" r="1" fill="#000000" class="animate-node-glow-slow"/>
   </svg>
 
   <!-- Horizontal flowing energy lines - Layer 4 -->
-  <svg class="absolute inset-0 w-full h-full opacity-[0.10]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
-    <line x1="-100" y1="100" x2="1300" y2="100" stroke="#374151" stroke-width="0.3" class="animate-energy-flow-1"/>
-    <line x1="-100" y1="180" x2="1300" y2="180" stroke="#374151" stroke-width="0.4" class="animate-energy-flow-2"/>
-    <line x1="-100" y1="420" x2="1300" y2="420" stroke="#374151" stroke-width="0.4" class="animate-energy-flow-3"/>
-    <line x1="-100" y1="520" x2="1300" y2="520" stroke="#374151" stroke-width="0.3" class="animate-energy-flow-1"/>
+  <svg class="absolute inset-0 w-full h-full opacity-[0.20]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
+    <line x1="-100" y1="100" x2="1300" y2="100" stroke="#000000" stroke-width="0.3" class="animate-energy-flow-1"/>
+    <line x1="-100" y1="180" x2="1300" y2="180" stroke="#000000" stroke-width="0.4" class="animate-energy-flow-2"/>
+    <line x1="-100" y1="420" x2="1300" y2="420" stroke="#000000" stroke-width="0.4" class="animate-energy-flow-3"/>
+    <line x1="-100" y1="520" x2="1300" y2="520" stroke="#000000" stroke-width="0.3" class="animate-energy-flow-1"/>
   </svg>
 
   <!-- Spiral vortex curves - Layer 5 -->
-  <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.08]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-    <path d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0" fill="none" stroke="#374151" stroke-width="0.5" class="animate-vortex-spin"/>
-    <path d="M200,200 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0" fill="none" stroke="#374151" stroke-width="0.4" class="animate-vortex-spin-reverse"/>
-    <path d="M200,200 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0" fill="none" stroke="#374151" stroke-width="0.6" class="animate-vortex-spin-slow"/>
-    <path d="M200,200 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0" fill="none" stroke="#374151" stroke-width="0.5" class="animate-vortex-spin-reverse-slow"/>
+  <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.18]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <path d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0" fill="none" stroke="#000000" stroke-width="0.5" class="animate-vortex-spin"/>
+    <path d="M200,200 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0" fill="none" stroke="#000000" stroke-width="0.4" class="animate-vortex-spin-reverse"/>
+    <path d="M200,200 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0" fill="none" stroke="#000000" stroke-width="0.6" class="animate-vortex-spin-slow"/>
+    <path d="M200,200 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0" fill="none" stroke="#000000" stroke-width="0.5" class="animate-vortex-spin-reverse-slow"/>
   </svg>
 
   <!-- Floating particles with trails - Layer 6 -->
   <svg class="absolute inset-0 w-full h-full opacity-[0.14]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 600">
-    <circle cx="150" cy="150" r="1.2" fill="#374151" class="animate-particle-float-1"/>
-    <circle cx="1050" cy="200" r="1" fill="#374151" class="animate-particle-float-2"/>
-    <circle cx="200" cy="450" r="1.5" fill="#374151" class="animate-particle-float-3"/>
-    <circle cx="1000" cy="400" r="1.2" fill="#374151" class="animate-particle-float-1"/>
-    <circle cx="600" cy="100" r="1" fill="#374151" class="animate-particle-float-2"/>
-    <circle cx="500" cy="500" r="1.3" fill="#374151" class="animate-particle-float-3"/>
+    <circle cx="150" cy="150" r="1.2" fill="#000000" class="animate-particle-float-1"/>
+    <circle cx="1050" cy="200" r="1" fill="#000000" class="animate-particle-float-2"/>
+    <circle cx="200" cy="450" r="1.5" fill="#000000" class="animate-particle-float-3"/>
+    <circle cx="1000" cy="400" r="1.2" fill="#000000" class="animate-particle-float-1"/>
+    <circle cx="600" cy="100" r="1" fill="#000000" class="animate-particle-float-2"/>
+    <circle cx="500" cy="500" r="1.3" fill="#000000" class="animate-particle-float-3"/>
   </svg>
 
   <!-- Dynamic gradient glow orbs - Layer 7 -->
@@ -256,11 +256,11 @@ async function handleRegister() {
 
   <!-- Radar pulse scan rings - Layer 8 -->
   <svg class="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
-    <circle cx="600" cy="300" r="50" fill="none" stroke="#374151" stroke-width="0.5" class="animate-radar-pulse-1"/>
-    <circle cx="600" cy="300" r="100" fill="none" stroke="#374151" stroke-width="0.4" class="animate-radar-pulse-2"/>
-    <circle cx="600" cy="300" r="150" fill="none" stroke="#374151" stroke-width="0.3" class="animate-radar-pulse-3"/>
-    <circle cx="200" cy="150" r="30" fill="none" stroke="#374151" stroke-width="0.4" class="animate-radar-pulse-1"/>
-    <circle cx="1000" cy="450" r="40" fill="none" stroke="#374151" stroke-width="0.3" class="animate-radar-pulse-2"/>
+    <circle cx="600" cy="300" r="50" fill="none" stroke="#000000" stroke-width="0.5" class="animate-radar-pulse-1"/>
+    <circle cx="600" cy="300" r="100" fill="none" stroke="#000000" stroke-width="0.4" class="animate-radar-pulse-2"/>
+    <circle cx="600" cy="300" r="150" fill="none" stroke="#000000" stroke-width="0.3" class="animate-radar-pulse-3"/>
+    <circle cx="200" cy="150" r="30" fill="none" stroke="#000000" stroke-width="0.4" class="animate-radar-pulse-1"/>
+    <circle cx="1000" cy="450" r="40" fill="none" stroke="#000000" stroke-width="0.3" class="animate-radar-pulse-2"/>
   </svg>
 
   <!-- Binary code rain - Layer 9 -->
@@ -275,10 +275,10 @@ async function handleRegister() {
 
   <!-- Geometric polygon mesh - Layer 11 -->
   <svg class="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
-    <polygon points="100,100 150,50 200,100 150,150" fill="none" stroke="#374151" stroke-width="0.4" class="animate-polygon-morph-1"/>
-    <polygon points="1000,400 1050,350 1100,400 1050,450" fill="none" stroke="#374151" stroke-width="0.4" class="animate-polygon-morph-2"/>
-    <polygon points="300,500 360,440 420,500 360,560" fill="none" stroke="#374151" stroke-width="0.3" class="animate-polygon-morph-3"/>
-    <polygon points="900,150 940,110 980,150 940,190" fill="none" stroke="#374151" stroke-width="0.3" class="animate-polygon-morph-1"/>
+    <polygon points="100,100 150,50 200,100 150,150" fill="none" stroke="#000000" stroke-width="0.4" class="animate-polygon-morph-1"/>
+    <polygon points="1000,400 1050,350 1100,400 1050,450" fill="none" stroke="#000000" stroke-width="0.4" class="animate-polygon-morph-2"/>
+    <polygon points="300,500 360,440 420,500 360,560" fill="none" stroke="#000000" stroke-width="0.3" class="animate-polygon-morph-3"/>
+    <polygon points="900,150 940,110 980,150 940,190" fill="none" stroke="#000000" stroke-width="0.3" class="animate-polygon-morph-1"/>
   </svg>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-18 sm:py-24 lg:py-32">
