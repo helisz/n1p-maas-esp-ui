@@ -82,9 +82,9 @@ const modelSecuritySections = [
 </script>
 
 <template>
-  <div class="grid gap-6 lg:grid-cols-3">
+  <div class="grid gap-6 lg:grid-cols-1 xl:grid-cols-3">
     <!-- Left Panel -->
-    <div class="space-y-4 lg:col-span-1">
+    <div class="space-y-4 lg:col-span-1 xl:col-span-1">
       <!-- Risk Monitoring Card -->
       <Card>
         <CardHeader class="pb-3">
@@ -152,7 +152,7 @@ const modelSecuritySections = [
     </div>
 
     <!-- Right Panel -->
-    <div class="lg:col-span-2">
+    <div class="lg:col-span-2 xl:col-span-2">
       <Tabs default-value="model" class="w-full">
         <TabsList class="mb-4">
           <TabsTrigger value="model">模型安全</TabsTrigger>
@@ -161,7 +161,7 @@ const modelSecuritySections = [
 
         <!-- Model Security Tab -->
         <TabsContent value="model">
-          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+          <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 xxl:grid-cols-4  gap-4">
             <Card v-for="section in modelSecuritySections" :key="section.title" class="flex flex-col overflow-hidden">
               <CardHeader class="pb-3">
                 <div class="flex items-start gap-3">
@@ -201,225 +201,247 @@ const modelSecuritySections = [
         <TabsContent value="architecture">
           <Card class="overflow-hidden">
             <CardContent class="p-0">
-              <svg viewBox="0 0 840 520" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-label="数据安全架构示意图：客户私域通过加密通道与可信安全沙箱进行数据交互">
+              <!-- // [AI_START TIMESTAMP=2025-06-28 12:00:00] -->
+              <svg viewBox="0 0 880 480" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" role="img" aria-label="数据安全架构示意图：客户私域通过加密通道与可信安全沙箱进行数据交互">
                 <defs>
                   <!-- Background -->
                   <linearGradient id="archBg" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stop-color="#F8FAFC" />
-                    <stop offset="100%" stop-color="#F1F5F9" />
+                    <stop offset="100%" stop-color="#EEF2F7" />
                   </linearGradient>
 
-                  <!-- Soft shadow for isometric blocks -->
-                  <filter id="isoShadow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.06" />
+                  <!-- Dot grid pattern -->
+                  <pattern id="dotGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="1" fill="#CBD5E1" opacity="0.35" />
+                  </pattern>
+
+                  <!-- Card inner gradient for depth -->
+                  <linearGradient id="cardInner" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="100%" stop-color="#FAFBFD" />
+                  </linearGradient>
+
+                  <!-- Icon circle gradients -->
+                  <radialGradient id="blueIconGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#EFF6FF" />
+                    <stop offset="100%" stop-color="#DBEAFE" />
+                  </radialGradient>
+                  <radialGradient id="greenIconGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#ECFDF5" />
+                    <stop offset="100%" stop-color="#D1FAE5" />
+                  </radialGradient>
+                  <radialGradient id="amberIconGrad" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFFBEB" />
+                    <stop offset="100%" stop-color="#FEF3C7" />
+                  </radialGradient>
+
+                  <!-- Soft card shadow (elevation 1) -->
+                  <filter id="shadowSm" x="-10%" y="-10%" width="120%" height="125%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.05" />
                   </filter>
-                  <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
-                    <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.07" />
+                  <!-- Medium card shadow (elevation 2) -->
+                  <filter id="shadowMd" x="-12%" y="-12%" width="124%" height="128%">
+                    <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.07" />
                   </filter>
-
-                  <!-- Gradients for isometric faces -->
-                  <linearGradient id="cTop" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#DBEAFE" />
-                    <stop offset="100%" stop-color="#BFDBFE" />
-                  </linearGradient>
-                  <linearGradient id="cFront" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#93C5FD" />
-                    <stop offset="100%" stop-color="#60A5FA" />
-                  </linearGradient>
-                  <linearGradient id="cSide" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#60A5FA" />
-                    <stop offset="100%" stop-color="#3B82F6" />
-                  </linearGradient>
-
-                  <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#D1FAE5" />
-                    <stop offset="100%" stop-color="#A7F3D0" />
-                  </linearGradient>
-                  <linearGradient id="gFront" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#6EE7B7" />
-                    <stop offset="100%" stop-color="#34D399" />
-                  </linearGradient>
-                  <linearGradient id="gSide" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#34D399" />
-                    <stop offset="100%" stop-color="#10B981" />
-                  </linearGradient>
-
-                  <linearGradient id="sTop" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#FEF3C7" />
-                    <stop offset="100%" stop-color="#FDE68A" />
-                  </linearGradient>
-                  <linearGradient id="sFront" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#FCD34D" />
-                    <stop offset="100%" stop-color="#F59E0B" />
-                  </linearGradient>
-                  <linearGradient id="sSide" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#F59E0B" />
-                    <stop offset="100%" stop-color="#D97706" />
-                  </linearGradient>
+                  <!-- Glow filters -->
+                  <filter id="glowBlue" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                  <filter id="glowGreen" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
 
                   <!-- Arrow markers -->
-                  <marker id="arrBlue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z" fill="#3B82F6" />
+                  <marker id="mBlue" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                    <path d="M0,1.5 L10,5 L0,8.5 Z" fill="#2563EB" />
                   </marker>
-                  <marker id="arrGreen" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z" fill="#10B981" />
+                  <marker id="mGreen" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                    <path d="M0,1.5 L10,5 L0,8.5 Z" fill="#059669" />
                   </marker>
-                  <marker id="arrOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z" fill="#D97706" />
+                  <marker id="mOrange" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                    <path d="M0,1.5 L10,5 L0,8.5 Z" fill="#D97706" />
                   </marker>
+
+                  <!-- Clip path for top accent bar -->
+                  <clipPath id="clipCardBlue"><rect x="48" y="84" width="228" height="296" rx="16" /></clipPath>
+                  <clipPath id="clipCardGreen"><rect x="326" y="84" width="228" height="296" rx="16" /></clipPath>
+                  <clipPath id="clipCardAmber"><rect x="604" y="84" width="228" height="296" rx="16" /></clipPath>
                 </defs>
 
-                <!-- Background -->
-                <rect width="840" height="520" rx="12" fill="url(#archBg)" />
+                <!-- Background base -->
+                <rect width="880" height="480" rx="12" fill="url(#archBg)" />
+                <!-- Dot grid overlay -->
+                <rect width="880" height="480" rx="12" fill="url(#dotGrid)" />
 
-                <!-- Ground plane connection line -->
-                <path d="M120,440 L420,440 L720,440" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,6" fill="none" />
-
-                <!-- LEFT: Customer Private Domain (Isometric Block) -->
-                <g filter="url(#isoShadow)">
-                  <!-- Top face -->
-                  <path d="M120,300 L220,250 L320,300 L220,350 Z" fill="url(#cTop)" />
-                  <!-- Front face -->
-                  <path d="M120,300 L220,350 L220,440 L120,390 Z" fill="url(#cFront)" />
-                  <!-- Side face -->
-                  <path d="M220,350 L320,300 L320,390 L220,440 Z" fill="url(#cSide)" />
-
-                  <!-- Top icon: user -->
-                  <g transform="translate(220,300)">
-                    <circle cx="0" cy="-18" r="14" fill="white" opacity="0.95" />
-                    <circle cx="0" cy="-22" r="5" fill="#3B82F6" />
-                    <path d="M-8,-10 Q0,-16 8,-10 L8,-4 Q0,-10 -8,-4 Z" fill="#3B82F6" />
-                    <circle cx="0" cy="-18" r="14" fill="none" stroke="white" stroke-width="2" opacity="0.6" />
-                  </g>
-
-                  <!-- Front panel: title -->
-                  <g transform="translate(170,365)">
-                    <rect x="-55" y="-16" width="110" height="28" rx="6" fill="white" opacity="0.92" />
-                    <text x="0" y="2" text-anchor="middle" font-size="12" font-weight="700" fill="#1D4ED8">客户私域</text>
-                  </g>
-
-                  <!-- Side panels -->
-                  <g transform="translate(270,365)">
-                    <rect x="-38" y="-14" width="76" height="22" rx="5" fill="white" opacity="0.85" />
-                    <text x="0" y="2" text-anchor="middle" font-size="9" font-weight="600" fill="#1E40AF">输入 Prompt</text>
-                  </g>
-                  <g transform="translate(270,395)">
-                    <rect x="-42" y="-14" width="84" height="22" rx="5" fill="white" opacity="0.85" />
-                    <text x="0" y="2" text-anchor="middle" font-size="9" font-weight="600" fill="#1E40AF">接收 Response</text>
-                  </g>
+                <!-- ====== LEFT CARD: Customer Private Domain ====== -->
+                <g filter="url(#shadowMd)">
+                  <rect x="48" y="84" width="228" height="296" rx="16" fill="url(#cardInner)" />
+                  <!-- Top accent bar clipped to card -->
+                  <rect x="48" y="84" width="228" height="6" fill="#2563EB" clip-path="url(#clipCardBlue)" />
+                  <!-- Icon circle with gradient -->
+                  <circle cx="162" cy="124" r="24" fill="url(#blueIconGrad)" />
+                  <!-- User icon (more refined) -->
+                  <path d="M162,112 a7,7 0 1,1 0,0.01 M148,134 a14,14 0 0,1 28,0" stroke="#2563EB" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="162" cy="126" r="2.5" fill="#2563EB" opacity="0.15" />
+                  <!-- Title -->
+                  <text x="162" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.02em">客户私域</text>
+                  <!-- Subtitle label -->
+                  <text x="162" y="188" text-anchor="middle" font-size="10" font-weight="500" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.04em">PRIVATE DOMAIN</text>
+                  <!-- Divider -->
+                  <line x1="68" y1="204" x2="256" y2="204" stroke="#E2E8F0" stroke-width="1" />
+                  <!-- Content item 1 -->
+                  <rect x="68" y="220" width="188" height="52" rx="10" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1" />
+                  <text x="162" y="242" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" font-family="system-ui, -apple-system, Segoe UI, sans-serif">输入 Prompt</text>
+                  <text x="162" y="258" text-anchor="middle" font-size="11" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif">（提示词）</text>
+                  <!-- Internal arrow -->
+                  <path d="M162,282 L162,298 M157,292 L162,298 L167,292" stroke="#CBD5E1" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  <!-- Content item 2 -->
+                  <rect x="68" y="308" width="188" height="52" rx="10" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1" />
+                  <text x="162" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" font-family="system-ui, -apple-system, Segoe UI, sans-serif">接收 Response</text>
+                  <text x="162" y="346" text-anchor="middle" font-size="11" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif">（模型响应）</text>
                 </g>
 
-                <!-- CENTER: Access Layer (Isometric Block) -->
-                <g filter="url(#isoShadow)">
-                  <!-- Top face -->
-                  <path d="M370,300 L470,250 L570,300 L470,350 Z" fill="url(#gTop)" />
-                  <!-- Front face -->
-                  <path d="M370,300 L470,350 L470,440 L370,390 Z" fill="url(#gFront)" />
-                  <!-- Side face -->
-                  <path d="M470,350 L570,300 L570,390 L470,440 Z" fill="url(#gSide)" />
-
-                  <!-- Top icon: lock -->
-                  <g transform="translate(470,300)">
-                    <rect x="-10" y="-6" width="20" height="16" rx="3" fill="white" opacity="0.95" />
-                    <rect x="-6" y="-14" width="12" height="10" rx="5" fill="none" stroke="white" stroke-width="2.5" opacity="0.95" />
-                    <circle cx="0" cy="2" r="2" fill="#10B981" />
-                  </g>
-
-                  <!-- Front panel: title -->
-                  <g transform="translate(420,365)">
-                    <rect x="-45" y="-16" width="90" height="28" rx="6" fill="white" opacity="0.92" />
-                    <text x="0" y="2" text-anchor="middle" font-size="12" font-weight="700" fill="#047857">接入层</text>
-                  </g>
-
-                  <!-- Side panels -->
-                  <g transform="translate(520,358)">
-                    <rect x="-42" y="-12" width="84" height="22" rx="5" fill="white" opacity="0.85" />
-                    <text x="0" y="3" text-anchor="middle" font-size="9" font-weight="600" fill="#065F46">接入点登录</text>
-                  </g>
-                  <g transform="translate(520,388)">
-                    <rect x="-48" y="-16" width="96" height="30" rx="5" fill="white" opacity="0.85" />
-                    <text x="0" y="-2" text-anchor="middle" font-size="9" font-weight="600" fill="#065F46">全链路加密通道</text>
-                    <text x="0" y="10" text-anchor="middle" font-size="8" fill="#059669">TLS / mTLS</text>
-                  </g>
+                <!-- ====== CENTER CARD: Access Layer ====== -->
+                <g filter="url(#shadowMd)">
+                  <rect x="326" y="84" width="228" height="296" rx="16" fill="url(#cardInner)" />
+                  <rect x="326" y="84" width="228" height="6" fill="#059669" clip-path="url(#clipCardGreen)" />
+                  <!-- Lock icon circle -->
+                  <circle cx="440" cy="124" r="24" fill="url(#greenIconGrad)" />
+                  <!-- Lock icon (refined) -->
+                  <rect x="433" y="118" width="14" height="12" rx="3" stroke="#059669" stroke-width="2" fill="none" />
+                  <path d="M436,118 v-4 a4,4 0 0,1 8,0 v4" stroke="#059669" stroke-width="2" fill="none" stroke-linecap="round" />
+                  <circle cx="440" cy="124" r="2" fill="#059669" />
+                  <!-- Title -->
+                  <text x="440" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#065F46" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.02em">接入层</text>
+                  <text x="440" y="188" text-anchor="middle" font-size="10" font-weight="500" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.04em">ACCESS LAYER</text>
+                  <!-- Divider -->
+                  <line x1="346" y1="204" x2="534" y2="204" stroke="#E2E8F0" stroke-width="1" />
+                  <!-- Content item 1 -->
+                  <rect x="346" y="220" width="188" height="48" rx="10" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1" />
+                  <text x="440" y="240" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" font-family="system-ui, -apple-system, Segoe UI, sans-serif">接入点登录</text>
+                  <text x="440" y="256" text-anchor="middle" font-size="10" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif">身份鉴权 / 权限校验</text>
+                  <!-- Content item 2 (encryption highlight) -->
+                  <rect x="346" y="280" width="188" height="72" rx="10" fill="#F0FDF4" stroke="#BBF7D0" stroke-width="1.5" />
+                  <text x="440" y="302" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" font-family="system-ui, -apple-system, Segoe UI, sans-serif">全链路加密通道</text>
+                  <text x="440" y="320" text-anchor="middle" font-size="11" font-weight="700" fill="#059669" font-family="system-ui, -apple-system, Segoe UI, sans-serif">TLS / mTLS</text>
+                  <text x="440" y="338" text-anchor="middle" font-size="10" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif">端到端加密传输</text>
+                  <!-- Subtle lock indicator -->
+                  <circle cx="524" cy="296" r="10" fill="#D1FAE5" opacity="0.6" />
+                  <path d="M520,296 L524,300 L530,292" stroke="#059669" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" />
                 </g>
 
-                <!-- RIGHT: Sandbox (Isometric Block) -->
-                <g filter="url(#isoShadow)">
-                  <!-- Top face -->
-                  <path d="M620,300 L720,250 L820,300 L720,350 Z" fill="url(#sTop)" />
-                  <!-- Front face -->
-                  <path d="M620,300 L720,350 L720,440 L620,390 Z" fill="url(#sFront)" />
-                  <!-- Side face -->
-                  <path d="M720,350 L820,300 L820,390 L720,440 Z" fill="url(#sSide)" />
-
-                  <!-- Top icon: shield -->
-                  <g transform="translate(720,300)">
-                    <path d="M0,-18 L14,-10 V2 Q14,10 0,18 Q-14,10 -14,2 V-10 Z" fill="white" opacity="0.95" />
-                    <path d="M0,-14 L10,-8 V0 Q10,6 0,12 Q-10,6 -10,0 V-8 Z" fill="#F59E0B" />
-                    <path d="M-3,0 L-1,4 L4,-3" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-                  </g>
-
-                  <!-- Front panel: title -->
-                  <g transform="translate(670,365)">
-                    <rect x="-60" y="-18" width="120" height="32" rx="6" fill="white" opacity="0.92" />
-                    <text x="0" y="-2" text-anchor="middle" font-size="11" font-weight="700" fill="#B45309">Sandbox</text>
-                    <text x="0" y="11" text-anchor="middle" font-size="10" font-weight="600" fill="#B45309">可信安全沙箱</text>
-                  </g>
-
-                  <!-- Side panels -->
-                  <g transform="translate(770,358)">
-                    <rect x="-42" y="-12" width="84" height="22" rx="5" fill="white" opacity="0.85" />
-                    <text x="0" y="3" text-anchor="middle" font-size="9" font-weight="600" fill="#92400E">模型推理中</text>
-                  </g>
-                  <g transform="translate(770,388)">
-                    <rect x="-50" y="-14" width="100" height="26" rx="5" fill="#FFFBEB" opacity="0.95" stroke="#FCD34D" stroke-width="1" />
-                    <text x="0" y="4" text-anchor="middle" font-size="9" font-weight="700" fill="#B45309">数据「可用不可见」</text>
-                  </g>
+                <!-- ====== RIGHT CARD: Sandbox ====== -->
+                <g filter="url(#shadowMd)">
+                  <rect x="604" y="84" width="228" height="296" rx="16" fill="url(#cardInner)" />
+                  <rect x="604" y="84" width="228" height="6" fill="#D97706" clip-path="url(#clipCardAmber)" />
+                  <!-- Shield icon circle -->
+                  <circle cx="718" cy="124" r="24" fill="url(#amberIconGrad)" />
+                  <!-- Shield icon (refined) -->
+                  <path d="M718,106 L732,114 v12 a14,14 0 0,1 -14,14 a14,14 0 0,1 -14,-14 v-12 Z" stroke="#D97706" stroke-width="2" fill="none" stroke-linejoin="round" />
+                  <path d="M714,124 l3.5,3.5 l7.5,-7.5" stroke="#D97706" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                  <!-- Title -->
+                  <text x="718" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#92400E" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.02em">可信安全沙箱</text>
+                  <text x="718" y="188" text-anchor="middle" font-size="10" font-weight="500" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif" letter-spacing="0.04em">TRUSTED SANDBOX</text>
+                  <!-- Divider -->
+                  <line x1="624" y1="204" x2="812" y2="204" stroke="#E2E8F0" stroke-width="1" />
+                  <!-- Content item 1 -->
+                  <rect x="624" y="220" width="188" height="52" rx="10" fill="#F8FAFC" stroke="#F1F5F9" stroke-width="1" />
+                  <text x="718" y="242" text-anchor="middle" font-size="12" font-weight="600" fill="#334155" font-family="system-ui, -apple-system, Segoe UI, sans-serif">模型推理中</text>
+                  <text x="718" y="258" text-anchor="middle" font-size="11" fill="#64748B" font-family="system-ui, -apple-system, Segoe UI, sans-serif">隔离 / 不可篡改环境</text>
+                  <!-- Highlight badge -->
+                  <rect x="624" y="286" width="188" height="52" rx="10" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1.5" />
+                  <text x="718" y="308" text-anchor="middle" font-size="12" font-weight="700" fill="#B45309" font-family="system-ui, -apple-system, Segoe UI, sans-serif">数据「可用不可见」</text>
+                  <text x="718" y="326" text-anchor="middle" font-size="10" font-weight="600" fill="#D97706" font-family="system-ui, -apple-system, Segoe UI, sans-serif">Prompt 不出域</text>
+                  <!-- Small shield badge -->
+                  <circle cx="636" cy="312" r="8" fill="#FDE68A" opacity="0.5" />
+                  <path d="M634,310 l2,2 l4,-4" stroke="#B45309" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
                 </g>
 
-                <!-- Data Flow Arrows -->
+                <!-- ====== DATA FLOW ARROWS (upper: left→center→right) ====== -->
                 <!-- Prompt: Left -> Center -->
                 <g>
-                  <path d="M320,390 Q360,410 370,400" stroke="#3B82F6" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrBlue)" />
-                  <rect x="332" y="382" width="46" height="18" rx="4" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" />
-                  <text x="355" y="395" text-anchor="middle" font-size="9" font-weight="600" fill="#2563EB">Prompt</text>
+                  <!-- Animated dashed flow line -->
+                  <path d="M280,198 C300,198 306,198 326,198" stroke="#2563EB" stroke-width="2.5" fill="none" marker-end="url(#mBlue)" stroke-dasharray="6,4" opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.2s" repeatCount="indefinite" />
+                  </path>
+                  <!-- Flow label badge -->
+                  <rect x="278" y="178" width="48" height="22" rx="6" fill="#EFF6FF" stroke="#BFDBFE" stroke-width="1" filter="url(#shadowSm)" />
+                  <text x="302" y="193" text-anchor="middle" font-size="10" font-weight="700" fill="#2563EB" font-family="system-ui, -apple-system, Segoe UI, sans-serif">Prompt</text>
+                  <!-- Glowing dot -->
+                  <circle cx="300" cy="198" r="3" fill="#3B82F6" filter="url(#glowBlue)">
+                    <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite" />
+                  </circle>
                 </g>
 
                 <!-- Encrypted Prompt: Center -> Right -->
                 <g>
-                  <path d="M570,390 Q610,410 620,400" stroke="#10B981" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrGreen)" />
-                  <rect x="562" y="407" width="36" height="16" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
-                  <text x="580" y="418" text-anchor="middle" font-size="8" font-weight="600" fill="#059669">加密</text>
+                  <path d="M558,198 C578,198 584,198 604,198" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#mGreen)" stroke-dasharray="6,4" opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.2s" repeatCount="indefinite" />
+                  </path>
+                  <rect x="556" y="178" width="48" height="22" rx="6" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" filter="url(#shadowSm)" />
+                  <text x="580" y="193" text-anchor="middle" font-size="10" font-weight="700" fill="#059669" font-family="system-ui, -apple-system, Segoe UI, sans-serif">加密</text>
+                  <circle cx="578" cy="198" r="3" fill="#10B981" filter="url(#glowGreen)">
+                    <animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite" />
+                  </circle>
                 </g>
 
+                <!-- ====== DATA FLOW ARROWS (lower: right→center→left) ====== -->
                 <!-- Encrypted Response: Right -> Center -->
                 <g>
-                  <path d="M620,360 Q580,340 570,350" stroke="#D97706" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrOrange)" />
-                  <rect x="572" y="332" width="36" height="16" rx="4" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1" />
-                  <text x="590" y="343" text-anchor="middle" font-size="8" font-weight="600" fill="#B45309">加密</text>
+                  <path d="M604,264 C584,264 578,264 558,264" stroke="#D97706" stroke-width="2.5" fill="none" marker-end="url(#mOrange)" stroke-dasharray="6,4" opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.6s" repeatCount="indefinite" />
+                  </path>
+                  <rect x="556" y="268" width="48" height="22" rx="6" fill="#FFFBEB" stroke="#FDE68A" stroke-width="1" filter="url(#shadowSm)" />
+                  <text x="580" y="283" text-anchor="middle" font-size="10" font-weight="700" fill="#B45309" font-family="system-ui, -apple-system, Segoe UI, sans-serif">加密</text>
                 </g>
 
                 <!-- Response: Center -> Left -->
                 <g>
-                  <path d="M370,360 Q330,340 320,350" stroke="#10B981" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrGreen)" />
-                  <rect x="332" y="332" width="54" height="18" rx="4" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" />
-                  <text x="359" y="345" text-anchor="middle" font-size="9" font-weight="600" fill="#059669">Response</text>
+                  <path d="M326,264 C306,264 300,264 280,264" stroke="#059669" stroke-width="2.5" fill="none" marker-end="url(#mGreen)" stroke-dasharray="6,4" opacity="0.9">
+                    <animate attributeName="stroke-dashoffset" from="20" to="0" dur="1.6s" repeatCount="indefinite" />
+                  </path>
+                  <rect x="278" y="268" width="48" height="22" rx="6" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" filter="url(#shadowSm)" />
+                  <text x="302" y="283" text-anchor="middle" font-size="10" font-weight="700" fill="#059669" font-family="system-ui, -apple-system, Segoe UI, sans-serif">Response</text>
                 </g>
 
+                <!-- ====== CONNECTION STATUS DOTS (on card edges) ====== -->
+                <!-- Left card right-edge dots -->
+                <circle cx="276" cy="198" r="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" />
+                <circle cx="276" cy="264" r="4" fill="#FFFFFF" stroke="#059669" stroke-width="2" />
+                <!-- Center card dots -->
+                <circle cx="326" cy="198" r="4" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" />
+                <circle cx="326" cy="264" r="4" fill="#FFFFFF" stroke="#D97706" stroke-width="2" />
+                <circle cx="554" cy="198" r="4" fill="#FFFFFF" stroke="#059669" stroke-width="2" />
+                <circle cx="554" cy="264" r="4" fill="#FFFFFF" stroke="#D97706" stroke-width="2" />
+                <!-- Right card dots -->
+                <circle cx="604" cy="198" r="4" fill="#FFFFFF" stroke="#059669" stroke-width="2" />
+                <circle cx="604" cy="264" r="4" fill="#FFFFFF" stroke="#D97706" stroke-width="2" />
 
-                <!-- Bottom Annotation -->
-                <g filter="url(#cardShadow)">
-                  <rect x="80" y="468" width="680" height="36" rx="8" fill="white" />
-                  <text x="420" y="490" text-anchor="middle" font-size="12" font-weight="500" fill="#475569">
-                    用户 Prompt 数据仅在沙箱内进行推理计算，响应结果再通过加密通道返回客户私域，实现数据「可用不可见」
+                <!-- ====== BOTTOM ANNOTATION BAR ====== -->
+                <g filter="url(#shadowMd)">
+                  <rect x="90" y="412" width="700" height="48" rx="12" fill="white" />
+                  <!-- Left accent strip -->
+                  <rect x="90" y="412" width="4" height="48" rx="2" fill="#2563EB" />
+                  <!-- Info icon -->
+                  <circle cx="118" cy="436" r="12" fill="#EFF6FF" />
+                  <text x="118" y="440" text-anchor="middle" font-size="12" font-weight="700" fill="#2563EB" font-family="system-ui, -apple-system, Segoe UI, sans-serif">i</text>
+                  <!-- Main text -->
+                  <text x="144" y="432" font-size="13" font-weight="500" fill="#475569" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+                    用户 Prompt 数据仅在沙箱内进行推理计算，响应结果再通过加密通道返回客户私域
                   </text>
+                  <!-- Highlight text -->
+                  <text x="144" y="450" font-size="12" font-weight="700" fill="#1E40AF" font-family="system-ui, -apple-system, Segoe UI, sans-serif">
+                    实现数据「可用不可见」
+                  </text>
+                  <!-- Decorative lock icon on right -->
+                  <circle cx="758" cy="436" r="14" fill="#F0FDF4" />
+                  <rect x="752" y="432" width="12" height="10" rx="2" stroke="#059669" stroke-width="1.6" fill="none" />
+                  <path d="M754,432 v-3 a3,3 0 0,1 6,0 v3" stroke="#059669" stroke-width="1.6" fill="none" stroke-linecap="round" />
                 </g>
-
-                <!-- Decorative dots -->
-                <circle cx="220" cy="440" r="3" fill="#CBD5E1" />
-                <circle cx="470" cy="440" r="3" fill="#CBD5E1" />
-                <circle cx="720" cy="440" r="3" fill="#CBD5E1" />
               </svg>
+              <!-- // [AI_END LINES=160 TIMESTAMP=2025-06-28 12:00:00] -->
             </CardContent>
           </Card>
         </TabsContent>
