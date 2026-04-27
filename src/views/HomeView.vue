@@ -55,6 +55,29 @@ const mouseX = ref(0)
 const mouseY = ref(0)
 const heroRef = ref<HTMLElement | null>(null)
 
+// Hero background video fade control
+const videoRef = ref<HTMLVideoElement | null>(null)
+const videoOpacity = ref(1)
+const FADE_DURATION = 1.5
+
+watch(videoRef, (el) => {
+  if (el) el.playbackRate = 0.6
+}, { immediate: true })
+
+function handleVideoTimeUpdate() {
+  const v = videoRef.value
+  if (!v || !v.duration || !isFinite(v.duration)) return
+  const t = v.currentTime
+  const d = v.duration
+  if (t < FADE_DURATION) {
+    videoOpacity.value = t / FADE_DURATION
+  } else if (t > d - FADE_DURATION) {
+    videoOpacity.value = (d - t) / FADE_DURATION
+  } else {
+    videoOpacity.value = 1
+  }
+}
+
 function handleMouseMove(e: MouseEvent) {
   if (!heroRef.value) return
   const rect = heroRef.value.getBoundingClientRect()
@@ -215,155 +238,24 @@ onMounted(() => {
     </nav>
     <!-- [AI_START TIMESTAMP=2025-06-18 10:00:00] -->
     <!-- Hero Banner with Dark Tech Animation -->
-    <section class="pt-16 relative overflow-hidden bg-gray-900 hero-parallax-container"
-      :style="{ '--parallax-x': mouseX * 30 + 'px', '--parallax-y': mouseY * 20 + 'px', '--parallax-x-reverse': -mouseX * 20 + 'px', '--parallax-y-reverse': -mouseY * 15 + 'px' }">
-      <!-- Flowing wave curves - Layer 1 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.25]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none" viewBox="0 0 1200 600">
-        <path d="M0,300 Q150,200 300,300 T600,300 T900,300 T1200,300" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-wave-flow-1" />
-        <path d="M0,350 Q150,450 300,350 T600,350 T900,350 T1200,350" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-wave-flow-2" />
-        <path d="M0,250 Q200,150 400,250 T800,250 T1200,250" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-wave-flow-3" />
-        <path d="M0,400 Q200,500 400,400 T800,400 T1200,400" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-wave-flow-1" />
-      </svg>
-
-      <!-- Diagonal data stream lines - Layer 2 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.18]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none" viewBox="0 0 1200 600">
-        <line x1="-100" y1="500" x2="400" y2="-100" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="4 12"
-          class="animate-stream-1" />
-        <line x1="0" y1="600" x2="500" y2="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="6 18"
-          class="animate-stream-2" />
-        <line x1="100" y1="600" x2="600" y2="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="3 15"
-          class="animate-stream-3" />
-        <line x1="200" y1="600" x2="700" y2="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="8 20"
-          class="animate-stream-1" />
-        <line x1="700" y1="600" x2="1200" y2="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="5 15"
-          class="animate-stream-2" />
-        <line x1="800" y1="600" x2="1300" y2="0" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="4 16"
-          class="animate-stream-3" />
-      </svg>
-
-      <!-- Curved connection network - Layer 3 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.22]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
-        <!-- Central hub connections -->
-        <path d="M600,300 Q500,200 400,250" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse" />
-        <path d="M600,300 Q700,200 800,150" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse-delayed" />
-        <path d="M600,300 Q500,400 350,450" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse-slow" />
-        <path d="M600,300 Q700,400 850,480" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse-delayed" />
-        <path d="M400,250 Q300,180 200,220" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse" />
-        <path d="M800,150 Q900,100 1000,140" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-network-pulse-slow" />
-        <!-- Connection nodes -->
-        <circle cx="600" cy="300" r="2" fill="#FFFFFF" class="animate-node-glow" />
-        <circle cx="400" cy="250" r="1.5" fill="#FFFFFF" class="animate-node-glow-delayed" />
-        <circle cx="800" cy="150" r="1.5" fill="#FFFFFF" class="animate-node-glow-slow" />
-        <circle cx="350" cy="450" r="1.5" fill="#FFFFFF" class="animate-node-glow-delayed" />
-        <circle cx="200" cy="220" r="1" fill="#FFFFFF" class="animate-node-glow" />
-        <circle cx="1000" cy="140" r="1" fill="#FFFFFF" class="animate-node-glow-slow" />
-      </svg>
-
-      <!-- Horizontal flowing energy lines - Layer 4 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.15]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none" viewBox="0 0 1200 600">
-        <line x1="-100" y1="100" x2="1300" y2="100" stroke="#FFFFFF" stroke-width="1" class="animate-energy-flow-1" />
-        <line x1="-100" y1="180" x2="1300" y2="180" stroke="#FFFFFF" stroke-width="1" class="animate-energy-flow-2" />
-        <line x1="-100" y1="420" x2="1300" y2="420" stroke="#FFFFFF" stroke-width="1" class="animate-energy-flow-3" />
-        <line x1="-100" y1="520" x2="1300" y2="520" stroke="#FFFFFF" stroke-width="1" class="animate-energy-flow-1" />
-      </svg>
-
-      <!-- Spiral vortex curves - Layer 5 -->
-      <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-[0.14]"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-        <path d="M200,200 m-150,0 a150,150 0 1,1 300,0 a150,150 0 1,1 -300,0" fill="none" stroke="#FFFFFF"
-          stroke-width="1" class="animate-vortex-spin" />
-        <path d="M200,200 m-120,0 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0" fill="none" stroke="#FFFFFF"
-          stroke-width="1" class="animate-vortex-spin-reverse" />
-        <path d="M200,200 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-vortex-spin-slow" />
-        <path d="M200,200 m-60,0 a60,60 0 1,0 120,0 a60,60 0 1,0 -120,0" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-vortex-spin-reverse-slow" />
-      </svg>
-
-      <!-- Floating particles with trails - Layer 6 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.12]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none" viewBox="0 0 1200 600">
-        <circle cx="150" cy="150" r="1.2" fill="#FFFFFF" class="animate-particle-float-1" />
-        <circle cx="1050" cy="200" r="1" fill="#FFFFFF" class="animate-particle-float-2" />
-        <circle cx="200" cy="450" r="1.5" fill="#FFFFFF" class="animate-particle-float-3" />
-        <circle cx="1000" cy="400" r="1.2" fill="#FFFFFF" class="animate-particle-float-1" />
-        <circle cx="600" cy="100" r="1" fill="#FFFFFF" class="animate-particle-float-2" />
-        <circle cx="500" cy="500" r="1.3" fill="#FFFFFF" class="animate-particle-float-3" />
-      </svg>
-
-      <!-- Dynamic gradient glow orbs - Layer 7 -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div
-          class="absolute w-[600px] h-[600px] rounded-full bg-gradient-radial from-indigo-400/30 via-violet-400/20 to-transparent blur-3xl animate-glow-orb-1">
-        </div>
-        <div
-          class="absolute w-[500px] h-[500px] rounded-full bg-gradient-radial from-cyan-400/25 via-teal-400/20 to-transparent blur-3xl animate-glow-orb-2">
-        </div>
-        <div
-          class="absolute w-[400px] h-[400px] rounded-full bg-gradient-radial from-violet-400/25 via-fuchsia-400/20 to-transparent blur-3xl animate-glow-orb-3">
-        </div>
-      </div>
-
-      <!-- Radar pulse scan rings - Layer 8 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.10]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
-        <circle cx="600" cy="300" r="50" fill="none" stroke="#FFFFFF" stroke-width="0.5"
-          class="animate-radar-pulse-1" />
-        <circle cx="600" cy="300" r="100" fill="none" stroke="#FFFFFF" stroke-width="0.4"
-          class="animate-radar-pulse-2" />
-        <circle cx="600" cy="300" r="150" fill="none" stroke="#FFFFFF" stroke-width="0.3"
-          class="animate-radar-pulse-3" />
-        <circle cx="200" cy="150" r="30" fill="none" stroke="#FFFFFF" stroke-width="0.4"
-          class="animate-radar-pulse-1" />
-        <circle cx="1000" cy="450" r="40" fill="none" stroke="#FFFFFF" stroke-width="0.3"
-          class="animate-radar-pulse-2" />
-      </svg>
-
-      <!-- Binary code rain - Layer 9 -->
-      <div class="absolute inset-0 overflow-hidden opacity-[0.08] pointer-events-none">
-        <div class="absolute left-[10%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-1 leading-tight">
-          10110<br />01001<br />11010<br />00101</div>
-        <div class="absolute left-[25%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-2 leading-tight">
-          01011<br />10100<br />01101<br />10010</div>
-        <div class="absolute left-[40%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-3 leading-tight">
-          11001<br />00110<br />10011<br />01100</div>
-        <div class="absolute left-[60%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-1 leading-tight">
-          00101<br />11010<br />01011<br />10100</div>
-        <div class="absolute left-[75%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-2 leading-tight">
-          10010<br />01101<br />10110<br />01001</div>
-        <div class="absolute left-[90%] top-0 font-mono text-[10px] text-gray-400 animate-binary-rain-3 leading-tight">
-          01100<br />10011<br />00110<br />11001</div>
-      </div>
-
-      <!-- Geometric polygon mesh - Layer 11 -->
-      <svg class="absolute inset-0 w-full h-full opacity-[0.06]" xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 600">
-        <polygon points="100,100 150,50 200,100 150,150" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-polygon-morph-1" />
-        <polygon points="1000,400 1050,350 1100,400 1050,450" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-polygon-morph-2" />
-        <polygon points="300,500 360,440 420,500 360,560" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-polygon-morph-3" />
-        <polygon points="900,150 940,110 980,150 940,190" fill="none" stroke="#FFFFFF" stroke-width="1"
-          class="animate-polygon-morph-1" />
-      </svg>
+    <section class="pt-16 relative overflow-hidden bg-black">
+      <!-- Background Video -->
+      <!-- [AI_START TIMESTAMP=2025-06-18 15:00:00] -->
+      <video
+        ref="videoRef"
+        class="absolute inset-0 w-full h-full object-cover z-0"
+        :style="{ opacity: videoOpacity * 0.5, transition: 'opacity 0.1s linear' }"
+        src="@/files/hero-bg.mp4"
+        autoplay
+        muted
+        loop
+        playsinline
+        @timeupdate="handleVideoTimeUpdate"
+      />
+      <!-- [AI_END LINES=12 TIMESTAMP=2025-06-18 15:00:00] -->
 
       <div
-        class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-18 sm:py-24 lg:py-24">
+        class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-18 sm:py-24 lg:py-24">
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 mb-8">
           <BoltIcon class="h-3.5 w-3.5 text-white" />
@@ -405,7 +297,7 @@ onMounted(() => {
     <!-- [AI_END LINES=52 TIMESTAMP=2025-06-17 10:10:00] -->
 
     <!-- Live Platform Stats Bar -->
-    <section class="py-12 bg-gray-800 text-white">
+    <section class="py-12 bg-black text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="text-center">
