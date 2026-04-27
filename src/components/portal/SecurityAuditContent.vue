@@ -161,7 +161,7 @@ const modelSecuritySections = [
 
         <!-- Model Security Tab -->
         <TabsContent value="model">
-          <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 xxl:grid-cols-4  gap-4">
+          <div class="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 xxl:grid-cols-4  gap-4">
             <Card v-for="section in modelSecuritySections" :key="section.title" class="flex flex-col overflow-hidden">
               <CardHeader class="pb-3">
                 <div class="flex items-start gap-3">
@@ -188,7 +188,7 @@ const modelSecuritySections = [
                     <Badge  variant="outline" class="py-1 gap-1 text-muted-foreground w-full justify-center">
                       <ShieldAlert class="h-3 w-3" />未开启
                     </Badge>
-                    <Button size="sm">去支付</Button>
+                    <Button size="sm">去开启</Button>
                   </div>
                   
                 </div>
