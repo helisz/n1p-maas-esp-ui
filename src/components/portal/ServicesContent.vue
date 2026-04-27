@@ -25,6 +25,7 @@ import DialogHeader from '@/components/ui/DialogHeader.vue'
 import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
+import SecurityAuditContent from '@/components/portal/SecurityAuditContent.vue'
 import {
   Key, Eye, EyeOff, Copy, RefreshCw, AlertTriangle,
   CheckCircle2, Activity, TrendingUp, Clock, Server,
@@ -80,6 +81,7 @@ function handleResetKey(key: typeof apiKeys[0]) {
         <TabsTrigger value="packages">我的套餐</TabsTrigger>
         <TabsTrigger value="keys">API 密钥</TabsTrigger>
         <TabsTrigger value="monitor">调用监控</TabsTrigger>
+        <TabsTrigger value="security">安全审计</TabsTrigger>
       </TabsList>
 
       <!-- Packages Tab -->
@@ -213,6 +215,11 @@ function handleResetKey(key: typeof apiKeys[0]) {
             </Table>
           </CardContent>
         </Card>
+      </TabsContent>
+
+      <!-- Security Audit Tab -->
+      <TabsContent value="security">
+        <SecurityAuditContent />
       </TabsContent>
     </Tabs>
 
