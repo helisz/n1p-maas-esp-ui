@@ -57,7 +57,7 @@ const heroRef = ref<HTMLElement | null>(null)
 
 // Hero background video fade control
 const videoRef = ref<HTMLVideoElement | null>(null)
-const videoOpacity = ref(1)
+const videoOpacity = ref(0)
 const FADE_DURATION = 1.5
 
 watch(videoRef, (el) => {
