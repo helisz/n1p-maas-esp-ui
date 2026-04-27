@@ -15,7 +15,7 @@ import DialogHeader from '@/components/ui/DialogHeader.vue'
 import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
-import { Check, Sparkles, Rocket, Crown, Info, ArrowRight, Zap, Brain, Eye } from 'lucide-vue-next'
+import { CheckIcon, SparklesIcon, RocketLaunchIcon, StarIcon, InformationCircleIcon, ArrowRightIcon, BoltIcon, CpuChipIcon, EyeIcon } from '@heroicons/vue/24/outline'
 
 const packages = [
   {
@@ -74,10 +74,10 @@ const packages = [
   },
 ]
 
-const tierConfig: Record<string, { icon: typeof Sparkles; gradient: string; badgeGradient: string; accentColor: string; ringColor: string }> = {
-  basic: { icon: Sparkles, gradient: 'from-slate-500 to-slate-600', badgeGradient: 'bg-slate-100 text-slate-700', accentColor: 'text-slate-600', ringColor: 'ring-slate-200' },
-  advanced: { icon: Rocket, gradient: 'from-indigo-500 to-purple-600', badgeGradient: 'bg-indigo-100 text-indigo-700', accentColor: 'text-indigo-600', ringColor: 'ring-indigo-300' },
-  premium: { icon: Crown, gradient: 'from-amber-500 to-orange-600', badgeGradient: 'bg-amber-100 text-amber-700', accentColor: 'text-amber-600', ringColor: 'ring-amber-300' },
+const tierConfig: Record<string, { icon: typeof SparklesIcon; gradient: string; badgeGradient: string; accentColor: string; ringColor: string }> = {
+  basic: { icon: SparklesIcon, gradient: 'from-slate-500 to-slate-600', badgeGradient: 'bg-slate-100 text-slate-700', accentColor: 'text-slate-600', ringColor: 'ring-slate-200' },
+  advanced: { icon: RocketLaunchIcon, gradient: 'from-indigo-500 to-purple-600', badgeGradient: 'bg-indigo-100 text-indigo-700', accentColor: 'text-indigo-600', ringColor: 'ring-indigo-300' },
+  premium: { icon: StarIcon, gradient: 'from-amber-500 to-orange-600', badgeGradient: 'bg-amber-100 text-amber-700', accentColor: 'text-amber-600', ringColor: 'ring-amber-300' },
 }
 
 const selectedPackage = ref<typeof packages[0] | null>(null)
@@ -149,7 +149,7 @@ function handlePurchase(pkg: typeof packages[0]) {
             <ul class="space-y-2.5">
               <li v-for="feature in pkg.features" :key="feature" class="flex items-start gap-2.5 text-sm">
                 <div class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-green-100">
-                  <Check class="h-2.5 w-2.5 text-green-600" />
+                  <CheckIcon class="h-2.5 w-2.5 text-green-600" />
                 </div>
                 <span class="text-foreground/90">{{ feature }}</span>
               </li>
@@ -170,7 +170,7 @@ function handlePurchase(pkg: typeof packages[0]) {
             @click="handlePurchase(pkg)"
           >
             立即订购
-            <ArrowRight class="ml-2 h-4 w-4" />
+            <ArrowRightIcon class="ml-2 h-4 w-4" />
           </Button>
         </CardFooter>
       </Card>
@@ -179,15 +179,15 @@ function handlePurchase(pkg: typeof packages[0]) {
     <!-- Trust Indicators -->
     <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
       <div class="flex items-center gap-2">
-        <Zap class="h-4 w-4 text-amber-500" />
+        <BoltIcon class="h-4 w-4 text-amber-500" />
         <span>即时开通</span>
       </div>
       <div class="flex items-center gap-2">
-        <Brain class="h-4 w-4 text-indigo-500" />
+        <CpuChipIcon class="h-4 w-4 text-indigo-500" />
         <span>全模型覆盖</span>
       </div>
       <div class="flex items-center gap-2">
-        <Eye class="h-4 w-4 text-emerald-500" />
+        <EyeIcon class="h-4 w-4 text-emerald-500" />
         <span>透明计费</span>
       </div>
     </div>
@@ -212,7 +212,7 @@ function handlePurchase(pkg: typeof packages[0]) {
             <span class="text-lg font-bold">¥{{ selectedPackage.price.toLocaleString() }}/{{ selectedPackage.period }}</span>
           </div>
           <div class="flex items-center gap-2 rounded-lg bg-muted/50 p-3">
-            <Info class="h-4 w-4 text-muted-foreground shrink-0" />
+            <InformationCircleIcon class="h-4 w-4 text-muted-foreground shrink-0" />
             <p class="text-xs text-muted-foreground">订购后将立即开通全部套餐内服务，费用将计入当月账单。</p>
           </div>
         </div>

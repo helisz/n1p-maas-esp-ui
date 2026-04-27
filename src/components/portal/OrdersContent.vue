@@ -25,9 +25,9 @@ import DropdownMenuTrigger from '@/components/ui/DropdownMenuTrigger.vue'
 import DropdownMenuContent from '@/components/ui/DropdownMenuContent.vue'
 import DropdownMenuItem from '@/components/ui/DropdownMenuItem.vue'
 import {
-  Search, Filter, MoreHorizontal, Eye, CreditCard, X,
-  ShieldCheck, Clock, CheckCircle2, XCircle,
-} from 'lucide-vue-next'
+  MagnifyingGlassIcon, FunnelIcon, EllipsisHorizontalIcon, EyeIcon, CreditCardIcon, XMarkIcon,
+  ShieldCheckIcon, ClockIcon, CheckCircleIcon, XCircleIcon,
+} from '@heroicons/vue/24/outline'
 
 const orders = [
   { id: 'ORD202403150001', packageName: '高级版', amount: 5999, status: 'paid', createdAt: '2024-03-15 14:30:00', paidAt: '2024-03-15 14:35:00' },
@@ -38,10 +38,10 @@ const orders = [
   { id: 'ORD202403100006', packageName: '高级版', amount: 5999, status: 'paid', createdAt: '2024-03-10 15:00:00', paidAt: '2024-03-10 15:05:00' },
 ]
 
-const statusConfig: Record<string, { label: string; variant: 'default' | 'outline' | 'secondary' | 'destructive'; icon: typeof Clock; color: string }> = {
-  pending: { label: '待支付', variant: 'outline', icon: Clock, color: 'text-yellow-500' },
-  paid: { label: '已支付', variant: 'outline', icon: CheckCircle2, color: 'text-green-500' },
-  cancelled: { label: '已取消', variant: 'secondary', icon: XCircle, color: 'text-muted-foreground' },
+const statusConfig: Record<string, { label: string; variant: 'default' | 'outline' | 'secondary' | 'destructive'; icon: typeof ClockIcon; color: string }> = {
+  pending: { label: '待支付', variant: 'outline', icon: ClockIcon, color: 'text-yellow-500' },
+  paid: { label: '已支付', variant: 'outline', icon: CheckCircleIcon, color: 'text-green-500' },
+  cancelled: { label: '已取消', variant: 'secondary', icon: XCircleIcon, color: 'text-muted-foreground' },
 }
 
 const paymentDialogOpen = ref(false)
@@ -107,10 +107,10 @@ const stats = computed(() => ({
           <CardTitle>订单列表</CardTitle>
           <div class="flex items-center gap-2">
             <div class="relative">
-              <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <MagnifyingGlassIcon class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input v-model="searchQuery" placeholder="搜索订单..." class="w-64 pl-8" />
             </div>
-            <Button variant="outline" size="icon"><Filter class="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon"><FunnelIcon class="h-4 w-4" /></Button>
           </div>
         </div>
       </CardHeader>
@@ -141,18 +141,18 @@ const stats = computed(() => ({
               <TableCell class="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger>
-                    <Button variant="ghost" size="icon"><MoreHorizontal class="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon"><EllipsisHorizontalIcon class="h-4 w-4" /></Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem @click="handleViewDetail(order)">
-                      <Eye class="mr-2 h-4 w-4" />查看详情
+                      <EyeIcon class="mr-2 h-4 w-4" />查看详情
                     </DropdownMenuItem>
                     <template v-if="order.status === 'pending'">
                       <DropdownMenuItem @click="handlePay(order)">
-                        <CreditCard class="mr-2 h-4 w-4" />去支付
+                        <CreditCardIcon class="mr-2 h-4 w-4" />去支付
                       </DropdownMenuItem>
                       <DropdownMenuItem class="text-destructive">
-                        <X class="mr-2 h-4 w-4" />取消订单
+                        <XMarkIcon class="mr-2 h-4 w-4" />取消订单
                       </DropdownMenuItem>
                     </template>
                   </DropdownMenuContent>
@@ -178,7 +178,7 @@ const stats = computed(() => ({
             <div class="mt-2 flex justify-between"><span class="text-muted-foreground">金额</span><span class="text-lg font-bold">¥{{ selectedOrder.amount.toLocaleString() }}</span></div>
           </div>
           <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
-            <ShieldCheck class="h-4 w-4 text-muted-foreground" />
+            <ShieldCheckIcon class="h-4 w-4 text-muted-foreground" />
             <span class="text-sm text-muted-foreground">需要网银Key认证确认支付</span>
           </div>
         </div>

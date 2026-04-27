@@ -27,18 +27,18 @@ import DialogTitle from "@/components/ui/DialogTitle.vue";
 import DialogDescription from "@/components/ui/DialogDescription.vue";
 import DialogFooter from "@/components/ui/DialogFooter.vue";
 import {
-  Search,
-  Download,
-  Filter,
-  LogIn,
-  ShoppingCart,
-  CreditCard,
-  Server,
-  Key,
-  ShieldCheck,
-  UserCog,
-  Eye,
-} from "lucide-vue-next";
+  MagnifyingGlassIcon,
+  ArrowDownTrayIcon,
+  FunnelIcon,
+  ArrowLeftOnRectangleIcon,
+  ShoppingCartIcon,
+  CreditCardIcon,
+  ServerIcon,
+  KeyIcon,
+  ShieldCheckIcon,
+  UsersIcon,
+  EyeIcon,
+} from "@heroicons/vue/24/outline";
 
 const auditLogs = [
   {
@@ -125,33 +125,33 @@ const auditLogs = [
 
 const typeConfig: Record<
   string,
-  { label: string; icon: typeof LogIn; color: string }
+  { label: string; icon: typeof ArrowLeftOnRectangleIcon; color: string }
 > = {
-  login: { label: "登录", icon: LogIn, color: "bg-blue-50 text-blue-700" },
+  login: { label: "登录", icon: ArrowLeftOnRectangleIcon, color: "bg-blue-50 text-blue-700" },
   order: {
     label: "订购",
-    icon: ShoppingCart,
+    icon: ShoppingCartIcon,
     color: "bg-purple-50 text-purple-700",
   },
   payment: {
     label: "支付",
-    icon: CreditCard,
+    icon: CreditCardIcon,
     color: "bg-green-50 text-green-700",
   },
   service: {
     label: "开通服务",
-    icon: Server,
+    icon: ServerIcon,
     color: "bg-orange-50 text-orange-700",
   },
-  key: { label: "密钥变更", icon: Key, color: "bg-red-50 text-red-700" },
+  key: { label: "密钥变更", icon: KeyIcon, color: "bg-red-50 text-red-700" },
   auth: {
     label: "网银Key认证",
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     color: "bg-cyan-50 text-cyan-700",
   },
   account: {
     label: "账号管理",
-    icon: UserCog,
+    icon: UsersIcon,
     color: "bg-amber-50 text-amber-700",
   },
 };
@@ -236,7 +236,7 @@ function handleViewDetail(log: (typeof auditLogs)[0]) {
           </div>
           <div class="flex items-center gap-2">
             <div class="relative">
-              <Search
+              <MagnifyingGlassIcon
                 class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"
               />
               <Input
@@ -261,7 +261,7 @@ function handleViewDetail(log: (typeof auditLogs)[0]) {
               </SelectContent>
             </Select>
             <Button variant="outline"
-              ><Download class="mr-2 h-4 w-4" />导出</Button
+              ><ArrowDownTrayIcon class="mr-2 h-4 w-4" />导出</Button
             >
           </div>
         </div>
@@ -292,7 +292,7 @@ function handleViewDetail(log: (typeof auditLogs)[0]) {
               <TableCell>{{ log.authMethod }}</TableCell>
               <TableCell class="text-right">
                 <Button variant="ghost" size="sm" @click="handleViewDetail(log)"
-                  ><Eye class="mr-1 h-3 w-3" />详情</Button
+                  ><EyeIcon class="mr-1 h-3 w-3" />详情</Button
                 >
               </TableCell>
             </TableRow>

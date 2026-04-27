@@ -17,24 +17,24 @@ import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
-  Server,
-  Activity,
-  Receipt,
-  Clock,
-  ArrowRight,
-  Key,
-  FileText,
-  TrendingUp,
-  ShieldCheck,
-  CheckCircle2,
-  AlertTriangle,
-  Building2,
-  Upload,
-  UserCheck,
-  Zap,
-  Lock,
-  HeadphonesIcon,
-} from 'lucide-vue-next'
+  ServerIcon,
+  SignalIcon,
+  ClipboardDocumentListIcon,
+  ClockIcon,
+  ArrowRightIcon,
+  KeyIcon,
+  DocumentTextIcon,
+  ArrowTrendingUpIcon,
+  ShieldCheckIcon,
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+  BuildingOffice2Icon,
+  ArrowUpTrayIcon,
+  CheckBadgeIcon,
+  BoltIcon,
+  LockClosedIcon,
+  LifebuoyIcon,
+} from '@heroicons/vue/24/outline'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -48,16 +48,16 @@ onMounted(() => {
 })
 
 const stats = [
-  { title: '已开通服务', value: '5', unit: '个', icon: Server, change: '+2', changeLabel: '本月新增' },
-  { title: '本月API调用', value: '128,456', unit: '次', icon: Activity, change: '+12.5%', changeLabel: '较上月' },
-  { title: '待支付订单', value: '2', unit: '笔', icon: Receipt, change: '¥3,600', changeLabel: '待付金额' },
-  { title: '即将到期套餐', value: '1', unit: '个', icon: Clock, change: '15天后', changeLabel: '到期' },
+  { title: '已开通服务', value: '5', unit: '个', icon: ServerIcon, change: '+2', changeLabel: '本月新增' },
+  { title: '本月API调用', value: '128,456', unit: '次', icon: SignalIcon, change: '+12.5%', changeLabel: '较上月' },
+  { title: '待支付订单', value: '2', unit: '笔', icon: ClipboardDocumentListIcon, change: '¥3,600', changeLabel: '待付金额' },
+  { title: '即将到期套餐', value: '1', unit: '个', icon: ClockIcon, change: '15天后', changeLabel: '到期' },
 ]
 
 const quickActions = [
-  { title: '订购套餐', description: '浏览并购买 MaaS 服务套餐', icon: Server, href: '/packages' },
-  { title: '查看 API 密钥', description: '管理您的 API 访问凭证', icon: Key, href: '/services' },
-  { title: '查看账单', description: '查看账单详情和支付记录', icon: FileText, href: '/billing' },
+  { title: '订购套餐', description: '浏览并购买 MaaS 服务套餐', icon: ServerIcon, href: '/packages' },
+  { title: '查看 API 密钥', description: '管理您的 API 访问凭证', icon: KeyIcon, href: '/services' },
+  { title: '查看账单', description: '查看账单详情和支付记录', icon: DocumentTextIcon, href: '/billing' },
 ]
 
 const recentActivities = [
@@ -94,7 +94,7 @@ function goToEnterprise() {
       </div>
       <div class="flex items-center gap-2">
         <Badge variant="outline" class="gap-1">
-          <ShieldCheck class="h-3 w-3" />
+          <ShieldCheckIcon class="h-3 w-3" />
           已认证企业
         </Badge>
       </div>
@@ -113,7 +113,7 @@ function goToEnterprise() {
             <span class="text-sm text-muted-foreground">{{ stat.unit }}</span>
           </div>
           <div class="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-            <TrendingUp class="h-3 w-3 text-green-500" />
+            <ArrowTrendingUpIcon class="h-3 w-3 text-green-500" />
             <span class="text-green-500">{{ stat.change }}</span>
             <span>{{ stat.changeLabel }}</span>
           </div>
@@ -144,7 +144,7 @@ function goToEnterprise() {
                 <div class="text-xs text-muted-foreground">{{ action.description }}</div>
               </div>
             </div>
-            <ArrowRight class="h-4 w-4 text-muted-foreground" />
+            <ArrowRightIcon class="h-4 w-4 text-muted-foreground" />
           </button>
         </CardContent>
       </Card>
@@ -197,10 +197,10 @@ function goToEnterprise() {
               <p class="text-sm text-muted-foreground">到期：{{ pkg.expiry }}</p>
             </div>
             <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1">
-              <CheckCircle2 class="h-3 w-3 text-green-500" />运行中
+              <CheckCircleIcon class="h-3 w-3 text-green-500" />运行中
             </Badge>
             <Badge v-else variant="outline" class="gap-1">
-              <AlertTriangle class="h-3 w-3 text-red-500" />即将到期
+              <ExclamationTriangleIcon class="h-3 w-3 text-red-500" />即将到期
             </Badge>
           </div>
         </div>
@@ -212,7 +212,7 @@ function goToEnterprise() {
       <DialogContent class="sm:max-w-lg">
         <DialogHeader class="text-center">
           <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 mb-4">
-            <Building2 class="h-8 w-8 text-indigo-600" />
+            <BuildingOffice2Icon class="h-8 w-8 text-indigo-600" />
           </div>
           <DialogTitle class="text-xl">完善企业信息，解锁全部服务</DialogTitle>
           <DialogDescription>
@@ -252,19 +252,19 @@ function goToEnterprise() {
             <p class="text-sm font-semibold text-foreground">验证后可享受</p>
             <div class="grid grid-cols-2 gap-3">
               <div class="flex items-center gap-2">
-                <Zap class="h-4 w-4 text-amber-500" />
+                <BoltIcon class="h-4 w-4 text-amber-500" />
                 <span class="text-xs">更高 API 调用额度</span>
               </div>
               <div class="flex items-center gap-2">
-                <HeadphonesIcon class="h-4 w-4 text-indigo-500" />
+                <LifebuoyIcon class="h-4 w-4 text-indigo-500" />
                 <span class="text-xs">专属客户经理</span>
               </div>
               <div class="flex items-center gap-2">
-                <Lock class="h-4 w-4 text-emerald-500" />
+                <LockClosedIcon class="h-4 w-4 text-emerald-500" />
                 <span class="text-xs">企业级 SLA 保障</span>
               </div>
               <div class="flex items-center gap-2">
-                <CheckCircle2 class="h-4 w-4 text-blue-500" />
+                <CheckCircleIcon class="h-4 w-4 text-blue-500" />
                 <span class="text-xs">优先技术支持</span>
               </div>
             </div>
@@ -276,7 +276,7 @@ function goToEnterprise() {
             我知道了
           </Button>
           <Button class="w-full sm:w-auto gap-2" @click="goToEnterprise">
-            <ShieldCheck class="h-4 w-4" />
+            <ShieldCheckIcon class="h-4 w-4" />
             验证企业资质
           </Button>
         </DialogFooter>

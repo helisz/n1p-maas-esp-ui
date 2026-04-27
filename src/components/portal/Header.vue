@@ -1,7 +1,7 @@
 <!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { Bell, HelpCircle, LogOut, ChevronDown, User, Settings } from 'lucide-vue-next'
+import { BellIcon, QuestionMarkCircleIcon, ArrowRightOnRectangleIcon, ChevronDownIcon, UserIcon, Cog6ToothIcon } from '@heroicons/vue/24/outline'
 import Button from '@/components/ui/Button.vue'
 import DropdownMenu from '@/components/ui/DropdownMenu.vue'
 import DropdownMenuTrigger from '@/components/ui/DropdownMenuTrigger.vue'
@@ -34,7 +34,7 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
     <div class="flex items-center gap-2">
       <!-- Notifications -->
       <Button variant="ghost" size="icon" class="relative">
-        <Bell class="h-4 w-4" />
+        <BellIcon class="h-4 w-4" />
         <Badge class="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full p-0 text-[10px] leading-none">
           3
         </Badge>
@@ -42,7 +42,7 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
 
       <!-- Help -->
       <Button variant="ghost" size="icon">
-        <HelpCircle class="h-4 w-4" />
+        <QuestionMarkCircleIcon class="h-4 w-4" />
       </Button>
 
       <!-- User Menu -->
@@ -58,7 +58,7 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
               <span class="font-medium">{{ auth.user?.company ?? '企业账号' }}</span>
               <span class="text-muted-foreground">{{ auth.user?.role ?? '管理员' }}</span>
             </div>
-            <ChevronDown class="h-4 w-4 text-muted-foreground" />
+            <ChevronDownIcon class="h-4 w-4 text-muted-foreground" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" class="w-48">
@@ -68,16 +68,16 @@ const initials = auth.user?.name?.charAt(0) ?? '企'
           </div>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <User class="mr-2 h-4 w-4" />
+            <UserIcon class="mr-2 h-4 w-4" />
             <span>个人中心</span>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Settings class="mr-2 h-4 w-4" />
+            <Cog6ToothIcon class="mr-2 h-4 w-4" />
             <span>账号设置</span>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem class="text-destructive focus:text-destructive" @click="handleLogout">
-            <LogOut class="mr-2 h-4 w-4" />
+            <ArrowRightOnRectangleIcon class="mr-2 h-4 w-4" />
             <span>退出登录</span>
           </DropdownMenuItem>
         </DropdownMenuContent>

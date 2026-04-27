@@ -18,9 +18,9 @@ import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
-  Building2, CheckCircle2, ShieldCheck, Edit, Upload,
-  Key, RefreshCw,
-} from 'lucide-vue-next'
+  BuildingOffice2Icon, CheckCircleIcon, ShieldCheckIcon, PencilSquareIcon, ArrowUpTrayIcon,
+  KeyIcon, ArrowPathIcon,
+} from '@heroicons/vue/24/outline'
 
 const enterpriseInfo = {
   name: '中科云数科技有限公司', creditCode: '91110108MA01XXXXXX', legalPerson: '张三',
@@ -50,10 +50,10 @@ const rebindDialogOpen = ref(false)
         <CardHeader>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"><Building2 class="h-5 w-5 text-primary" /></div>
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10"><BuildingOffice2Icon class="h-5 w-5 text-primary" /></div>
               <div><CardTitle>企业基本信息</CardTitle><CardDescription>工商注册信息</CardDescription></div>
             </div>
-            <Badge variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />已认证</Badge>
+            <Badge variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />已认证</Badge>
           </div>
         </CardHeader>
         <CardContent class="space-y-4">
@@ -76,7 +76,7 @@ const rebindDialogOpen = ref(false)
         <CardHeader>
           <div class="flex items-center justify-between">
             <div><CardTitle>联系人信息</CardTitle><CardDescription>企业管理员联系方式</CardDescription></div>
-            <Button variant="outline" size="sm" @click="editDialogOpen = true"><Edit class="mr-1 h-3 w-3" />修改</Button>
+            <Button variant="outline" size="sm" @click="editDialogOpen = true"><PencilSquareIcon class="mr-1 h-3 w-3" />修改</Button>
           </div>
         </CardHeader>
         <CardContent class="space-y-4">
@@ -93,7 +93,7 @@ const rebindDialogOpen = ref(false)
         <CardHeader>
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-50"><ShieldCheck class="h-5 w-5 text-cyan-600" /></div>
+              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-50"><ShieldCheckIcon class="h-5 w-5 text-cyan-600" /></div>
               <div><CardTitle>网银Key绑定状态</CardTitle><CardDescription>中信网银Key认证信息</CardDescription></div>
             </div>
             <Badge class="gap-1"><CheckCircle2 class="h-3 w-3" />已绑定</Badge>
@@ -108,13 +108,13 @@ const rebindDialogOpen = ref(false)
             </div>
             <div class="space-y-4">
               <div class="space-y-1"><Label class="text-muted-foreground">最近使用</Label><p>{{ uKeyInfo.lastUsed }}</p></div>
-              <div class="space-y-1"><Label class="text-muted-foreground">状态</Label><Badge variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />正常</Badge></div>
+              <div class="space-y-1"><Label class="text-muted-foreground">状态</Label><Badge variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />正常</Badge></div>
             </div>
           </div>
           <Separator class="my-4" />
           <div class="flex gap-2">
-            <Button variant="outline" @click="rebindDialogOpen = true"><RefreshCw class="mr-2 h-4 w-4" />重新绑定</Button>
-            <Button variant="outline"><Key class="mr-2 h-4 w-4" />测试认证</Button>
+            <Button variant="outline" @click="rebindDialogOpen = true"><ArrowPathIcon class="mr-2 h-4 w-4" />重新绑定</Button>
+            <Button variant="outline"><KeyIcon class="mr-2 h-4 w-4" />测试认证</Button>
           </div>
         </CardContent>
       </Card>
@@ -145,7 +145,7 @@ const rebindDialogOpen = ref(false)
             <div class="rounded-lg border border-dashed p-4">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded bg-muted"><Upload class="h-5 w-5 text-muted-foreground" /></div>
+                  <div class="flex h-10 w-10 items-center justify-center rounded bg-muted"><ArrowUpTrayIcon class="h-5 w-5 text-muted-foreground" /></div>
                   <div><p class="font-medium">其他资质</p><p class="text-xs text-muted-foreground">可选上传</p></div>
                 </div>
                 <Button variant="ghost" size="sm">上传</Button>
@@ -177,7 +177,7 @@ const rebindDialogOpen = ref(false)
       <DialogContent>
         <DialogHeader><DialogTitle>重新绑定网银Key</DialogTitle><DialogDescription>请插入新的网银Key设备后点击确认</DialogDescription></DialogHeader>
         <div class="flex items-center gap-3 rounded-lg bg-muted p-4">
-          <ShieldCheck class="h-5 w-5 text-muted-foreground" />
+          <ShieldCheckIcon class="h-5 w-5 text-muted-foreground" />
           <p class="text-sm text-muted-foreground">重新绑定后，旧的网银Key将立即失效</p>
         </div>
         <DialogFooter>

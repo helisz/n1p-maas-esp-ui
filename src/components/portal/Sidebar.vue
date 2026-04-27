@@ -4,19 +4,19 @@ import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { cn } from '@/lib/utils'
 import {
-  LayoutDashboard,
-  Package,
-  ShoppingCart,
-  Server,
-  Brain,
-  Wallet,
-  Receipt,
-  FileText,
-  Building2,
-  Users,
-  ChevronLeft,
-  Search,
-} from 'lucide-vue-next'
+  Squares2X2Icon,
+  CubeIcon,
+  ShoppingCartIcon,
+  ServerIcon,
+  CpuChipIcon,
+  WalletIcon,
+  ClipboardDocumentListIcon,
+  DocumentTextIcon,
+  BuildingOffice2Icon,
+  UsersIcon,
+  ChevronLeftIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/vue/24/outline'
 import Input from '@/components/ui/Input.vue'
 
 const route = useRoute()
@@ -26,31 +26,31 @@ const menuGroups = [
   {
 // [AI_START TIMESTAMP=2025-06-17 10:15:00]
     items: [
-      { title: '控制台首页', href: '/dashboard', icon: LayoutDashboard },
+      { title: '控制台首页', href: '/dashboard', icon: Squares2X2Icon },
     ],
   },
   {
     label: '服务',
     items: [
-      { title: '服务订购', href: '/packages', icon: Package },
-      { title: '模型广场', href: '/models', icon: Brain },
-      { title: '我的订单', href: '/orders', icon: ShoppingCart },
-      { title: '服务管理', href: '/services', icon: Server },
+      { title: '服务订购', href: '/packages', icon: CubeIcon },
+      { title: '模型广场', href: '/models', icon: CpuChipIcon },
+      { title: '我的订单', href: '/orders', icon: ShoppingCartIcon },
+      { title: '服务管理', href: '/services', icon: ServerIcon },
     ],
   },
   {
     label: '费用',
     items: [
-      { title: '智信钱包', href: '/wallet', icon: Wallet },
-      { title: '账单与计费', href: '/billing', icon: Receipt },
+      { title: '智信钱包', href: '/wallet', icon: WalletIcon },
+      { title: '账单与计费', href: '/billing', icon: ClipboardDocumentListIcon },
     ],
   },
   {
     label: '管理',
     items: [
-      { title: '企业信息管理', href: '/enterprise', icon: Building2 },
-      { title: '子账号与权限', href: '/accounts', icon: Users },
-      { title: '操作审计', href: '/audit', icon: FileText },
+      { title: '企业信息管理', href: '/enterprise', icon: BuildingOffice2Icon },
+      { title: '子账号与权限', href: '/accounts', icon: UsersIcon },
+      { title: '操作审计', href: '/audit', icon: DocumentTextIcon },
     ],
   },
 ]
@@ -85,7 +85,7 @@ function navigate(href: string) {
     <!-- Search -->
     <div v-if="!collapsed" class="border-r bg-sidebar p-3">
       <div class="relative">
-        <Search class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        <MagnifyingGlassIcon class="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input placeholder="搜索..." class="h-9 pl-8 text-sm bg-muted/50 border-0" />
       </div>
     </div>
@@ -120,7 +120,7 @@ function navigate(href: string) {
         @click="collapsed = !collapsed"
         class="flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       >
-        <ChevronLeft
+        <ChevronLeftIcon
           :class="cn('h-4 w-4 transition-transform', collapsed && 'rotate-180')"
         />
         <span v-if="!collapsed">收起菜单</span>

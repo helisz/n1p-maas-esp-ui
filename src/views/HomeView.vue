@@ -20,7 +20,7 @@ import CardContent from '@/components/ui/CardContent.vue'
 import CardDescription from '@/components/ui/CardDescription.vue'
 // [AI_START TIMESTAMP=2025-06-15 14:00:00]
 // [AI_START TIMESTAMP=2025-06-17 11:00:00]
-import { ShieldCheck, Package, Settings, FileText, Eye, EyeOff, Loader2, Check, Lock, KeyRound, Fingerprint, Cloud, Zap, Headphones, BarChart3, FileSearch, ClipboardCheck, ArrowRight, LogIn, ChevronDown, Sparkles, TrendingUp, Users, Cpu, Clock, Building2, Factory, BookOpen, Landmark, UserPlus } from 'lucide-vue-next'
+import { ShieldCheckIcon, CubeIcon, Cog6ToothIcon, DocumentTextIcon, EyeIcon, EyeSlashIcon, ArrowPathIcon, CheckIcon, LockClosedIcon, KeyIcon, FingerPrintIcon, CloudIcon, BoltIcon, LifebuoyIcon, ChartBarIcon, DocumentMagnifyingGlassIcon, ClipboardDocumentCheckIcon, ArrowRightIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon, SparklesIcon, ArrowTrendingUpIcon, UsersIcon, CpuChipIcon, ClockIcon, BuildingOffice2Icon, BuildingOfficeIcon, BookOpenIcon, BuildingLibraryIcon, UserPlusIcon } from '@heroicons/vue/24/outline'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -182,7 +182,7 @@ onMounted(() => {
 <template>
   <!-- Loading state -->
   <div v-if="auth.isLoading" class="flex h-screen items-center justify-center bg-background">
-    <Loader2 class="h-6 w-6 animate-spin text-muted-foreground" />
+    <ArrowPathIcon class="h-6 w-6 animate-spin text-muted-foreground" />
   </div>
 
   <!-- Main landing page -->
@@ -207,7 +207,7 @@ onMounted(() => {
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">帮助中心</span>
           <span class="hidden sm:inline text-sm text-muted-foreground hover:text-foreground cursor-pointer">联系我们</span>
           <Button size="sm" @click="openLogin" class="gap-1.5">
-            <LogIn class="h-4 w-4" />登录
+            <ArrowLeftOnRectangleIcon class="h-4 w-4" />登录
           </Button>
           <!-- <Button variant="outline" size="sm" @click="openRegister">注册</Button> -->
         </div>
@@ -366,7 +366,7 @@ onMounted(() => {
         class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center py-18 sm:py-24 lg:py-24">
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 mb-8">
-          <Zap class="h-3.5 w-3.5 text-white" />
+          <BoltIcon class="h-3.5 w-3.5 text-white" />
           <span class="text-sm font-medium text-white">智信 MaaS 服务平台</span>
         </div>
         <!-- Title -->
@@ -381,7 +381,7 @@ onMounted(() => {
         <div class="flex flex-col sm:flex-row items-center gap-4 mt-10">
           <Button size="lg" @click="openLogin" class="gap-2 bg-white text-gray-900 hover:bg-gray-100">
             
-            <ArrowRight class="h-4 w-4" />立即体验
+            <ArrowRightIcon class="h-4 w-4" />立即体验
           </Button>
 
         </div>
@@ -409,22 +409,22 @@ onMounted(() => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div class="text-center">
-            <Cpu class="h-8 w-8 mx-auto mb-3 opacity-80" />
+            <CpuChipIcon class="h-8 w-8 mx-auto mb-3 opacity-80" />
             <p class="text-3xl sm:text-4xl font-bold">50+</p>
             <p class="text-sm text-white/80 mt-1">大模型 API</p>
           </div>
           <div class="text-center">
-            <TrendingUp class="h-8 w-8 mx-auto mb-3 opacity-80" />
+            <ArrowTrendingUpIcon class="h-8 w-8 mx-auto mb-3 opacity-80" />
             <p class="text-3xl sm:text-4xl font-bold">12.8亿</p>
             <p class="text-sm text-white/80 mt-1">累计调用次数</p>
           </div>
           <div class="text-center">
-            <Users class="h-8 w-8 mx-auto mb-3 opacity-80" />
+            <UsersIcon class="h-8 w-8 mx-auto mb-3 opacity-80" />
             <p class="text-3xl sm:text-4xl font-bold">2,000+</p>
             <p class="text-sm text-white/80 mt-1">企业客户</p>
           </div>
           <div class="text-center">
-            <Clock class="h-8 w-8 mx-auto mb-3 opacity-80" />
+            <ClockIcon class="h-8 w-8 mx-auto mb-3 opacity-80" />
             <p class="text-3xl sm:text-4xl font-bold">99.99%</p>
             <p class="text-sm text-white/80 mt-1">服务可用性</p>
           </div>
@@ -439,32 +439,32 @@ onMounted(() => {
         <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12">
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-indigo-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>中信集团</span>
           </div>
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-teal-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>平安科技</span>
           </div>
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-amber-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>华为云</span>
           </div>
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-rose-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>招商银行</span>
           </div>
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-cyan-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>腾讯金融</span>
           </div>
           <div
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-violet-600 transition-colors duration-300 cursor-default">
-            <Building2 class="h-6 w-6" />
+            <BuildingOffice2Icon class="h-6 w-6" />
             <span>阿里云</span>
           </div>
         </div>
@@ -482,7 +482,7 @@ onMounted(() => {
             <div class="flex-1">
               <div class="flex items-center gap-4 mb-6">
                 <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-100">
-                  <ShieldCheck class="h-7 w-7 text-teal-600" />
+                  <ShieldCheckIcon class="h-7 w-7 text-teal-600" />
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全认证・筑牢企业防线</h2>
@@ -498,28 +498,28 @@ onMounted(() => {
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Lock class="h-4 w-4 text-teal-600" />
+                    <LockClosedIcon class="h-4 w-4 text-teal-600" />
                     <span class="text-sm font-medium text-foreground">数据传输加密</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">全链路 TLS 1.3 加密传输，保障数据在客户端与服务器之间的安全通信</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <KeyRound class="h-4 w-4 text-teal-600" />
+                    <KeyIcon class="h-4 w-4 text-teal-600" />
                     <span class="text-sm font-medium text-foreground">网银 Key 认证</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">对接中信网银 Key 硬件证书，关键操作强制双因子身份核验</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Fingerprint class="h-4 w-4 text-teal-600" />
+                    <FingerPrintIcon class="h-4 w-4 text-teal-600" />
                     <span class="text-sm font-medium text-foreground">实名校验</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">企业身份实名认证，操作全程签名留痕，责任可追溯到人</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Check class="h-4 w-4 text-teal-600" />
+                    <CheckIcon class="h-4 w-4 text-teal-600" />
                     <span class="text-sm font-medium text-foreground">全场景覆盖</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">覆盖登录、支付、服务开通、密钥变更等所有核心业务场景</p>
@@ -536,7 +536,7 @@ onMounted(() => {
             <div class="flex-1">
               <div class="flex items-center gap-4 mb-6">
                 <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-100">
-                  <Package class="h-7 w-7 text-indigo-600" />
+                  <CubeIcon class="h-7 w-7 text-indigo-600" />
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">MaaS 服务・一站式采购开通</h2>
@@ -552,28 +552,28 @@ onMounted(() => {
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Package class="h-4 w-4 text-indigo-600" />
+                    <CubeIcon class="h-4 w-4 text-indigo-600" />
                     <span class="text-sm font-medium text-foreground">灵活套餐选择</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">基础版 / 企业版 / 旗舰版三档灵活选择，满足不同规模企业需求</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Cloud class="h-4 w-4 text-indigo-600" />
+                    <CloudIcon class="h-4 w-4 text-indigo-600" />
                     <span class="text-sm font-medium text-foreground">公有云无缝对接</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">开通即用，无需人工干预，标准 API 接口快速对接企业现有系统</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <BarChart3 class="h-4 w-4 text-indigo-600" />
+                    <ChartBarIcon class="h-4 w-4 text-indigo-600" />
                     <span class="text-sm font-medium text-foreground">用量实时监控</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">套餐用量可视化监控，API 调用统计一目了然，费用透明可控</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Headphones class="h-4 w-4 text-indigo-600" />
+                    <LifebuoyIcon class="h-4 w-4 text-indigo-600" />
                     <span class="text-sm font-medium text-foreground">专属技术支持</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">API 在线调试工具，专属客户经理一对一服务，7×24 小时响应</p>
@@ -590,7 +590,7 @@ onMounted(() => {
             <div class="flex-1">
               <div class="flex items-center gap-4 mb-6">
                 <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100">
-                  <Settings class="h-7 w-7 text-amber-600" />
+                  <Cog6ToothIcon class="h-7 w-7 text-amber-600" />
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">全流程管理・高效便捷</h2>
@@ -606,28 +606,28 @@ onMounted(() => {
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <FileText class="h-4 w-4 text-amber-600" />
+                    <DocumentTextIcon class="h-4 w-4 text-amber-600" />
                     <span class="text-sm font-medium text-foreground">订单全流程跟踪</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">从下单、审批、支付到开通，订单状态实时追踪，进度透明可视</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <KeyRound class="h-4 w-4 text-amber-600" />
+                    <KeyIcon class="h-4 w-4 text-amber-600" />
                     <span class="text-sm font-medium text-foreground">API 密钥管控</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">密钥生成、权限配置、调用范围管控，精细化的 API 访问授权管理</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <BarChart3 class="h-4 w-4 text-amber-600" />
+                    <ChartBarIcon class="h-4 w-4 text-amber-600" />
                     <span class="text-sm font-medium text-foreground">调用量统计</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">多维度 API 调用统计分析，用量趋势、异常告警、配额管理一站搞定</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <ClipboardCheck class="h-4 w-4 text-amber-600" />
+                    <ClipboardDocumentCheckIcon class="h-4 w-4 text-amber-600" />
                     <span class="text-sm font-medium text-foreground">账单明细导出</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">透明账单明细，支持按月导出报表，对接企业财务系统，开票便捷</p>
@@ -644,7 +644,7 @@ onMounted(() => {
             <div class="flex-1">
               <div class="flex items-center gap-4 mb-6">
                 <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-100">
-                  <FileSearch class="h-7 w-7 text-rose-600" />
+                  <DocumentMagnifyingGlassIcon class="h-7 w-7 text-rose-600" />
                 </div>
                 <div>
                   <h2 class="text-xl sm:text-2xl font-bold text-foreground">安全审计・可溯可查</h2>
@@ -660,28 +660,28 @@ onMounted(() => {
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <FileText class="h-4 w-4 text-rose-600" />
+                    <DocumentTextIcon class="h-4 w-4 text-rose-600" />
                     <span class="text-sm font-medium text-foreground">全类型日志</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">覆盖登录日志、操作日志、网银 Key 认证日志、API 调用日志全类型</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <Lock class="h-4 w-4 text-rose-600" />
+                    <LockClosedIcon class="h-4 w-4 text-rose-600" />
                     <span class="text-sm font-medium text-foreground">日志不可篡改</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">采用区块链级存储技术，日志一旦写入不可修改或删除，确保审计真实性</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <FileSearch class="h-4 w-4 text-rose-600" />
+                    <DocumentMagnifyingGlassIcon class="h-4 w-4 text-rose-600" />
                     <span class="text-sm font-medium text-foreground">多维度检索</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">按时间、操作人、操作类型等多维度灵活检索，快速定位目标记录</p>
                 </div>
                 <div class="rounded-xl border border-border bg-transparent p-4 space-y-2">
                   <div class="flex items-center gap-2">
-                    <ClipboardCheck class="h-4 w-4 text-rose-600" />
+                    <ClipboardDocumentCheckIcon class="h-4 w-4 text-rose-600" />
                     <span class="text-sm font-medium text-foreground">导出审计报告</span>
                   </div>
                   <p class="text-xs text-muted-foreground leading-relaxed">一键导出标准化审计报告，适配企业内控合规检查与外部审计需求</p>
@@ -707,7 +707,7 @@ onMounted(() => {
             class="rounded-2xl border border-border bg-white p-6 hover:shadow-lg transition-all duration-300 group reveal-on-scroll">
             <div
               class="h-12 w-12 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <Landmark class="h-6 w-6 text-white" />
+              <BuildingLibraryIcon class="h-6 w-6 text-white" />
             </div>
             <h3 class="text-lg font-bold text-foreground mb-2">智慧金融</h3>
             <p class="text-sm text-muted-foreground leading-relaxed">智能风控建模、合规审查自动化、客户画像分析，助力金融机构降本增效。</p>
@@ -717,7 +717,7 @@ onMounted(() => {
             class="rounded-2xl border border-border bg-white p-6 hover:shadow-lg transition-all duration-300 group reveal-on-scroll">
             <div
               class="h-12 w-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <Factory class="h-6 w-6 text-white" />
+              <BuildingOfficeIcon class="h-6 w-6 text-white" />
             </div>
             <h3 class="text-lg font-bold text-foreground mb-2">智能制造</h3>
             <p class="text-sm text-muted-foreground leading-relaxed">设备预测性维护、生产质量检测、供应链优化，推动制造业数字化转型。</p>
@@ -727,7 +727,7 @@ onMounted(() => {
             class="rounded-2xl border border-border bg-white p-6 hover:shadow-lg transition-all duration-300 group reveal-on-scroll">
             <div
               class="h-12 w-12 rounded-xl bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <BookOpen class="h-6 w-6 text-white" />
+              <BookOpenIcon class="h-6 w-6 text-white" />
             </div>
             <h3 class="text-lg font-bold text-foreground mb-2">企业知识库</h3>
             <p class="text-sm text-muted-foreground leading-relaxed">RAG 检索增强生成、私有化文档问答、智能客服，释放企业知识资产价值。</p>
@@ -754,7 +754,7 @@ onMounted(() => {
           </div>
           <div class="relative z-10">
             <div class="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 mb-6">
-              <Sparkles class="h-4 w-4" />
+              <SparklesIcon class="h-4 w-4" />
               <span class="text-sm font-medium">新用户专享</span>
             </div>
             <h2 class="text-2xl sm:text-4xl font-bold mb-4">免费试用 100 万 Token</h2>
@@ -763,7 +763,7 @@ onMounted(() => {
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg" @click="openRegister" class="bg-black hover:bg-white/90 gap-2">
                 免费注册
-                <ArrowRight class="h-4 w-4" />
+                <ArrowRightIcon class="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="lg" @click="openLogin" class="bg-white bg-white text-gray-900 hover:bg-gray-100">
                 查看价格方案
@@ -787,7 +787,7 @@ onMounted(() => {
             <button @click="toggleFaq(idx)"
               class="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 transition-colors">
               <span class="font-medium text-foreground text-sm sm:text-base">{{ item.q }}</span>
-              <ChevronDown class="h-5 w-5 text-muted-foreground transition-transform duration-300 shrink-0 ml-3"
+              <ChevronDownIcon class="h-5 w-5 text-muted-foreground transition-transform duration-300 shrink-0 ml-3"
                 :class="{ 'rotate-180': openFaqIndex === idx }" />
             </button>
             <div class="overflow-hidden transition-all duration-300"
@@ -837,8 +837,8 @@ onMounted(() => {
             <Input id="login-password" :type="showPassword ? 'text' : 'password'" v-model="password" class="pr-10" />
             <button type="button" @click="showPassword = !showPassword"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              <EyeOff v-if="showPassword" class="h-4 w-4" />
-              <Eye v-else class="h-4 w-4" />
+              <EyeSlashIcon v-if="showPassword" class="h-4 w-4" />
+              <EyeIcon v-else class="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -848,7 +848,7 @@ onMounted(() => {
         </div>
         <p v-if="loginError" class="text-sm text-destructive">{{ loginError }}</p>
         <Button type="submit" class="w-full" :disabled="loginSubmitting">
-          <Loader2 v-if="loginSubmitting" class="mr-2 h-4 w-4 animate-spin" />
+          <ArrowPathIcon v-if="loginSubmitting" class="mr-2 h-4 w-4 animate-spin" />
           {{ loginSubmitting ? '登录中...' : '登录' }}
         </Button>
       </form>
@@ -898,8 +898,8 @@ onMounted(() => {
               placeholder="请设置密码（至少6位）" :class="cn(registerErrors.password && 'border-destructive', 'pr-10')" />
             <button type="button" @click="showRegPassword = !showRegPassword"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              <EyeOff v-if="showRegPassword" class="h-4 w-4" />
-              <Eye v-else class="h-4 w-4" />
+              <EyeSlashIcon v-if="showRegPassword" class="h-4 w-4" />
+              <EyeIcon v-else class="h-4 w-4" />
             </button>
           </div>
           <p v-if="registerErrors.password" class="text-xs text-destructive">{{ registerErrors.password }}</p>
@@ -911,8 +911,8 @@ onMounted(() => {
               placeholder="请再次输入密码" :class="cn(registerErrors.confirmPassword && 'border-destructive', 'pr-10')" />
             <button type="button" @click="showConfirmPassword = !showConfirmPassword"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              <EyeOff v-if="showConfirmPassword" class="h-4 w-4" />
-              <Eye v-else class="h-4 w-4" />
+              <EyeSlashIcon v-if="showConfirmPassword" class="h-4 w-4" />
+              <EyeIcon v-else class="h-4 w-4" />
             </button>
           </div>
           <p v-if="registerErrors.confirmPassword" class="text-xs text-destructive">{{ registerErrors.confirmPassword }}
@@ -925,7 +925,7 @@ onMounted(() => {
         <p v-if="registerErrors.agreed" class="text-xs text-destructive">{{ registerErrors.agreed }}</p>
         <p v-if="registerErrors.general" class="text-sm text-destructive">{{ registerErrors.general }}</p>
         <Button type="submit" class="w-full" :disabled="registerSubmitting">
-          <Loader2 v-if="registerSubmitting" class="mr-2 h-4 w-4 animate-spin" />
+          <ArrowPathIcon v-if="registerSubmitting" class="mr-2 h-4 w-4 animate-spin" />
           {{ registerSubmitting ? '注册中...' : '注册' }}
         </Button>
       </form>

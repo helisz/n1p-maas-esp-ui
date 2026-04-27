@@ -26,9 +26,9 @@ import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
-  Download, FileText, Receipt, CreditCard, TrendingUp,
-  AlertCircle, CheckCircle2, Clock, Building2,
-} from 'lucide-vue-next'
+  ArrowDownTrayIcon, DocumentTextIcon, ClipboardDocumentListIcon, CreditCardIcon, ArrowTrendingUpIcon,
+  ExclamationCircleIcon, CheckCircleIcon, ClockIcon, BuildingOffice2Icon,
+} from '@heroicons/vue/24/outline'
 
 const bills = [
   { id: 'BILL202403', month: '2024年3月', amount: 12997, status: 'unpaid', dueDate: '2024-04-15', items: [{ name: 'GPT-4 企业版', amount: 5999 }, { name: 'Embedding 基础版', amount: 999 }, { name: '超量调用费用', amount: 5999 }] },
@@ -78,7 +78,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
         <CardHeader class="pb-2"><CardTitle class="text-sm font-medium text-muted-foreground">本月消费</CardTitle></CardHeader>
         <CardContent>
           <div class="text-2xl font-bold">¥12,997</div>
-          <div class="flex items-center text-xs text-muted-foreground"><TrendingUp class="mr-1 h-3 w-3 text-green-500" />较上月 +85%</div>
+          <div class="flex items-center text-xs text-muted-foreground"><ArrowTrendingUpIcon class="mr-1 h-3 w-3 text-green-500" />较上月 +85%</div>
         </CardContent>
       </Card>
       <Card>
@@ -110,13 +110,13 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
                   <TableCell class="font-mono text-sm">{{ bill.id }}</TableCell>
                   <TableCell class="font-medium">¥{{ bill.amount.toLocaleString() }}</TableCell>
                   <TableCell>
-                    <Badge v-if="bill.status === 'paid'" variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />已支付</Badge>
-                    <Badge v-else variant="outline" class="gap-1"><Clock class="h-3 w-3 text-yellow-500" />待支付</Badge>
+                    <Badge v-if="bill.status === 'paid'" variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />已支付</Badge>
+                    <Badge v-else variant="outline" class="gap-1"><ClockIcon class="h-3 w-3 text-yellow-500" />待支付</Badge>
                   </TableCell>
                   <TableCell class="text-right">
                     <div class="flex justify-end gap-2">
                       <Button variant="ghost" size="sm" @click="handleViewBill(bill)">查看</Button>
-                      <Button variant="ghost" size="sm"><Download class="mr-1 h-3 w-3" />下载</Button>
+                      <Button variant="ghost" size="sm"><ArrowDownTrayIcon class="mr-1 h-3 w-3" />下载</Button>
                       <Button v-if="bill.status === 'unpaid'" size="sm">去支付</Button>
                     </div>
                   </TableCell>
@@ -137,7 +137,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
                   <p class="font-medium">{{ stat.package }}</p>
                   <p class="text-sm text-muted-foreground">已用 {{ stat.used.toLocaleString() }} / 额度 {{ stat.quota.toLocaleString() }} 次</p>
                 </div>
-                <Badge v-if="stat.overage > 0" variant="outline" class="gap-1"><AlertCircle class="h-3 w-3 text-red-500" />超量 {{ stat.overage.toLocaleString() }} 次</Badge>
+                <Badge v-if="stat.overage > 0" variant="outline" class="gap-1"><ExclamationCircleIcon class="h-3 w-3 text-red-500" />超量 {{ stat.overage.toLocaleString() }} 次</Badge>
               </div>
               <Progress :value="Math.min(Math.round((stat.used / stat.quota) * 100), 100)" />
               <p v-if="stat.overage > 0" class="text-xs text-destructive">超量费用：¥{{ (stat.overage * stat.overagePrice).toLocaleString() }}</p>
@@ -151,7 +151,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
           <CardHeader>
             <div class="flex items-center justify-between">
               <div><CardTitle>发票管理</CardTitle><CardDescription>查看和管理开票记录</CardDescription></div>
-              <Button @click="invoiceDialogOpen = true"><FileText class="mr-2 h-4 w-4" />申请开票</Button>
+              <Button @click="invoiceDialogOpen = true"><DocumentTextIcon class="mr-2 h-4 w-4" />申请开票</Button>
             </div>
           </CardHeader>
           <CardContent>
@@ -162,7 +162,7 @@ const totalUnpaid = computed(() => bills.filter((b) => b.status === 'unpaid').re
                   <TableCell class="font-mono text-sm">{{ inv.id }}</TableCell>
                   <TableCell>{{ inv.type }}</TableCell>
                   <TableCell class="font-medium">¥{{ inv.amount.toLocaleString() }}</TableCell>
-                  <TableCell><Badge variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />已开具</Badge></TableCell>
+                  <TableCell><Badge variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />已开具</Badge></TableCell>
                   <TableCell class="text-muted-foreground">{{ inv.issuedAt }}</TableCell>
                 </TableRow>
               </TableBody>

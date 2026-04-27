@@ -26,9 +26,9 @@ import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import SecurityAuditContent from '@/components/portal/SecurityAuditContent.vue'
 import {
-  Key, Eye, EyeOff, Copy, RefreshCw, AlertTriangle,
-  CheckCircle2, Activity, TrendingUp, Clock, Server,
-} from 'lucide-vue-next'
+  KeyIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, ArrowPathIcon, ExclamationTriangleIcon,
+  CheckCircleIcon, SignalIcon, ArrowTrendingUpIcon, ClockIcon, ServerIcon,
+} from '@heroicons/vue/24/outline'
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from '@/components/ui/select'
@@ -286,14 +286,14 @@ watch(selectedRange, () => {
             <CardHeader class="pb-2">
               <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-muted"><Server class="h-5 w-5" /></div>
+                  <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-muted"><ServerIcon class="h-5 w-5" /></div>
                   <div>
                     <CardTitle class="text-lg">{{ pkg.name }}</CardTitle>
                     <CardDescription>有效期：{{ pkg.startDate }} 至 {{ pkg.endDate }}</CardDescription>
                   </div>
                 </div>
-                <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />运行中</Badge>
-                <Badge v-else variant="outline" class="gap-1"><AlertTriangle class="h-3 w-3 text-red-500" />即将到期</Badge>
+                <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />运行中</Badge>
+                <Badge v-else variant="outline" class="gap-1"><ExclamationTriangleIcon class="h-3 w-3 text-red-500" />即将到期</Badge>
               </div>
             </CardHeader>
             <CardContent class="space-y-4">
@@ -308,7 +308,7 @@ watch(selectedRange, () => {
               <div class="flex items-center gap-2 rounded-lg bg-muted/50 p-3">
                 <span class="text-sm text-muted-foreground">API 端点：</span>
                 <code class="flex-1 text-sm">{{ pkg.apiEndpoint }}</code>
-                <Button variant="ghost" size="icon" class="h-6 w-6" @click="copyToClipboard(pkg.apiEndpoint)"><Copy class="h-3 w-3" /></Button>
+                <Button variant="ghost" size="icon" class="h-6 w-6" @click="copyToClipboard(pkg.apiEndpoint)"><DocumentDuplicateIcon class="h-3 w-3" /></Button>
               </div>
               <div class="flex gap-2">
                 <Button variant="outline" size="sm">查看文档</Button>
@@ -326,7 +326,7 @@ watch(selectedRange, () => {
           <CardHeader>
             <div class="flex items-center justify-between">
               <div><CardTitle>API 密钥管理</CardTitle><CardDescription>用于 API 接口调用的访问凭证</CardDescription></div>
-              <Button><Key class="mr-2 h-4 w-4" />创建密钥</Button>
+              <Button><KeyIcon class="mr-2 h-4 w-4" />创建密钥</Button>
             </div>
           </CardHeader>
           <CardContent>
@@ -343,22 +343,22 @@ watch(selectedRange, () => {
                   <TableCell>
                     <div class="flex items-center gap-2">
                       <code class="text-sm">{{ key.accessKey }}</code>
-                      <Button variant="ghost" size="icon" class="h-6 w-6" @click="copyToClipboard(key.accessKey)"><Copy class="h-3 w-3" /></Button>
+                      <Button variant="ghost" size="icon" class="h-6 w-6" @click="copyToClipboard(key.accessKey)"><DocumentDuplicateIcon class="h-3 w-3" /></Button>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div class="flex items-center gap-2">
                       <code class="text-sm">{{ showSecretKey === key.id ? key.secretKey : '••••••••••••••••••••••••' }}</code>
                       <Button variant="ghost" size="icon" class="h-6 w-6" @click="showSecretKey = showSecretKey === key.id ? null : key.id">
-                        <Eye v-if="showSecretKey !== key.id" class="h-3 w-3" />
-                        <EyeOff v-else class="h-3 w-3" />
+                        <EyeIcon v-if="showSecretKey !== key.id" class="h-3 w-3" />
+                        <EyeSlashIcon v-else class="h-3 w-3" />
                       </Button>
                     </div>
                   </TableCell>
                   <TableCell class="text-muted-foreground">{{ key.createdAt }}</TableCell>
-                  <TableCell><Badge variant="outline" class="gap-1"><CheckCircle2 class="h-3 w-3 text-green-500" />正常</Badge></TableCell>
+                  <TableCell><Badge variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />正常</Badge></TableCell>
                   <TableCell class="text-right">
-                    <Button variant="ghost" size="sm" @click="handleResetKey(key)"><RefreshCw class="mr-1 h-3 w-3" />重置</Button>
+                    <Button variant="ghost" size="sm" @click="handleResetKey(key)"><ArrowPathIcon class="mr-1 h-3 w-3" />重置</Button>
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -372,7 +372,7 @@ watch(selectedRange, () => {
         <div class="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader class="pb-2"><CardTitle class="text-sm font-medium text-muted-foreground">今日调用</CardTitle></CardHeader>
-            <CardContent><div class="text-2xl font-bold">6,800</div><div class="flex items-center text-xs text-muted-foreground"><TrendingUp class="mr-1 h-3 w-3 text-green-500" />较昨日 +8%</div></CardContent>
+            <CardContent><div class="text-2xl font-bold">6,800</div><div class="flex items-center text-xs text-muted-foreground"><ArrowTrendingUpIcon class="mr-1 h-3 w-3 text-green-500" />较昨日 +8%</div></CardContent>
           </Card>
           <Card>
             <CardHeader class="pb-2"><CardTitle class="text-sm font-medium text-muted-foreground">本周调用</CardTitle></CardHeader>
@@ -415,7 +415,7 @@ watch(selectedRange, () => {
                 <TableRow v-for="log in errorLogs" :key="log.time">
                   <TableCell class="text-muted-foreground">{{ log.time }}</TableCell>
                   <TableCell class="font-mono text-sm">{{ log.api }}</TableCell>
-                  <TableCell><div class="flex items-center gap-2"><AlertTriangle class="h-4 w-4 text-yellow-500" />{{ log.error }}</div></TableCell>
+                  <TableCell><div class="flex items-center gap-2"><ExclamationTriangleIcon class="h-4 w-4 text-yellow-500" />{{ log.error }}</div></TableCell>
                   <TableCell><Badge variant="outline" class="gap-1 text-red-500">{{ log.code }}</Badge></TableCell>
                 </TableRow>
               </TableBody>

@@ -16,9 +16,9 @@ import DialogTitle from '@/components/ui/DialogTitle.vue'
 import DialogDescription from '@/components/ui/DialogDescription.vue'
 import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
-  Search, Brain, Eye, ExternalLink, Cpu, Layers, Hash,
-  DollarSign, Sparkles, Globe, Zap,
-} from 'lucide-vue-next'
+  MagnifyingGlassIcon, CpuChipIcon, EyeIcon, ArrowTopRightOnSquareIcon, RectangleStackIcon, HashtagIcon,
+  CurrencyDollarIcon, SparklesIcon, GlobeAltIcon, BoltIcon,
+} from '@heroicons/vue/24/outline'
 
 interface TierPricing {
   prompt: number
@@ -321,7 +321,7 @@ const providerColors: Record<string, string> = {
     <!-- Filters -->
     <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
       <div class="relative w-full lg:w-80">
-        <Search class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <MagnifyingGlassIcon class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Input v-model="searchQuery" placeholder="搜索模型名称、提供商或标签..." class="h-10 pl-9 text-sm" />
       </div>
       <div class="flex flex-wrap items-center gap-3">
@@ -365,7 +365,7 @@ const providerColors: Record<string, string> = {
     <!-- Model Cards -->
     <div>
       <div class="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
-        <Brain class="h-5 w-5 text-primary" />
+        <CpuChipIcon class="h-5 w-5 text-primary" />
         模型列表
         <span class="text-sm font-normal text-muted-foreground">（共 {{ filteredModels.length }} 个）</span>
         <span :class="['ml-2 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', tierBadgeClasses[selectedTier]]">
@@ -383,13 +383,13 @@ const providerColors: Record<string, string> = {
             <div class="flex items-start justify-between">
               <div class="flex items-center gap-3">
                 <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <Cpu class="h-5 w-5 text-primary" />
+                  <CpuChipIcon class="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
                     <CardTitle class="text-base">{{ model.name }}</CardTitle>
                     <span v-if="model.tags.includes('推荐')" class="inline-flex items-center rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
-                      <Sparkles class="mr-0.5 h-3 w-3" />推荐
+                      <SparklesIcon class="mr-0.5 h-3 w-3" />推荐
                     </span>
                   </div>
                   <CardDescription class="mt-0.5 text-xs">
@@ -424,7 +424,7 @@ const providerColors: Record<string, string> = {
             <div class="flex items-center justify-between">
               <span class="text-xs text-muted-foreground">上下文 {{ model.contextLength.toLocaleString() }} Tokens</span>
               <Button variant="ghost" size="sm" class="h-7 gap-1 text-xs" @click.stop="openDetail(model)">
-                <Eye class="h-3.5 w-3.5" />
+                <EyeIcon class="h-3.5 w-3.5" />
                 详情
               </Button>
             </div>
@@ -439,7 +439,7 @@ const providerColors: Record<string, string> = {
     <!-- Price Legend -->
     <div class="rounded-lg border border-border bg-muted/30 p-5">
       <div class="flex items-center gap-2 text-sm font-medium text-foreground">
-        <DollarSign class="h-4 w-4" />
+        <CurrencyDollarIcon class="h-4 w-4" />
         计费说明
       </div>
       <p class="mt-2 text-xs leading-relaxed text-muted-foreground">
@@ -453,7 +453,7 @@ const providerColors: Record<string, string> = {
         <DialogHeader>
           <div class="flex items-center gap-3">
             <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-              <Cpu class="h-5 w-5 text-primary" />
+              <CpuChipIcon class="h-5 w-5 text-primary" />
             </div>
             <div>
               <DialogTitle class="text-xl">{{ selectedModel?.name }}</DialogTitle>
@@ -480,21 +480,21 @@ const providerColors: Record<string, string> = {
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
             <div class="rounded-lg border border-border bg-muted/30 p-3">
               <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Layers class="h-3.5 w-3.5" />
+                <RectangleStackIcon class="h-3.5 w-3.5" />
                 上下文长度
               </div>
               <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.contextLength.toLocaleString() }} Tokens</p>
             </div>
             <div class="rounded-lg border border-border bg-muted/30 p-3">
               <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Hash class="h-3.5 w-3.5" />
+                <HashtagIcon class="h-3.5 w-3.5" />
                 最大输出
               </div>
               <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.maxOutput.toLocaleString() }} Tokens</p>
             </div>
             <div class="rounded-lg border border-border bg-muted/30 p-3">
               <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
-                <Globe class="h-3.5 w-3.5" />
+                <GlobeAltIcon class="h-3.5 w-3.5" />
                 模态
               </div>
               <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.modality }}</p>
@@ -565,7 +565,7 @@ const providerColors: Record<string, string> = {
                 :key="cap"
                 class="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary"
               >
-                <Zap class="h-3 w-3" />
+                <BoltIcon class="h-3 w-3" />
                 {{ cap }}
               </span>
             </div>
@@ -575,7 +575,7 @@ const providerColors: Record<string, string> = {
         <DialogFooter class="gap-2 sm:gap-0">
           <Button variant="outline" @click="detailOpen = false">关闭</Button>
           <Button class="gap-1">
-            <ExternalLink class="h-4 w-4" />
+            <ArrowTopRightOnSquareIcon class="h-4 w-4" />
             查看文档
           </Button>
         </DialogFooter>

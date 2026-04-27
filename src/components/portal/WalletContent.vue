@@ -23,10 +23,10 @@ import DialogFooter from '@/components/ui/DialogFooter.vue'
 import Input from '@/components/ui/Input.vue'
 import Label from '@/components/ui/Label.vue'
 import {
-  Wallet, Plus, History, ShieldCheck, AlertTriangle,
-  CheckCircle2, Clock, XCircle, ArrowUpRight, ArrowDownRight,
-  ExternalLink, TrendingUp, CircleDollarSign, Activity,
-} from 'lucide-vue-next'
+  WalletIcon, PlusIcon, ClockIcon, ShieldCheckIcon, ExclamationTriangleIcon,
+  CheckCircleIcon, XCircleIcon, ArrowUpRightIcon, ArrowDownRightIcon,
+  ArrowTopRightOnSquareIcon, ArrowTrendingUpIcon, CurrencyDollarIcon, SignalIcon,
+} from '@heroicons/vue/24/outline'
 
 // Wallet state
 const balance = ref(12850.50)
@@ -57,13 +57,13 @@ const spendingStats = [
 function getStatusBadge(status: string) {
   switch (status) {
     case 'success':
-      return { label: '成功', variant: 'outline' as const, icon: CheckCircle2, class: 'text-green-500' }
+      return { label: '成功', variant: 'outline' as const, icon: CheckCircleIcon, class: 'text-green-500' }
     case 'pending':
-      return { label: '处理中', variant: 'outline' as const, icon: Clock, class: 'text-yellow-500' }
+      return { label: '处理中', variant: 'outline' as const, icon: ClockIcon, class: 'text-yellow-500' }
     case 'failed':
-      return { label: '失败', variant: 'outline' as const, icon: XCircle, class: 'text-red-500' }
+      return { label: '失败', variant: 'outline' as const, icon: XCircleIcon, class: 'text-red-500' }
     default:
-      return { label: status, variant: 'outline' as const, icon: Clock, class: '' }
+      return { label: status, variant: 'outline' as const, icon: ClockIcon, class: '' }
   }
 }
 
@@ -110,7 +110,7 @@ async function handleRecharge() {
             <div class="mt-1 text-xs text-slate-400">Credits</div>
           </div>
           <Button class="mt-6 w-full gap-2 bg-white text-slate-900 hover:bg-slate-100" @click="rechargeOpen = true">
-            <Plus class="h-4 w-4" />
+            <PlusIcon class="h-4 w-4" />
             充值
           </Button>
         </div>
@@ -119,7 +119,7 @@ async function handleRecharge() {
       <Card class="lg:col-span-2">
         <CardHeader class="pb-3">
           <CardTitle class="flex items-center gap-2 text-base">
-            <TrendingUp class="h-4 w-4 text-primary" />
+            <ArrowTrendingUpIcon class="h-4 w-4 text-primary" />
             本月消费构成
           </CardTitle>
         </CardHeader>
@@ -148,12 +148,12 @@ async function handleRecharge() {
       <Card>
         <CardContent class="flex items-center gap-4 p-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-            <CircleDollarSign class="h-5 w-5" />
+            <CurrencyDollarIcon class="h-5 w-5" />
           </div>
           <div>
             <div class="text-xs text-muted-foreground">本月充值</div>
             <div class="flex items-center gap-1 text-lg font-semibold text-emerald-600">
-              <ArrowUpRight class="h-4 w-4" />
+              <ArrowUpRightIcon class="h-4 w-4" />
               +18,000.00
             </div>
           </div>
@@ -162,12 +162,12 @@ async function handleRecharge() {
       <Card>
         <CardContent class="flex items-center gap-4 p-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-rose-600">
-            <Activity class="h-5 w-5" />
+            <SignalIcon class="h-5 w-5" />
           </div>
           <div>
             <div class="text-xs text-muted-foreground">本月消费</div>
             <div class="flex items-center gap-1 text-lg font-semibold text-rose-600">
-              <ArrowDownRight class="h-4 w-4" />
+              <ArrowDownRightIcon class="h-4 w-4" />
               -5,649.50
             </div>
           </div>
@@ -176,7 +176,7 @@ async function handleRecharge() {
       <Card>
         <CardContent class="flex items-center gap-4 p-5">
           <div class="flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-            <Wallet class="h-5 w-5" />
+            <WalletIcon class="h-5 w-5" />
           </div>
           <div>
             <div class="text-xs text-muted-foreground">累计充值</div>
@@ -192,13 +192,13 @@ async function handleRecharge() {
         <div class="flex items-center justify-between">
           <div>
             <CardTitle class="flex items-center gap-2">
-              <History class="h-5 w-5 text-primary" />
+              <ClockIcon class="h-5 w-5 text-primary" />
               交易记录
             </CardTitle>
             <CardDescription>查看历史充值、消费与退款明细</CardDescription>
           </div>
           <Button variant="outline" size="sm" class="gap-1">
-            <ExternalLink class="h-3.5 w-3.5" />
+            <ArrowTopRightOnSquareIcon class="h-3.5 w-3.5" />
             导出记录
           </Button>
         </div>
@@ -220,8 +220,8 @@ async function handleRecharge() {
               <TableCell class="text-sm text-muted-foreground">{{ tx.time }}</TableCell>
               <TableCell>
                 <div class="flex items-center gap-1.5">
-                  <ArrowUpRight v-if="tx.amount > 0" class="h-4 w-4 text-green-500" />
-                  <ArrowDownRight v-else class="h-4 w-4 text-red-500" />
+                  <ArrowUpRightIcon v-if="tx.amount > 0" class="h-4 w-4 text-green-500" />
+                  <ArrowDownRightIcon v-else class="h-4 w-4 text-red-500" />
                   <span class="font-medium">{{ tx.type }}</span>
                 </div>
               </TableCell>
@@ -257,21 +257,21 @@ async function handleRecharge() {
     <Card class="border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-950/20">
       <CardHeader class="pb-3">
         <CardTitle class="flex items-center gap-2 text-base">
-          <ShieldCheck class="h-5 w-5 text-amber-600" />
+          <ShieldCheckIcon class="h-5 w-5 text-amber-600" />
           安全提示
         </CardTitle>
       </CardHeader>
       <CardContent class="space-y-3 text-sm text-muted-foreground">
         <div class="flex items-start gap-2">
-          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+          <ExclamationTriangleIcon class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
           <p>账户资金仅用于本平台 MaaS 套餐订购、服务续费，不支持其他用途</p>
         </div>
         <div class="flex items-start gap-2">
-          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+          <ExclamationTriangleIcon class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
           <p>所有充值、消费操作均需中信网银 Key 认证，且全程留痕，可在「<router-link to="/audit" class="font-medium text-primary hover:underline">操作审计</router-link>」中查询</p>
         </div>
         <div class="flex items-start gap-2">
-          <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
+          <ExclamationTriangleIcon class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
           <p>若有资金异常，请立即联系客服：<span class="font-medium text-foreground">400-XXXX-XXXX</span></p>
         </div>
       </CardContent>

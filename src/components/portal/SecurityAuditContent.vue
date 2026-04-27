@@ -12,9 +12,9 @@ import TabsList from '@/components/ui/TabsList.vue'
 import TabsTrigger from '@/components/ui/TabsTrigger.vue'
 import TabsContent from '@/components/ui/TabsContent.vue'
 import {
-  RefreshCw, ShieldCheck, ShieldAlert, Info, CheckCircle2,
-  Brain, Shield, Server,
-} from 'lucide-vue-next'
+  ArrowPathIcon, ShieldCheckIcon, ShieldExclamationIcon, InformationCircleIcon, CheckCircleIcon,
+  CpuChipIcon, ServerIcon,
+} from '@heroicons/vue/24/outline'
 
 const updateTime = ref(new Date().toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }))
 
@@ -37,7 +37,7 @@ const protectionItems = [
 const modelSecuritySections = [
   {
     title: '模型防泄露与知识产权保护',
-    icon: Brain,
+    icon: CpuChipIcon,
     iconColor: 'text-blue-600',
     iconBg: 'bg-blue-50',
     enabled: true,
@@ -48,7 +48,7 @@ const modelSecuritySections = [
   },
   {
     title: '模型防攻击与鲁棒性防护',
-    icon: ShieldAlert,
+    icon: ShieldExclamationIcon,
     iconColor: 'text-amber-600',
     iconBg: 'bg-amber-50',
     enabled: true,
@@ -59,7 +59,7 @@ const modelSecuritySections = [
   },
   {
     title: '模型行为安全与合规管控',
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
     iconColor: 'text-emerald-600',
     iconBg: 'bg-emerald-50',
     enabled: false,
@@ -70,7 +70,7 @@ const modelSecuritySections = [
   },
   {
     title: '模型运行环境安全',
-    icon: Server,
+    icon: ServerIcon,
     iconColor: 'text-violet-600',
     iconBg: 'bg-violet-50',
     enabled: true,
@@ -89,7 +89,7 @@ const modelSecuritySections = [
       <Card>
         <CardHeader class="pb-3">
           <div class="flex items-center gap-2">
-            <ShieldAlert class="h-5 w-5 text-orange-500" />
+            <ShieldExclamationIcon class="h-5 w-5 text-orange-500" />
             <CardTitle class="text-base">风险监控中</CardTitle>
           </div>
         </CardHeader>
@@ -99,7 +99,7 @@ const modelSecuritySections = [
               <div class="flex items-center gap-1 mb-2 ">
                 <span class="text-xs text-muted-foreground">{{ item.label }}</span>
                 <div class="group relative inline-flex">
-                  <Info class="h-3 w-3 cursor-help text-muted-foreground hover:text-foreground transition-colors" />
+                  <InformationCircleIcon class="h-3 w-3 cursor-help text-muted-foreground hover:text-foreground transition-colors" />
                   <div class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-52 -translate-x-1/2 rounded-lg border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg opacity-0 transition-opacity group-hover:opacity-100">
                     {{ item.desc }}
                     <div class="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-popover" />
@@ -116,7 +116,7 @@ const modelSecuritySections = [
       <Card>
         <CardHeader class="pb-3">
           <div class="flex items-center gap-2">
-            <ShieldCheck class="h-5 w-5 text-green-500" />
+            <ShieldCheckIcon class="h-5 w-5 text-green-500" />
             <CardTitle class="text-base">全方位安全防护</CardTitle>
           </div>
         </CardHeader>
@@ -126,7 +126,7 @@ const modelSecuritySections = [
               <div class="flex items-center gap-1 mb-2">
                 <span class="text-xs text-muted-foreground">{{ item.label }}</span>
                 <div class="group relative inline-flex">
-                  <Info class="h-3 w-3 cursor-help text-muted-foreground hover:text-foreground transition-colors" />
+                  <InformationCircleIcon class="h-3 w-3 cursor-help text-muted-foreground hover:text-foreground transition-colors" />
                   <div class="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-52 -translate-x-1/2 rounded-lg border bg-popover px-3 py-2 text-xs text-popover-foreground shadow-lg opacity-0 transition-opacity group-hover:opacity-100">
                     {{ item.desc }}
                     <div class="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-popover" />
@@ -135,7 +135,7 @@ const modelSecuritySections = [
               </div>
               <span v-if="item.isNumber" class="text-3xl font-bold text-green-600">{{ item.value }}</span>
               <Badge v-else variant="outline" class="w-fit gap-1 text-green-600 border-green-200 bg-green-50 mt-3">
-                <CheckCircle2 class="h-3 w-3" />已启用
+                <CheckCircleIcon class="h-3 w-3" />已启用
               </Badge>
             </div>
           </div>
@@ -146,7 +146,7 @@ const modelSecuritySections = [
       <div class="flex items-center justify-between">
         <span class="text-xs text-muted-foreground">数据更新时间：{{ updateTime }}</span>
         <Button variant="ghost" size="icon" class="h-7 w-7" @click="refreshData">
-          <RefreshCw class="h-3.5 w-3.5" />
+          <ArrowPathIcon class="h-3.5 w-3.5" />
         </Button>
       </div>
     </div>
@@ -182,11 +182,11 @@ const modelSecuritySections = [
                 </ul>
                 <div class="mt-4 pt-3 ">
                   <Badge v-if="section.enabled" variant="outline" class=" py-2 gap-1 text-green-600 border-green-200 bg-green-50 w-full justify-center">
-                    <ShieldCheck class="h-3 w-3" />保护已开启
+                    <ShieldCheckIcon class="h-3 w-3" />保护已开启
                   </Badge>
                   <div v-else class="grid grid-cols-2 gap-2">
                     <Badge  variant="outline" class="py-1 gap-1 text-muted-foreground w-full justify-center">
-                      <ShieldAlert class="h-3 w-3" />未开启
+                      <ShieldExclamationIcon class="h-3 w-3" />未开启
                     </Badge>
                     <Button size="sm">去开启</Button>
                   </div>
