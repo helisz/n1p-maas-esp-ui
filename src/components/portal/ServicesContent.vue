@@ -1,6 +1,5 @@
-<!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted, onUnmounted, onUpdated, watch, nextTick } from 'vue'
 import Card from '@/components/ui/Card.vue'
 import CardHeader from '@/components/ui/CardHeader.vue'
 import CardTitle from '@/components/ui/CardTitle.vue'
@@ -30,24 +29,57 @@ import {
   Key, Eye, EyeOff, Copy, RefreshCw, AlertTriangle,
   CheckCircle2, Activity, TrendingUp, Clock, Server,
 } from 'lucide-vue-next'
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '@/components/ui/select'
 
 const myPackages = [
   { id: 'pkg-001', name: '高级版', status: 'active', startDate: '2024-03-15', endDate: '2024-06-15', usedCalls: 89456, totalCalls: 200000, apiEndpoint: 'https://api.maas-portal.com/v1' },
   { id: 'pkg-002', name: '基础版', status: 'active', startDate: '2024-02-01', endDate: '2024-05-01', usedCalls: 78000, totalCalls: 100000, apiEndpoint: 'https://api.maas-portal.com/v1' },
   { id: 'pkg-003', name: '尊享版', status: 'expiring', startDate: '2024-01-15', endDate: '2024-04-01', usedCalls: 450000, totalCalls: 1000000, apiEndpoint: 'https://api.maas-portal.com/v1' },
 ]
-
 const apiKeys = [
   { id: 'key-001', name: '生产环境密钥', accessKey: 'ak_prod_xxxxxxxxxxxx1234', secretKey: 'sk_prod_xxxxxxxxxxxxxxxxxxxxxxxx5678', createdAt: '2024-03-15 10:30:00', status: 'active' },
   { id: 'key-002', name: '测试环境密钥', accessKey: 'ak_test_xxxxxxxxxxxx9876', secretKey: 'sk_test_xxxxxxxxxxxxxxxxxxxxxxxx4321', createdAt: '2024-03-10 14:20:00', status: 'active' },
 ]
 
-const apiCallStats = [
-  { date: '03-10', calls: 4500 }, { date: '03-11', calls: 5200 },
-  { date: '03-12', calls: 4800 }, { date: '03-13', calls: 6100 },
-  { date: '03-14', calls: 5500 }, { date: '03-15', calls: 7200 },
+const stats7d = [
+  { date: '03-10', calls: 4500 }, { date: '03-11', calls: 2200 },
+  { date: '03-12', calls: 4800 }, { date: '03-13', calls: 4100 },
+  { date: '03-14', calls: 2500 }, { date: '03-15', calls: 1200 },
+  { date: '03-16', calls: 3800 },
+]
+
+const stats30d = [
+  { date: '02-15', calls: 3200 }, { date: '02-16', calls: 4100 }, { date: '02-17', calls: 3800 },
+  { date: '02-18', calls: 4500 }, { date: '02-19', calls: 5200 }, { date: '02-20', calls: 4900 },
+  { date: '02-21', calls: 5600 }, { date: '02-22', calls: 6100 }, { date: '02-23', calls: 5800 },
+  { date: '02-24', calls: 5300 }, { date: '02-25', calls: 4700 }, { date: '02-26', calls: 5100 },
+  { date: '02-27', calls: 6200 }, { date: '02-28', calls: 5900 }, { date: '02-29', calls: 6500 },
+  { date: '03-01', calls: 6800 }, { date: '03-02', calls: 7200 }, { date: '03-03', calls: 6900 },
+  { date: '03-04', calls: 7400 }, { date: '03-05', calls: 7100 }, { date: '03-06', calls: 7800 },
+  { date: '03-07', calls: 7500 }, { date: '03-08', calls: 8200 }, { date: '03-09', calls: 7900 },
+  { date: '03-10', calls: 4500 }, { date: '03-11', calls: 5200 }, { date: '03-12', calls: 4800 },
+  { date: '03-13', calls: 6100 }, { date: '03-14', calls: 5500 }, { date: '03-15', calls: 7200 },
   { date: '03-16', calls: 6800 },
 ]
+
+const stats90d = [
+  { date: 'W1', calls: 28500 }, { date: 'W2', calls: 31200 }, { date: 'W3', calls: 29800 },
+  { date: 'W4', calls: 35600 }, { date: 'W5', calls: 34100 }, { date: 'W6', calls: 38900 },
+  { date: 'W7', calls: 37400 }, { date: 'W8', calls: 42100 }, { date: 'W9', calls: 40800 },
+  { date: 'W10', calls: 44500 }, { date: 'W11', calls: 43200 }, { date: 'W12', calls: 46800 },
+]
+
+type RangeOption = '7d' | '30d' | '90d'
+const rangeMap: Record<RangeOption, { label: string; data: typeof stats7d; desc: string }> = {
+  '7d': { label: '7天', data: stats7d, desc: '过去7天的调用趋势' },
+  '30d': { label: '1个月', data: stats30d, desc: '过去30天的调用趋势' },
+  '90d': { label: '3个月', data: stats90d, desc: '过去12周的调用趋势' },
+}
+
+const selectedRange = ref<RangeOption>('7d')
+const currentStats = computed(() => rangeMap[selectedRange.value].data)
 
 const errorLogs = [
   { time: '2024-03-15 14:32:15', api: '/v1/completions', error: 'Rate limit exceeded', code: 429 },
@@ -67,6 +99,169 @@ function handleResetKey(key: typeof apiKeys[0]) {
   selectedKey.value = key
   resetDialogOpen.value = true
 }
+
+const chartCanvas = ref<HTMLCanvasElement | null>(null)
+const chartContainer = ref<HTMLDivElement | null>(null)
+
+function niceStep(maxValue: number, ticks: number): number {
+  const rough = maxValue / ticks
+  const pow10 = Math.pow(10, Math.floor(Math.log10(rough)))
+  const d = rough / pow10
+  let nice = 1
+  if (d < 1.5) nice = 1
+  else if (d < 3) nice = 2
+  else if (d < 7) nice = 5
+  else nice = 10
+  return nice * pow10
+}
+
+function drawBarChart() {
+  const canvas = chartCanvas.value
+  const container = chartContainer.value
+  if (!canvas || !container) return
+
+  const rect = container.getBoundingClientRect()
+  if (rect.width === 0) {
+    requestAnimationFrame(drawBarChart)
+    return
+  }
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+
+  const dpr = window.devicePixelRatio || 1
+  const width = rect.width
+  const height = 220
+
+  canvas.width = width * dpr
+  canvas.height = height * dpr
+  canvas.style.width = `${width}px`
+  canvas.style.height = `${height}px`
+  ctx.scale(dpr, dpr)
+
+  ctx.clearRect(0, 0, width, height)
+
+  const padding = { top: 20, right: 16, bottom: 32, left: 52 }
+  const chartWidth = width - padding.left - padding.right
+  const chartHeight = height - padding.top - padding.bottom
+
+  const data = currentStats.value
+  const rawMax = Math.max(...data.map((d: { calls: number }) => d.calls))
+  const yTicks = 5
+  const step = niceStep(rawMax, yTicks)
+  const maxValue = step * yTicks
+
+  // Draw Y axis grid lines & labels
+  ctx.strokeStyle = '#E5E7EB'
+  ctx.lineWidth = 1
+  ctx.fillStyle = '#6B7280'
+  ctx.font = '11px system-ui, -apple-system, sans-serif'
+  ctx.textAlign = 'right'
+  ctx.textBaseline = 'middle'
+
+  for (let i = 0; i <= yTicks; i++) {
+    const value = i * step
+    const y = padding.top + chartHeight - (value / maxValue) * chartHeight
+
+    // Grid line
+    ctx.beginPath()
+    ctx.moveTo(padding.left, y)
+    ctx.lineTo(width - padding.right, y)
+    ctx.stroke()
+
+    // Y axis label
+    ctx.fillText(String(Math.round(value)), padding.left - 8, y)
+  }
+
+  // Y axis line
+  ctx.strokeStyle = '#9CA3AF'
+  ctx.lineWidth = 1.5
+  ctx.beginPath()
+  ctx.moveTo(padding.left, padding.top)
+  ctx.lineTo(padding.left, height - padding.bottom)
+  ctx.stroke()
+
+  // Draw bars
+  const barCount = data.length
+  const barGap = Math.max(4, 64 / barCount)
+  const barWidth = (chartWidth - (barCount - 1) * barGap) / barCount
+
+  data.forEach((stat: { date: string; calls: number }, i: number) => {
+    const x = padding.left + i * (barWidth + barGap)
+    const barHeight = (stat.calls / maxValue) * chartHeight
+    const y = padding.top + chartHeight - barHeight
+
+    // Bar shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.06)'
+    ctx.fillRect(x + 2, y + 2, barWidth, barHeight)
+
+    // Bar body (dark gray)
+    ctx.fillStyle = '#374151'
+    ctx.fillRect(x, y, barWidth, barHeight)
+
+    // Top highlight line
+    ctx.fillStyle = '#4B5563'
+    ctx.fillRect(x, y, barWidth, 2)
+
+    // Value label (only when barCount <= 14 or every nth)
+    const showLabel = barCount <= 14 || i % Math.ceil(barCount / 10) === 0
+    if (showLabel && barWidth > 18) {
+      ctx.fillStyle = '#111827'
+      ctx.font = 'bold 10px system-ui, -apple-system, sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'bottom'
+      ctx.fillText(String(stat.calls), x + barWidth / 2, y - 6)
+    }
+
+    // Date label (skip some when too dense)
+    const showDate = barCount <= 14 || i % Math.ceil(barCount / 10) === 0
+    if (showDate) {
+      ctx.fillStyle = '#6B7280'
+      ctx.font = '10px system-ui, -apple-system, sans-serif'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'top'
+      ctx.fillText(stat.date, x + barWidth / 2, height - padding.bottom + 8)
+    }
+  })
+}
+
+let resizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
+  if (chartContainer.value) {
+    resizeObserver = new ResizeObserver(() => drawBarChart())
+    resizeObserver.observe(chartContainer.value)
+  }
+  window.addEventListener('resize', drawBarChart)
+})
+
+onUpdated(() => {
+  // Re-draw when TabsContent becomes visible or data changes
+  drawBarChart()
+})
+
+onUnmounted(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+    resizeObserver = null
+  }
+  window.removeEventListener('resize', drawBarChart)
+})
+
+// Draw when canvas element is first bound to ref (TabsContent mount)
+watch(chartCanvas, (el) => {
+  if (el) {
+    nextTick(() => {
+      requestAnimationFrame(drawBarChart)
+    })
+  }
+})
+
+watch(selectedRange, () => {
+  nextTick(() => {
+    requestAnimationFrame(drawBarChart)
+  })
+})
 </script>
 
 <template>
@@ -189,13 +384,25 @@ function handleResetKey(key: typeof apiKeys[0]) {
           </Card>
         </div>
         <Card>
-          <CardHeader><CardTitle>近期 API 调用统计</CardTitle><CardDescription>过去7天的调用趋势</CardDescription></CardHeader>
+          <CardHeader class="flex flex-row items-center justify-between space-y-0 pb-2">
+            <div>
+              <CardTitle>近期 API 调用统计</CardTitle>
+              <CardDescription>{{ rangeMap[selectedRange].desc }}</CardDescription>
+            </div>
+            <Select v-model="selectedRange">
+              <SelectTrigger class="w-28">
+                <SelectValue placeholder="选择范围" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7d">7天</SelectItem>
+                <SelectItem value="30d">1个月</SelectItem>
+                <SelectItem value="90d">3个月</SelectItem>
+              </SelectContent>
+            </Select>
+          </CardHeader>
           <CardContent>
-            <div class="flex items-end gap-3 h-40">
-              <div v-for="stat in apiCallStats" :key="stat.date" class="flex-1 flex flex-col items-center gap-1">
-                <div class="w-full bg-primary/20 rounded-t" :style="{ height: `${(stat.calls / 8000) * 100}%` }" />
-                <span class="text-xs text-muted-foreground">{{ stat.date }}</span>
-              </div>
+            <div ref="chartContainer" class="w-full">
+              <canvas ref="chartCanvas" />
             </div>
           </CardContent>
         </Card>
