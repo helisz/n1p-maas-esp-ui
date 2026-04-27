@@ -13,6 +13,7 @@ import TabsTrigger from '@/components/ui/TabsTrigger.vue'
 import TabsContent from '@/components/ui/TabsContent.vue'
 import {
   RefreshCw, ShieldCheck, ShieldAlert, Info, CheckCircle2,
+  Brain, Shield, Server,
 } from 'lucide-vue-next'
 
 const updateTime = ref(new Date().toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }))
@@ -36,6 +37,9 @@ const protectionItems = [
 const modelSecuritySections = [
   {
     title: '模型防泄露与知识产权保护',
+    icon: Brain,
+    iconColor: 'text-blue-600',
+    iconBg: 'bg-blue-50',
     enabled: true,
     items: [
       { text: '防止通过 prompt 注入、成员推断等方式窃取模型参数、权重或训练数据，避免模型被逆向工程或盗用。' },
@@ -44,6 +48,9 @@ const modelSecuritySections = [
   },
   {
     title: '模型防攻击与鲁棒性防护',
+    icon: ShieldAlert,
+    iconColor: 'text-amber-600',
+    iconBg: 'bg-amber-50',
     enabled: true,
     items: [
       { text: '对抗样本防御：防止恶意构造的输入（如带微小扰动的图片 / 文本）误导模型输出错误结果。' },
@@ -52,7 +59,10 @@ const modelSecuritySections = [
   },
   {
     title: '模型行为安全与合规管控',
-    enabled: true,
+    icon: ShieldCheck,
+    iconColor: 'text-emerald-600',
+    iconBg: 'bg-emerald-50',
+    enabled: false,
     items: [
       { text: '内置安全护栏（Safety Guardrails）：防止模型生成违法违规、有害或敏感内容（如暴力、歧视、诈骗信息）。' },
       { text: '权限与访问控制：限制模型的调用范围、用户权限，防止被用于恶意用途（如批量生成钓鱼邮件、恶意代码）。' },
@@ -60,6 +70,9 @@ const modelSecuritySections = [
   },
   {
     title: '模型运行环境安全',
+    icon: Server,
+    iconColor: 'text-violet-600',
+    iconBg: 'bg-violet-50',
     enabled: true,
     items: [
       { text: '与「可信安全沙箱」联动，确保模型在隔离、不可篡改的安全环境中运行，防止模型被篡改、替换或被非法调用。' },
@@ -147,28 +160,41 @@ const modelSecuritySections = [
         </TabsList>
 
         <!-- Model Security Tab -->
-        <TabsContent value="model" class="space-y-4">
-          <Card v-for="section in modelSecuritySections" :key="section.title" class="overflow-hidden">
-            <CardHeader class="pb-3">
-              <div class="flex items-center justify-between">
-                <CardTitle class="text-base">{{ section.title }}</CardTitle>
-                <Badge v-if="section.enabled" variant="outline" class="gap-1 text-green-600 border-green-200 bg-green-50">
-                  <ShieldCheck class="h-3 w-3" />保护已开启
-                </Badge>
-                <Badge v-else variant="outline" class="gap-1 text-muted-foreground">
-                  <ShieldAlert class="h-3 w-3" />未开启
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <ul class="space-y-2">
-                <li v-for="(item, idx) in section.items" :key="idx" class="flex items-start gap-2 text-sm text-muted-foreground">
-                  <div class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                  {{ item.text }}
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
+        <TabsContent value="model">
+          <div class="grid grid-cols-2 xl:grid-cols-4 gap-4">
+            <Card v-for="section in modelSecuritySections" :key="section.title" class="flex flex-col overflow-hidden">
+              <CardHeader class="pb-3">
+                <div class="flex items-start gap-3">
+                  <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg" :class="section.iconBg">
+                    <component :is="section.icon" class="h-5 w-5" :class="section.iconColor" />
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <CardTitle class="text-sm leading-tight">{{ section.title }}</CardTitle>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent class="flex-1 flex flex-col">
+                <ul class="space-y-2.5 flex-1">
+                  <li v-for="(item, idx) in section.items" :key="idx" class="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                    <div class="mt-1 h-1 w-1 shrink-0 rounded-full" :class="section.iconColor.replace('text-', 'bg-')" />
+                    <span>{{ item.text }}</span>
+                  </li>
+                </ul>
+                <div class="mt-4 pt-3 ">
+                  <Badge v-if="section.enabled" variant="outline" class=" py-2 gap-1 text-green-600 border-green-200 bg-green-50 w-full justify-center">
+                    <ShieldCheck class="h-3 w-3" />保护已开启
+                  </Badge>
+                  <div v-else class="grid grid-cols-2 gap-2">
+                    <Badge  variant="outline" class="py-1 gap-1 text-muted-foreground w-full justify-center">
+                      <ShieldAlert class="h-3 w-3" />未开启
+                    </Badge>
+                    <Button size="sm">去支付</Button>
+                  </div>
+                  
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         <!-- Architecture Diagram Tab -->
