@@ -20,7 +20,7 @@ import CardContent from '@/components/ui/CardContent.vue'
 import CardDescription from '@/components/ui/CardDescription.vue'
 // [AI_START TIMESTAMP=2025-06-15 14:00:00]
 // [AI_START TIMESTAMP=2025-06-17 11:00:00]
-import { ShieldCheckIcon, CubeIcon, Cog6ToothIcon, DocumentTextIcon, EyeIcon, EyeSlashIcon, ArrowPathIcon, CheckIcon, LockClosedIcon, KeyIcon, FingerPrintIcon, CloudIcon, BoltIcon, LifebuoyIcon, ChartBarIcon, DocumentMagnifyingGlassIcon, ClipboardDocumentCheckIcon, ArrowRightIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon, SparklesIcon, ArrowTrendingUpIcon, UsersIcon, CpuChipIcon, ClockIcon, BuildingOffice2Icon, BuildingOfficeIcon, BookOpenIcon, BuildingLibraryIcon, UserPlusIcon } from '@heroicons/vue/24/outline'
+import { ShieldCheckIcon, CubeIcon, Cog6ToothIcon, DocumentTextIcon, EyeIcon, EyeSlashIcon, ArrowPathIcon, CheckIcon, LockClosedIcon, KeyIcon, FingerPrintIcon, CloudIcon, BoltIcon, LifebuoyIcon, ChartBarIcon, DocumentMagnifyingGlassIcon, ClipboardDocumentCheckIcon, ArrowRightIcon, ArrowLeftOnRectangleIcon, ChevronDownIcon, SparklesIcon, ArrowTrendingUpIcon, UsersIcon, CpuChipIcon, ClockIcon, BuildingOffice2Icon, BuildingOfficeIcon, BookOpenIcon, BuildingLibraryIcon, UserPlusIcon, RocketLaunchIcon, StarIcon, InformationCircleIcon } from '@heroicons/vue/24/outline'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -172,6 +172,70 @@ async function handleRegister() {
 }
 
 // [AI_START TIMESTAMP=2025-06-18 12:00:00]
+// Pricing packages data
+const packages = [
+  {
+    id: 'basic',
+    name: '基础版',
+    subtitle: 'Starter',
+    description: '个人开发者与初创团队的理想选择',
+    price: 1999,
+    period: '月',
+    features: [
+      '大语言模型 API 50,000 次/月',
+      '标准响应速度',
+      '基础技术支持',
+      'API 文档访问',
+      '基础调用统计报表',
+    ],
+    tier: 'basic',
+    popular: false,
+  },
+  {
+    id: 'advanced',
+    name: '高级版',
+    subtitle: 'Professional',
+    description: '成长型企业与中型团队的全能方案',
+    price: 5999,
+    period: '月',
+    features: [
+      '大语言模型 API 200,000 次/月',
+      '优先响应队列',
+      '7×24 技术支持',
+      '专属客户经理',
+      '高级调用分析',
+      '自定义限流规则',
+    ],
+    tier: 'advanced',
+    popular: true,
+  },
+  {
+    id: 'premium',
+    name: '尊享版',
+    subtitle: 'Enterprise',
+    description: '大型企业与高并发场景的顶级配置',
+    price: 19999,
+    period: '月',
+    features: [
+      '大语言模型 API 1,000,000 次/月',
+      '最高响应优先级',
+      '专属技术团队支持',
+      'SLA 99.99% 保障',
+      '私有化部署支持',
+      '定制化功能开发',
+      '专属网络通道',
+    ],
+    tier: 'premium',
+    popular: false,
+  },
+]
+
+const tierConfig: Record<string, { icon: typeof SparklesIcon; gradient: string; badgeGradient: string; accentColor: string; ringColor: string }> = {
+  basic: { icon: SparklesIcon, gradient: 'from-slate-500 to-slate-600', badgeGradient: 'bg-slate-100 text-slate-700', accentColor: 'text-slate-600', ringColor: 'ring-slate-200' },
+  advanced: { icon: RocketLaunchIcon, gradient: 'from-indigo-500 to-purple-600', badgeGradient: 'bg-indigo-100 text-indigo-700', accentColor: 'text-indigo-600', ringColor: 'ring-indigo-300' },
+  premium: { icon: StarIcon, gradient: 'from-amber-500 to-orange-600', badgeGradient: 'bg-amber-100 text-amber-700', accentColor: 'text-amber-600', ringColor: 'ring-amber-300' },
+}
+
 // FAQ accordion state
 const openFaqIndex = ref<number | null>(null)
 function toggleFaq(index: number) {
@@ -358,6 +422,107 @@ onMounted(() => {
             class="flex items-center gap-2 text-lg font-bold text-gray-800 hover:text-violet-600 transition-colors duration-300 cursor-default">
             <BuildingOffice2Icon class="h-6 w-6" />
             <span>阿里云</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 bg-slate-50/50 reveal-on-scroll">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-2xl sm:text-3xl font-bold text-foreground">服务套餐</h2>
+          <p class="text-muted-foreground mt-3">一站式 AI 能力套餐，按需选择，即刻启程</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <Card
+            v-for="pkg in packages"
+            :key="pkg.id"
+            :class="[
+              'relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
+              pkg.popular ? 'ring-1 ring-indigo-400 shadow-lg scale-[1.02]' : '',
+            ]"
+          >
+            <!-- Popular Badge -->
+            <div
+              v-if="pkg.popular"
+              class="absolute top-0 right-0 bg-gradient-to-l from-indigo-600 to-purple-600 text-white text-xs font-semibold px-4 py-1 rounded-bl-lg z-10"
+            >
+              最受欢迎
+            </div>
+
+            <!-- Card Header -->
+            <CardHeader :class="['relative pb-6 pt-7', pkg.popular ? 'bg-indigo-50/60' : 'bg-muted/30']">
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-12 w-12 items-center justify-center rounded-xl ring-1"
+                  :class="tierConfig[pkg.tier].ringColor"
+                >
+                  <component :is="tierConfig[pkg.tier].icon" :class="['h-6 w-6', tierConfig[pkg.tier].accentColor]" />
+                </div>
+                <div>
+                  <CardTitle class="text-xl">{{ pkg.name }}</CardTitle>
+                  <span class="text-xs font-medium uppercase tracking-wider text-muted-foreground">{{ pkg.subtitle }}</span>
+                </div>
+              </div>
+              <CardDescription class="mt-3 text-sm leading-relaxed">{{ pkg.description }}</CardDescription>
+            </CardHeader>
+
+            <!-- Price -->
+            <CardContent class="pt-2 pb-0">
+              <div class="flex items-baseline gap-1">
+                <span class="text-sm text-muted-foreground">¥</span>
+                <span class="text-4xl font-extrabold tracking-tight">{{ pkg.price.toLocaleString() }}</span>
+                <span class="text-muted-foreground">/ {{ pkg.period }}</span>
+              </div>
+            </CardContent>
+
+            <!-- Features -->
+            <CardContent class="flex-1 pt-5">
+              <div class="space-y-3">
+                <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">套餐包含</p>
+                <ul class="space-y-2.5">
+                  <li v-for="feature in pkg.features" :key="feature" class="flex items-start gap-2.5 text-sm">
+                    <div class="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-green-100">
+                      <CheckIcon class="h-2.5 w-2.5 text-green-600" />
+                    </div>
+                    <span class="text-foreground/90">{{ feature }}</span>
+                  </li>
+                </ul>
+              </div>
+            </CardContent>
+
+            <!-- CTA Footer -->
+            <CardFooter class="p-6">
+              <Button
+                :class="[
+                  'w-full font-semibold transition-all duration-200',
+                  pkg.popular
+                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-md hover:shadow-lg'
+                    : 'hover:bg-foreground hover:text-background',
+                ]"
+                variant="outline"
+                @click="openLogin"
+              >
+                立即订购
+                <ArrowRightIcon class="ml-2 h-4 w-4" />
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+        <!-- Trust Indicators -->
+        <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground mt-10">
+          <div class="flex items-center gap-2">
+            <BoltIcon class="h-4 w-4 text-amber-500" />
+            <span>即时开通</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <CpuChipIcon class="h-4 w-4 text-indigo-500" />
+            <span>全模型覆盖</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <EyeIcon class="h-4 w-4 text-emerald-500" />
+            <span>透明计费</span>
           </div>
         </div>
       </div>
@@ -1628,3 +1793,4 @@ onMounted(() => {
 /* [AI_END LINES=18 TIMESTAMP=2025-06-18 12:00:00] */
 /* [AI_END LINES=130 TIMESTAMP=2025-06-18 08:35:00] */
 </style>
+

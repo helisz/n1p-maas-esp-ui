@@ -104,7 +104,7 @@ function handlePurchase(pkg: typeof packages[0]) {
         :key="pkg.id"
         :class="[
           'relative overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl',
-          pkg.popular ? 'ring-2 ring-indigo-400 shadow-lg scale-[1.02]' : 'ring-1 ring-border',
+          pkg.popular ? 'ring-1 ring-indigo-400 shadow-lg scale-[1.02]' : '',
         ]"
       >
         <!-- Popular Badge -->
