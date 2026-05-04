@@ -61,7 +61,7 @@ const quickActions = [
 ]
 
 const recentActivities = [
-  { type: 'service', title: 'GPT-4 API 服务开通成功', time: '10分钟前', status: 'success' },
+  { type: 'service', title: '高级版 API 服务开通成功', time: '10分钟前', status: 'success' },
   { type: 'payment', title: '订单 #ORD202403150001 支付成功', time: '2小时前', status: 'success' },
   { type: 'auth', title: '网银Key认证完成', time: '2小时前', status: 'success' },
   { type: 'order', title: '创建订单 #ORD202403150002', time: '3小时前', status: 'pending' },
@@ -69,9 +69,9 @@ const recentActivities = [
 ]
 
 const activePackages = [
-  { name: 'GPT-4 企业版', status: 'active', usage: 45, expiry: '2024-06-15' },
-  { name: 'Claude 基础版', status: 'active', usage: 78, expiry: '2024-05-20' },
-  { name: 'Embedding 旗舰版', status: 'expiring', usage: 92, expiry: '2024-04-01' },
+  { name: '高级版', status: 'active', usage: 45, expiry: '2024-06-15' },
+  { name: '基础版', status: 'active', usage: 78, expiry: '2024-05-20' },
+  { name: '尊享版', status: 'expiring', usage: 92, expiry: '2024-04-01' },
 ]
 
 function navigate(href: string) {
