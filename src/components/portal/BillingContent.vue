@@ -37,9 +37,9 @@ const bills = [
 ]
 
 const usageStats = [
-  { package: 'GPT-4 企业版', quota: 200000, used: 189456, overage: 0, overagePrice: 0.05 },
-  { package: 'Embedding 基础版', quota: 100000, used: 78000, overage: 0, overagePrice: 0.01 },
-  { package: 'Claude 基础版', quota: 50000, used: 62000, overage: 12000, overagePrice: 0.08 },
+  { package: '高级版', quota: 200000, used: 189456, overage: 0, overagePrice: 0.05 },
+  { package: '基础版', quota: 100000, used: 78000, overage: 0, overagePrice: 0.01 },
+  { package: '尊享版', quota: 1000000, used: 450000, overage: 0, overagePrice: 0.08 },
 ]
 
 const invoices = [
