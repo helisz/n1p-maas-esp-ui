@@ -85,15 +85,15 @@ function goToEnterprise() {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-4 lg:space-y-6">
     <!-- Welcome -->
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h2 class="text-2xl font-semibold text-foreground">欢迎回来，中科云数科技</h2>
-        <p class="text-muted-foreground">以下是您的服务概览和最新动态</p>
+        <h2 class="text-xl lg:text-2xl font-semibold text-foreground">欢迎回来，中科云数科技</h2>
+        <p class="text-sm text-muted-foreground">以下是您的服务概览和最新动态</p>
       </div>
       <div class="flex items-center gap-2">
-        <Badge variant="outline" class="gap-1">
+        <Badge variant="outline" class="gap-1 shrink-0">
           <ShieldCheckIcon class="h-3 w-3" />
           已认证企业
         </Badge>
@@ -186,20 +186,20 @@ function goToEnterprise() {
         <CardDescription>已开通的 MaaS 服务套餐</CardDescription>
       </CardHeader>
       <CardContent>
-        <div class="grid gap-4 md:grid-cols-3">
+        <div class="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
           <div
             v-for="pkg in activePackages"
             :key="pkg.name"
-            class="flex items-center justify-between rounded-lg border border-border p-4"
+            class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-lg border border-border p-4"
           >
             <div>
               <p class="font-medium">{{ pkg.name }}</p>
               <p class="text-sm text-muted-foreground">到期：{{ pkg.expiry }}</p>
             </div>
-            <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1">
+            <Badge v-if="pkg.status === 'active'" variant="outline" class="gap-1 self-start sm:self-auto">
               <CheckCircleIcon class="h-3 w-3 text-green-500" />运行中
             </Badge>
-            <Badge v-else variant="outline" class="gap-1">
+            <Badge v-else variant="outline" class="gap-1 self-start sm:self-auto">
               <ExclamationTriangleIcon class="h-3 w-3 text-red-500" />即将到期
             </Badge>
           </div>

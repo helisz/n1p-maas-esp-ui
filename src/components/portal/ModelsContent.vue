@@ -397,7 +397,7 @@ const providerColors: Record<string, string> = {
         </button>
       </div>
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs text-muted-foreground">引擎提供方：</span>
+        <span class="text-xs text-muted-foreground">提供方：</span>
         <button
           @click="selectedProvider = '全部'"
           :class="[

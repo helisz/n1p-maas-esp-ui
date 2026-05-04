@@ -1,6 +1,6 @@
-<!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
+// [AI_START TIMESTAMP=2026-05-04 09:47:00]
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { cn } from '@/lib/utils'
 import {
@@ -16,12 +16,28 @@ import {
   UsersIcon,
   ChevronLeftIcon,
   MagnifyingGlassIcon,
+  XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import Input from '@/components/ui/Input.vue'
 
 const route = useRoute()
 const router = useRouter()
 const collapsed = ref(false)
+
+const props = withDefaults(defineProps<{
+  mobileOpen?: boolean
+}>(), {
+  mobileOpen: false,
+})
+
+const emit = defineEmits<{
+  close: []
+}>()
+
+// Close sidebar on route change for mobile
+watch(() => route.path, () => {
+  emit('close')
+})
 const menuGroups = [
   {
 // [AI_START TIMESTAMP=2025-06-17 10:15:00]
@@ -61,15 +77,28 @@ function navigate(href: string) {
 </script>
 
 <template>
+  <!-- Mobile overlay backdrop -->
+  <Transition name="sidebar-fade">
+    <div
+      v-if="mobileOpen"
+      class="fixed inset-0 z-40 bg-black/50 lg:hidden"
+      @click="emit('close')"
+    />
+  </Transition>
+
+  <!-- Sidebar -->
   <aside
     :class="cn(
-      'flex h-screen flex-col border-border transition-all duration-300',
+      'flex h-screen flex-col border-border bg-background transition-all duration-300',
+      // Desktop: normal sidebar
+      'fixed lg:static z-50',
+      // Mobile: drawer that slides in/out
+      mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
       collapsed ? 'w-16' : 'w-60'
     )"
   >
-    <!-- Logo -->
-    <!-- [AI_START TIMESTAMP=2025-06-18 08:00:00] -->
-    <div class="flex h-14 items-center border-b border-border px-4">
+    <!-- Logo + Close button -->
+    <div class="flex h-14 items-center justify-between border-b border-border px-4">
       <div class="flex items-center gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="h-8 w-8 rounded-lg">
           <rect width="32" height="32" rx="8" fill="#18181B"/>
@@ -77,10 +106,17 @@ function navigate(href: string) {
           <path d="M7 16.5l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.55" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M7 20l9 5.5 9-5.5" fill="none" stroke="#fff" stroke-width="1.8" opacity="0.3" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span v-if="!collapsed" class="text-sm font-semibold text-foreground">智信MaaS服务管理平台</span>
+        <span v-if="!collapsed" class="text-sm font-semibold text-foreground whitespace-nowrap">智信MaaS服务管理平台</span>
       </div>
+      <!-- Mobile close button -->
+      <button
+        v-if="!collapsed"
+        class="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-accent hover:text-accent-foreground lg:hidden"
+        @click="emit('close')"
+      >
+        <XMarkIcon class="h-4 w-4" />
+      </button>
     </div>
-    <!-- [AI_END LINES=16 TIMESTAMP=2025-06-18 08:00:00] -->
 
     <!-- Search -->
     <div v-if="!collapsed" class="border-r bg-sidebar p-3">
@@ -93,7 +129,7 @@ function navigate(href: string) {
     <!-- Navigation -->
     <nav class="flex-1 space-y-1 overflow-y-auto bg-sidebar border-r px-3 py-2">
       <template v-for="(group, gi) in menuGroups" :key="gi">
-        <div v-if="group.label && !collapsed" class="pt-4 pb-1 px-3 text-[12px]  uppercase tracking-wider text-muted-foreground/50">
+        <div v-if="group.label && !collapsed" class="pt-4 pb-1 px-3 text-[12px] uppercase tracking-wider text-muted-foreground/50">
           {{ group.label }}
         </div>
         <div v-if="group.label && collapsed" class="my-2 mx-2 border-t border-border" />
@@ -115,7 +151,7 @@ function navigate(href: string) {
     </nav>
 
     <!-- Collapse Button -->
-    <div class="border-t border-border border-r bg-sidebar  p-3">
+    <div class="border-t border-border border-r bg-sidebar p-3">
       <button
         @click="collapsed = !collapsed"
         class="flex w-full items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
@@ -128,4 +164,15 @@ function navigate(href: string) {
     </div>
   </aside>
 </template>
+
+<style scoped>
+.sidebar-fade-enter-active,
+.sidebar-fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.sidebar-fade-enter-from,
+.sidebar-fade-leave-to {
+  opacity: 0;
+}
+</style>
 <!-- [AI_END LINES=84 TIMESTAMP=2025-06-15 12:00:00] -->
