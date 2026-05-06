@@ -2,11 +2,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { cn } from "@/lib/utils";
-import Button from "@/components/ui/Button.vue";
-import Input from "@/components/ui/Input.vue";
-import Label from "@/components/ui/Label.vue";
-import Textarea from "@/components/ui/textarea/Textarea.vue";
-import Checkbox from "@/components/ui/checkbox/Checkbox.vue";
 import { ArrowPathIcon } from "@heroicons/vue/24/outline";
 
 const firstName = ref("");

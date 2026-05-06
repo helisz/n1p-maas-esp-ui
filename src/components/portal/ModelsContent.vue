@@ -1,20 +1,6 @@
 <!-- [AI_START TIMESTAMP=2025-06-16 08:00:00] -->
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import Card from '@/components/ui/Card.vue'
-import CardHeader from '@/components/ui/CardHeader.vue'
-import CardTitle from '@/components/ui/CardTitle.vue'
-import CardDescription from '@/components/ui/CardDescription.vue'
-import CardContent from '@/components/ui/CardContent.vue'
-import Button from '@/components/ui/Button.vue'
-import Badge from '@/components/ui/Badge.vue'
-import Input from '@/components/ui/Input.vue'
-import Dialog from '@/components/ui/Dialog.vue'
-import DialogContent from '@/components/ui/DialogContent.vue'
-import DialogHeader from '@/components/ui/DialogHeader.vue'
-import DialogTitle from '@/components/ui/DialogTitle.vue'
-import DialogDescription from '@/components/ui/DialogDescription.vue'
-import DialogFooter from '@/components/ui/DialogFooter.vue'
 import {
   MagnifyingGlassIcon, CpuChipIcon, EyeIcon, ArrowTopRightOnSquareIcon, RectangleStackIcon, HashtagIcon,
   CurrencyDollarIcon, SparklesIcon, GlobeAltIcon, BoltIcon,

@@ -12,20 +12,6 @@ import {
   Bars3Icon,
   PhoneIcon,
 } from "@heroicons/vue/24/outline";
-import Button from "@/components/ui/Button.vue";
-import DropdownMenu from "@/components/ui/DropdownMenu.vue";
-import DropdownMenuTrigger from "@/components/ui/DropdownMenuTrigger.vue";
-import DropdownMenuContent from "@/components/ui/DropdownMenuContent.vue";
-import DropdownMenuItem from "@/components/ui/DropdownMenuItem.vue";
-import DropdownMenuSeparator from "@/components/ui/DropdownMenuSeparator.vue";
-import Avatar from "@/components/ui/Avatar.vue";
-import AvatarFallback from "@/components/ui/AvatarFallback.vue";
-import Badge from "@/components/ui/Badge.vue";
-import Dialog from "@/components/ui/Dialog.vue";
-import DialogContent from "@/components/ui/DialogContent.vue";
-import DialogHeader from "@/components/ui/DialogHeader.vue";
-import DialogTitle from "@/components/ui/DialogTitle.vue";
-import DialogDescription from "@/components/ui/DialogDescription.vue";
 import ContactForm from "@/components/portal/ContactForm.vue";
 import { useAuthStore } from "@/stores/auth";
 

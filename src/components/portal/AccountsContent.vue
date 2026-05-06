@@ -1,36 +1,6 @@
 <!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
 <script setup lang="ts">
 import { ref } from "vue";
-import Card from "@/components/ui/Card.vue";
-import CardHeader from "@/components/ui/CardHeader.vue";
-import CardTitle from "@/components/ui/CardTitle.vue";
-import CardDescription from "@/components/ui/CardDescription.vue";
-import CardContent from "@/components/ui/CardContent.vue";
-import Button from "@/components/ui/Button.vue";
-import Badge from "@/components/ui/Badge.vue";
-import Input from "@/components/ui/Input.vue";
-import Label from "@/components/ui/Label.vue";
-import Select from "@/components/ui/select/Select.vue";
-import SelectValue from "@/components/ui/select/SelectValue.vue";
-import SelectTrigger from "@/components/ui/select/SelectTrigger.vue";
-import SelectContent from "@/components/ui/select/SelectContent.vue";
-import SelectItem from "@/components/ui/select/SelectItem.vue";
-import Table from "@/components/ui/Table.vue";
-import TableHeader from "@/components/ui/TableHeader.vue";
-import TableBody from "@/components/ui/TableBody.vue";
-import TableRow from "@/components/ui/TableRow.vue";
-import TableHead from "@/components/ui/TableHead.vue";
-import TableCell from "@/components/ui/TableCell.vue";
-import Dialog from "@/components/ui/Dialog.vue";
-import DialogContent from "@/components/ui/DialogContent.vue";
-import DialogHeader from "@/components/ui/DialogHeader.vue";
-import DialogTitle from "@/components/ui/DialogTitle.vue";
-import DialogDescription from "@/components/ui/DialogDescription.vue";
-import DialogFooter from "@/components/ui/DialogFooter.vue";
-import DropdownMenu from "@/components/ui/DropdownMenu.vue";
-import DropdownMenuTrigger from "@/components/ui/DropdownMenuTrigger.vue";
-import DropdownMenuContent from "@/components/ui/DropdownMenuContent.vue";
-import DropdownMenuItem from "@/components/ui/DropdownMenuItem.vue";
 import {
   UserPlusIcon,
   EllipsisHorizontalIcon,
@@ -99,8 +69,16 @@ const roleConfig: Record<
 > = {
   super_admin: { label: "超级管理员", icon: StarIcon, color: "text-amber-500" },
   ops_admin: { label: "运营管理员", icon: UsersIcon, color: "text-blue-500" },
-  finance_admin: { label: "财务管理员", icon: WalletIcon, color: "text-green-500" },
-  api_user: { label: "API 调用员", icon: CodeBracketIcon, color: "text-purple-500" },
+  finance_admin: {
+    label: "财务管理员",
+    icon: WalletIcon,
+    color: "text-green-500",
+  },
+  api_user: {
+    label: "API 调用员",
+    icon: CodeBracketIcon,
+    color: "text-purple-500",
+  },
 };
 
 const roles = [
@@ -259,11 +237,13 @@ function handleEdit(account: (typeof accounts)[0]) {
                   <DropdownMenu>
                     <DropdownMenuTrigger
                       ><Button variant="ghost" size="icon"
-                        ><MoreHorizontal class="h-4 w-4" /></Button
+                        ><EllipsisHorizontalIcon class="h-4 w-4" /></Button
                     ></DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem @click="handleEdit(account)"
-                        ><PencilSquareIcon class="mr-2 h-4 w-4" />编辑</DropdownMenuItem
+                        ><PencilSquareIcon
+                          class="mr-2 h-4 w-4"
+                        />编辑</DropdownMenuItem
                       >
                       <DropdownMenuItem
                         ><ShieldCheckIcon class="mr-2 h-4 w-4" />{{
@@ -273,7 +253,9 @@ function handleEdit(account: (typeof accounts)[0]) {
                       <DropdownMenuItem
                         v-if="account.role !== 'super_admin'"
                         class="text-destructive"
-                        ><TrashIcon class="mr-2 h-4 w-4" />删除</DropdownMenuItem
+                        ><TrashIcon
+                          class="mr-2 h-4 w-4"
+                        />删除</DropdownMenuItem
                       >
                     </DropdownMenuContent>
                   </DropdownMenu>

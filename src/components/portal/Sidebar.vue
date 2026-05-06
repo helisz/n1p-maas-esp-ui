@@ -19,7 +19,6 @@ import {
   XMarkIcon,
   PhoneIcon,
 } from "@heroicons/vue/24/outline";
-import Input from "@/components/ui/Input.vue";
 
 const route = useRoute();
 const router = useRouter();
