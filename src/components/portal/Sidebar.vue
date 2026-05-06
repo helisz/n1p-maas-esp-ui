@@ -172,7 +172,7 @@ function navigate(href: string) {
         />
         <Input
           placeholder="搜索..."
-          class="h-9 pl-8 text-sm bg-muted/50 border-0"
+          class="h-9 pl-8 text-sm bg-muted/50 border-transparent focus-visible:border-ring shadow-sm transition"
         />
       </div>
     </div>
