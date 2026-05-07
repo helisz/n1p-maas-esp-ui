@@ -9,12 +9,9 @@ import CardContent from '@/components/ui/CardContent.vue'
 import CardFooter from '@/components/ui/CardFooter.vue'
 import Button from '@/components/ui/Button.vue'
 import Badge from '@/components/ui/Badge.vue'
-import Dialog from '@/components/ui/Dialog.vue'
-import DialogContent from '@/components/ui/DialogContent.vue'
-import DialogHeader from '@/components/ui/DialogHeader.vue'
-import DialogTitle from '@/components/ui/DialogTitle.vue'
-import DialogDescription from '@/components/ui/DialogDescription.vue'
-import DialogFooter from '@/components/ui/DialogFooter.vue'
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/components/ui/dialog'
 import { CheckIcon, SparklesIcon, RocketLaunchIcon, StarIcon, InformationCircleIcon, ArrowRightIcon, BoltIcon, CpuChipIcon, EyeIcon } from '@heroicons/vue/24/outline'
 
 const packages = [

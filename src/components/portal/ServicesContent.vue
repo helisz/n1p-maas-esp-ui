@@ -18,12 +18,9 @@ import TableBody from '@/components/ui/TableBody.vue'
 import TableRow from '@/components/ui/TableRow.vue'
 import TableHead from '@/components/ui/TableHead.vue'
 import TableCell from '@/components/ui/TableCell.vue'
-import Dialog from '@/components/ui/Dialog.vue'
-import DialogContent from '@/components/ui/DialogContent.vue'
-import DialogHeader from '@/components/ui/DialogHeader.vue'
-import DialogTitle from '@/components/ui/DialogTitle.vue'
-import DialogDescription from '@/components/ui/DialogDescription.vue'
-import DialogFooter from '@/components/ui/DialogFooter.vue'
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from '@/components/ui/dialog'
 import SecurityAuditContent from '@/components/portal/SecurityAuditContent.vue'
 import {
   KeyIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, ArrowPathIcon, ExclamationTriangleIcon,
