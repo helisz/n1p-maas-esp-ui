@@ -1,34 +1,11 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, onUpdated, watch, nextTick } from 'vue'
-import Card from '@/components/ui/Card.vue'
-import CardHeader from '@/components/ui/CardHeader.vue'
-import CardTitle from '@/components/ui/CardTitle.vue'
-import CardDescription from '@/components/ui/CardDescription.vue'
-import CardContent from '@/components/ui/CardContent.vue'
-import Button from '@/components/ui/Button.vue'
-import Badge from '@/components/ui/Badge.vue'
-import Tabs from '@/components/ui/Tabs.vue'
-import TabsList from '@/components/ui/TabsList.vue'
-import TabsTrigger from '@/components/ui/TabsTrigger.vue'
-import TabsContent from '@/components/ui/TabsContent.vue'
-import Progress from '@/components/ui/Progress.vue'
-import Table from '@/components/ui/Table.vue'
-import TableHeader from '@/components/ui/TableHeader.vue'
-import TableBody from '@/components/ui/TableBody.vue'
-import TableRow from '@/components/ui/TableRow.vue'
-import TableHead from '@/components/ui/TableHead.vue'
-import TableCell from '@/components/ui/TableCell.vue'
-import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
-} from '@/components/ui/dialog'
-import SecurityAuditContent from '@/components/portal/SecurityAuditContent.vue'
+
 import {
   KeyIcon, EyeIcon, EyeSlashIcon, DocumentDuplicateIcon, ArrowPathIcon, ExclamationTriangleIcon,
   CheckCircleIcon, SignalIcon, ArrowTrendingUpIcon, ClockIcon, ServerIcon,
 } from '@heroicons/vue/24/outline'
-import {
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
-} from '@/components/ui/select'
+
 
 const myPackages = [
   { id: 'pkg-001', name: '高级版', status: 'active', startDate: '2024-03-15', endDate: '2024-06-15', usedCalls: 89456, totalCalls: 200000, apiEndpoint: 'https://api.maas-portal.com/v1' },

@@ -1,16 +1,6 @@
 <!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
 <script setup lang="ts">
 import { ref } from 'vue'
-import Card from '@/components/ui/Card.vue'
-import CardHeader from '@/components/ui/CardHeader.vue'
-import CardTitle from '@/components/ui/CardTitle.vue'
-import CardContent from '@/components/ui/CardContent.vue'
-import Badge from '@/components/ui/Badge.vue'
-import Button from '@/components/ui/Button.vue'
-import Tabs from '@/components/ui/Tabs.vue'
-import TabsList from '@/components/ui/TabsList.vue'
-import TabsTrigger from '@/components/ui/TabsTrigger.vue'
-import TabsContent from '@/components/ui/TabsContent.vue'
 import {
   ArrowPathIcon, ShieldCheckIcon, ShieldExclamationIcon, InformationCircleIcon, CheckCircleIcon,
   CpuChipIcon, ServerIcon,
