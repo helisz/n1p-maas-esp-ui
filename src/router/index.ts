@@ -68,6 +68,20 @@ const routes: RouteRecordRaw[] = [
     component: () => import("@/views/EnterpriseView.vue"),
     meta: { requiresAuth: true },
   },
+  // [AI_START TIMESTAMP=2025-07-14 12:00:00]
+  {
+    path: "/enterprise/verify-key",
+    name: "EnterpriseVerifyKey",
+    component: () => import("@/views/EnterpriseVerifyKeyView.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/enterprise/verify-upload",
+    name: "EnterpriseVerifyUpload",
+    component: () => import("@/views/EnterpriseVerifyUploadView.vue"),
+    meta: { requiresAuth: true },
+  },
+  // [AI_END LINES=12 TIMESTAMP=2025-07-14 12:00:00]
   {
     path: "/accounts",
     name: "Accounts",

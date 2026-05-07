@@ -1,10 +1,15 @@
-<!-- [AI_START TIMESTAMP=2025-06-15 12:00:00] -->
+<!-- [AI_START TIMESTAMP=2025-07-14 12:00:00] -->
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import {
-  BuildingOffice2Icon, CheckCircleIcon, ShieldCheckIcon, PencilSquareIcon, ArrowUpTrayIcon,
-  KeyIcon, ArrowPathIcon,
+  BuildingOffice2Icon, CheckCircleIcon, ShieldCheckIcon, PencilSquareIcon,
+  KeyIcon, DocumentTextIcon, ArrowRightIcon,
+  LockClosedIcon, BoltIcon, LifebuoyIcon,
+  ClockIcon, CpuChipIcon, ChartBarIcon,
 } from '@heroicons/vue/24/outline'
+
+const router = useRouter()
 
 const enterpriseInfo = {
   name: '中科云数科技有限公司', creditCode: '91110108MA01XXXXXX', legalPerson: '张三',
@@ -12,13 +17,18 @@ const enterpriseInfo = {
   address: '北京市海淀区中关村科技园区XX号', registeredAt: '2024-01-15', verifiedAt: '2024-01-16', status: 'verified',
 }
 
-const uKeyInfo = {
-  serialNumber: 'CITIC2024XXXXXXXX', boundAt: '2024-01-16 10:30:00',
-  expiry: '2025-01-16', status: 'active', lastUsed: '2024-03-15 14:32:00',
+const editDialogOpen = ref(false)
+const verifyDialogOpen = ref(false)
+
+function goVerifyKey() {
+  verifyDialogOpen.value = false
+  router.push('/enterprise/verify-key')
 }
 
-const editDialogOpen = ref(false)
-const rebindDialogOpen = ref(false)
+function goVerifyUpload() {
+  verifyDialogOpen.value = false
+  router.push('/enterprise/verify-upload')
+}
 </script>
 
 <template>
@@ -72,68 +82,124 @@ const rebindDialogOpen = ref(false)
         </CardContent>
       </Card>
 
-      <!-- UKey Binding -->
+      <!-- Enterprise Qualification -->
       <Card class="lg:col-span-2">
-        <CardHeader>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-3">
-              <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-50"><ShieldCheckIcon class="h-5 w-5 text-cyan-600" /></div>
-              <div><CardTitle>网银Key绑定状态</CardTitle><CardDescription>中信网银Key认证信息</CardDescription></div>
+        <CardHeader class="pb-4">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-100"><ShieldCheckIcon class="h-5 w-5 text-indigo-600" /></div>
+              <div class="min-w-0"><CardTitle>企业资质</CardTitle><CardDescription class="truncate">为了保障平台安全与合规，请尽快完成企业资质验证。验证通过后，您的企业将解锁全部 MaaS 平台服务。</CardDescription></div>
             </div>
-            <Badge class="gap-1"><CheckCircle2 class="h-3 w-3" />已绑定</Badge>
+            <Button size="lg" class="gap-2 shrink-0" @click="verifyDialogOpen = true">
+              <ShieldCheckIcon class="h-5 w-5" />
+              验证企业资质
+            </Button>
           </div>
         </CardHeader>
         <CardContent>
-          <div class="grid gap-6 md:grid-cols-2">
-            <div class="space-y-4">
-              <div class="space-y-1"><Label class="text-muted-foreground">Key 序列号</Label><p class="font-mono">{{ uKeyInfo.serialNumber }}</p></div>
-              <div class="space-y-1"><Label class="text-muted-foreground">绑定时间</Label><p>{{ uKeyInfo.boundAt }}</p></div>
-              <div class="space-y-1"><Label class="text-muted-foreground">证书有效期</Label><p>{{ uKeyInfo.expiry }}</p></div>
-            </div>
-            <div class="space-y-4">
-              <div class="space-y-1"><Label class="text-muted-foreground">最近使用</Label><p>{{ uKeyInfo.lastUsed }}</p></div>
-              <div class="space-y-1"><Label class="text-muted-foreground">状态</Label><Badge variant="outline" class="gap-1"><CheckCircleIcon class="h-3 w-3 text-green-500" />正常</Badge></div>
-            </div>
-          </div>
-          <Separator class="my-4" />
-          <div class="flex gap-2">
-            <Button variant="outline" @click="rebindDialogOpen = true"><ArrowPathIcon class="mr-2 h-4 w-4" />重新绑定</Button>
-            <Button variant="outline"><KeyIcon class="mr-2 h-4 w-4" />测试认证</Button>
-          </div>
-        </CardContent>
-      </Card>
+          <div class="grid gap-8 lg:grid-cols-5">
+            <!-- Left: Verification Steps (3/5) -->
+            <div class="lg:col-span-3 space-y-5">
 
-      <!-- Qualification Documents -->
-      <Card class="lg:col-span-2">
-        <CardHeader><CardTitle>资质文件</CardTitle><CardDescription>企业认证上传的资质文件</CardDescription></CardHeader>
-        <CardContent>
-          <div class="grid gap-4 md:grid-cols-3">
-            <div class="rounded-lg border p-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded bg-muted"><Building2 class="h-5 w-5 text-muted-foreground" /></div>
-                  <div><p class="font-medium">营业执照</p><p class="text-xs text-muted-foreground">business_license.pdf</p></div>
+              <div class="flex-1 space-y-5 p-5 flex-1 space-y-4">
+                <div class="flex items-center gap-2">
+                  <div class="h-px flex-1 bg-border" />
+                  <span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">验证流程</span>
+                  <div class="h-px flex-1 bg-border" />
                 </div>
-                <Badge variant="outline" class="text-green-600">已上传</Badge>
+
+                <!-- Horizontal Steps -->
+                <div class="flex items-start">
+                  <!-- Step 1 -->
+                  <div class="flex-1 flex flex-col items-center text-center rounded-lg bg-muted/60 p-5">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-700">1</div>
+                    <p class="mt-3 text-sm font-semibold text-foreground">选择验证方式</p>
+                    <p class="mt-1 text-xs text-muted-foreground leading-relaxed">在线绑定中信网银 Key，或提交营业执照、法人身份证等资质材料</p>
+                  </div>
+
+                  <!-- Arrow -->
+                  <div class="w-[10%] shrink-0 flex items-center justify-center pt-8">
+                    <div class="hidden sm:flex items-center w-full px-1">
+                      <div class="h-1 flex-1 rounded-full bg-indigo-300" />
+                      <div class="h-0 w-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-indigo-400" />
+                    </div>
+                  </div>
+
+                  <!-- Step 2 -->
+                  <div class="flex-1 flex flex-col items-center text-center rounded-lg bg-muted/60 p-5">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-700">2</div>
+                    <p class="mt-3 text-sm font-semibold text-foreground">完成验证操作</p>
+                    <p class="mt-1 text-xs text-muted-foreground leading-relaxed">安装插件并插入U盾自动匹配信息，或按指引上传所需资质文件</p>
+                  </div>
+
+                  <!-- Arrow -->
+                  <div class="w-[10%] shrink-0 flex items-center justify-center pt-8">
+                    <div class="hidden sm:flex items-center w-full px-1">
+                      <div class="h-1 flex-1 rounded-full bg-indigo-300" />
+                      <div class="h-0 w-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-indigo-400" />
+                    </div>
+                  </div>
+
+                  <!-- Step 3 -->
+                  <div class="flex-1 flex flex-col items-center text-center rounded-lg bg-muted/60 p-5">
+                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-sm font-bold text-white">3</div>
+                    <p class="mt-3 text-sm font-semibold text-foreground">审核通过，开通服务</p>
+                    <p class="mt-1 text-xs text-muted-foreground leading-relaxed">在线 Key 验证即时生效；材料提交后预计 <span class="font-medium text-foreground">3 个工作日</span> 内完成审核</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="rounded-lg border p-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded bg-muted"><ShieldCheck class="h-5 w-5 text-muted-foreground" /></div>
-                  <div><p class="font-medium">法人身份证</p><p class="text-xs text-muted-foreground">legal_person_id.pdf</p></div>
+
+            <!-- Right: Unlockable Services + CTA (2/5) -->
+            <div class="lg:col-span-2 flex flex-col">
+              <div class="rounded-lg bg-muted/40 p-5 flex-1 space-y-4">
+                <div class="flex items-center gap-2">
+                  <div class="h-px flex-1 bg-border" />
+                  <span class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">验证后可开通</span>
+                  <div class="h-px flex-1 bg-border" />
                 </div>
-                <Badge variant="outline" class="text-green-600">已上传</Badge>
+
+                <ul class="space-y-3">
+                  <li class="flex items-start gap-3">
+                    <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-blue-100 mt-px">
+                      <BoltIcon class="h-4 w-4 text-blue-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-foreground">MaaS API 服务</p>
+                      <p class="text-xs text-muted-foreground">大语言模型、视觉模型等全部 API 调用能力</p>
+                    </div>
+                  </li>
+                 
+                  <li class="flex items-start gap-3">
+                    <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-emerald-100 mt-px">
+                      <LockClosedIcon class="h-4 w-4 text-emerald-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-foreground">企业级安全策略</p>
+                      <p class="text-xs text-muted-foreground">独立租户隔离、访问控制、审计日志等安全配置</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-amber-100 mt-px">
+                      <LifebuoyIcon class="h-4 w-4 text-amber-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-foreground">专属技术支持</p>
+                      <p class="text-xs text-muted-foreground">7×24 小时技术支持与专属客户经理服务</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <div class="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-rose-100 mt-px">
+                      <ChartBarIcon class="h-4 w-4 text-rose-600" />
+                    </div>
+                    <div>
+                      <p class="text-sm font-medium text-foreground">完整数据看板</p>
+                      <p class="text-xs text-muted-foreground">实时调用统计、用量分析与消费报表</p>
+                    </div>
+                  </li>
+                </ul>
               </div>
-            </div>
-            <div class="rounded-lg border border-dashed p-4">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                  <div class="flex h-10 w-10 items-center justify-center rounded bg-muted"><ArrowUpTrayIcon class="h-5 w-5 text-muted-foreground" /></div>
-                  <div><p class="font-medium">其他资质</p><p class="text-xs text-muted-foreground">可选上传</p></div>
-                </div>
-                <Button variant="ghost" size="sm">上传</Button>
-              </div>
+
             </div>
           </div>
         </CardContent>
@@ -156,20 +222,72 @@ const rebindDialogOpen = ref(false)
       </DialogContent>
     </Dialog>
 
-    <!-- Rebind Dialog -->
-    <Dialog v-model:open="rebindDialogOpen">
-      <DialogContent>
-        <DialogHeader><DialogTitle>重新绑定网银Key</DialogTitle><DialogDescription>请插入新的网银Key设备后点击确认</DialogDescription></DialogHeader>
-        <div class="flex items-center gap-3 rounded-lg bg-muted p-4">
-          <ShieldCheckIcon class="h-5 w-5 text-muted-foreground" />
-          <p class="text-sm text-muted-foreground">重新绑定后，旧的网银Key将立即失效</p>
+    <!-- Verification Method Choice Dialog -->
+    <Dialog v-model:open="verifyDialogOpen">
+      <DialogContent class="sm:max-w-lg">
+        <DialogHeader class="text-center">
+          <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 mb-4">
+            <ShieldCheckIcon class="h-8 w-8 text-indigo-600" />
+          </div>
+          <DialogTitle class="text-xl">选择企业资质验证方式</DialogTitle>
+          <DialogDescription>
+            请选择适合您企业的方式进行资质验证
+          </DialogDescription>
+        </DialogHeader>
+
+        <div class="grid gap-4 py-2">
+          <!-- Option A: Online UKey Binding -->
+          <button
+            @click="goVerifyKey"
+            class="flex items-start gap-4 rounded-lg border border-border p-5 text-left transition-all hover:border-indigo-300 hover:bg-indigo-50/50 hover:shadow-sm"
+          >
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-indigo-100">
+              <KeyIcon class="h-6 w-6 text-indigo-600" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">方式 A</span>
+                <p class="font-semibold text-foreground">在线绑定中信网银 Key</p>
+              </div>
+              <p class="mt-1 text-sm text-muted-foreground">安装浏览器插件，插入U盾，系统自动匹配企业信息，即时完成验证</p>
+              <div class="mt-2 flex items-center gap-2 text-xs text-indigo-600">
+                <BoltIcon class="h-3 w-3" />
+                <span>即时生效，无需等待</span>
+              </div>
+            </div>
+            <ArrowRightIcon class="h-5 w-5 shrink-0 text-muted-foreground self-center" />
+          </button>
+
+          <!-- Option B: Document Upload -->
+          <button
+            @click="goVerifyUpload"
+            class="flex items-start gap-4 rounded-lg border border-border p-5 text-left transition-all hover:border-indigo-300 hover:bg-indigo-50/50 hover:shadow-sm"
+          >
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-emerald-100">
+              <DocumentTextIcon class="h-6 w-6 text-emerald-600" />
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="inline-flex items-center rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-medium text-emerald-700">方式 B</span>
+                <p class="font-semibold text-foreground">提交信息验证企业资质</p>
+              </div>
+              <p class="mt-1 text-sm text-muted-foreground">上传营业执照、法人身份证及其他资质材料，后台审核通过后完成验证</p>
+              <div class="mt-2 flex items-center gap-2 text-xs text-emerald-600">
+                <ClockIcon class="h-3 w-3" />
+                <span>预计 3 个工作日完成审核</span>
+              </div>
+            </div>
+            <ArrowRightIcon class="h-5 w-5 shrink-0 text-muted-foreground self-center" />
+          </button>
         </div>
+
         <DialogFooter>
-          <Button variant="outline" @click="rebindDialogOpen = false">取消</Button>
-          <Button @click="rebindDialogOpen = false">确认重新绑定</Button>
+          <Button variant="outline" class="w-full sm:w-auto" @click="verifyDialogOpen = false">
+            稍后再说
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   </div>
 </template>
-<!-- [AI_END LINES=143 TIMESTAMP=2025-06-15 12:00:00] -->
+<!-- [AI_END LINES=173 TIMESTAMP=2025-07-14 12:00:00] -->
