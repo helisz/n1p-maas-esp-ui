@@ -26,6 +26,8 @@ const initials = auth.user?.name?.charAt(0) ?? '企';
 
 <template>
   <header class="border-border bg-background flex h-14 items-center justify-between border-b px-4 lg:px-6">
+    <slot name="logo" />
+
     <div class="flex items-center gap-2">
       <!-- Hamburger menu for mobile -->
       <Button variant="ghost" size="icon" class="lg:hidden" @click="emit('toggleSidebar')">
@@ -50,11 +52,14 @@ const initials = auth.user?.name?.charAt(0) ?? '企';
       <DropdownMenu>
         <DropdownMenuTrigger>
           <Button variant="ghost" class="flex items-center gap-2 px-2">
+            <!-- [AI_START TIMESTAMP=2025-07-15 08:00:00] -->
             <Avatar size="sm">
-              <AvatarFallback class="bg-primary text-primary-foreground text-xs">
+              <img v-if="auth.user?.avatar" :src="auth.user.avatar" alt="头像" class="h-full w-full rounded-full object-cover" />
+              <AvatarFallback v-else class="bg-primary text-primary-foreground text-xs">
                 {{ initials }}
               </AvatarFallback>
             </Avatar>
+            <!-- [AI_END LINES=7 TIMESTAMP=2025-07-15 08:00:00] -->
             <div class="hidden flex-col items-start text-xs sm:flex">
               <span class="font-medium">{{ auth.user?.company ?? '企业账号' }}</span>
               <span class="text-muted-foreground">{{ auth.user?.role ?? '管理员' }}</span>

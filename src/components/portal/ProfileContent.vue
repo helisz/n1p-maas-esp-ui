@@ -1,8 +1,8 @@
-// [AI_START TIMESTAMP=2025-07-15 07:00:00]
+// [AI_START TIMESTAMP=2025-07-15 09:00:00]
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { UserIcon, EnvelopeIcon, PhoneIcon, BuildingOffice2Icon, ShieldCheckIcon, KeyIcon, BellIcon, PencilSquareIcon, CheckCircleIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, LockClosedIcon, CameraIcon } from '@heroicons/vue/24/outline';
+import { UserIcon, EnvelopeIcon, PhoneIcon, BuildingOffice2Icon, ShieldCheckIcon, KeyIcon, PencilSquareIcon, CheckCircleIcon, DevicePhoneMobileIcon, ComputerDesktopIcon, LockClosedIcon, CameraIcon } from '@heroicons/vue/24/outline';
 
 const auth = useAuthStore();
 
@@ -20,7 +20,9 @@ function onAvatarChange(event: Event) {
   if (input.files && input.files[0]) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      avatarPreview.value = e.target?.result as string;
+      const url = e.target?.result as string;
+      avatarPreview.value = url;
+      auth.updateAvatar(url);
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -71,7 +73,7 @@ const initials = auth.user?.name?.charAt(0) ?? '张';
           <!-- Avatar with upload -->
           <div class="group relative cursor-pointer" @click="triggerAvatarUpload">
             <Avatar size="lg" class="h-20 w-20">
-              <img v-if="avatarPreview" :src="avatarPreview" alt="头像" class="h-full w-full rounded-full object-cover" />
+              <img v-if="avatarPreview || auth.user?.avatar" :src="avatarPreview ?? auth.user?.avatar" alt="头像" class="h-full w-full rounded-full object-cover" />
               <AvatarFallback v-else class="bg-primary text-primary-foreground text-2xl font-bold">
                 {{ initials }}
               </AvatarFallback>
@@ -113,156 +115,86 @@ const initials = auth.user?.name?.charAt(0) ?? '张';
         </CardContent>
       </Card>
 
-      <!-- Right: Tabs Content -->
-      <div class="lg:col-span-8">
-        <Tabs defaultValue="basic" class="w-full">
-          <TabsList class="grid w-full grid-cols-2">
-            <TabsTrigger value="basic">基本信息</TabsTrigger>
-            <TabsTrigger value="security">安全设置</TabsTrigger>
-            <!-- <TabsTrigger value="notifications">通知设置</TabsTrigger> -->
-          </TabsList>
-
-          <!-- Tab: Basic Info -->
-          <TabsContent value="basic">
-            <Card>
-              <CardHeader class="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle>基本信息</CardTitle>
-                  <CardDescription>查看和修改您的个人资料</CardDescription>
-                </div>
-                <Button variant="outline" size="sm" @click="editingBasic = !editingBasic">
-                  <PencilSquareIcon class="mr-1 h-3 w-3" />
-                  {{ editingBasic ? '取消' : '编辑' }}
-                </Button>
-              </CardHeader>
-              <CardContent class="space-y-4">
-                <div class="grid gap-4 sm:grid-cols-2">
-                  <div class="space-y-2">
-                    <Label for="profileName">姓名</Label>
-                    <Input id="profileName" v-model="profileForm.name" :disabled="!editingBasic" />
-                  </div>
-                  <div class="space-y-2">
-                    <Label for="profileDept">部门</Label>
-                    <Input id="profileDept" v-model="profileForm.department" :disabled="!editingBasic" />
-                  </div>
-                  <div class="space-y-2">
-                    <Label for="profileEmail">邮箱</Label>
-                    <Input id="profileEmail" type="email" v-model="profileForm.email" :disabled="!editingBasic" />
-                  </div>
-                  <div class="space-y-2">
-                    <Label for="profilePhone">手机号码</Label>
-                    <Input id="profilePhone" v-model="profileForm.phone" :disabled="!editingBasic" />
-                  </div>
-                </div>
-                <div v-if="editingBasic" class="flex justify-end gap-2">
-                  <Button variant="outline" @click="editingBasic = false">取消</Button>
-                  <Button @click="editingBasic = false">保存修改</Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <!-- Tab: Security -->
-          <TabsContent value="security">
-            <div class="space-y-4">
-              <Card>
-                <CardHeader class="flex flex-row items-center justify-between">
-                  <div>
-                    <CardTitle>登录密码</CardTitle>
-                    <CardDescription>定期修改密码有助于保护账户安全</CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm" @click="showPasswordDialog = true">
-                    <KeyIcon class="mr-1 h-3 w-3" />
-                    修改密码
-                  </Button>
-                </CardHeader>
-                <CardContent>
-                  <div class="bg-muted/40 flex items-center gap-3 rounded-lg p-4">
-                    <LockClosedIcon class="text-muted-foreground h-5 w-5" />
-                    <div>
-                      <p class="text-sm font-medium">密码安全等级</p>
-                      <p class="text-muted-foreground text-xs">当前密码强度：中等</p>
-                    </div>
-                    <Badge variant="secondary" class="ml-auto">已设置</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>登录记录</CardTitle>
-                  <CardDescription>最近的登录设备与位置</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div class="space-y-3">
-                    <div v-for="log in loginHistory" :key="log.time" class="border-border flex items-center gap-3 rounded-lg border p-3">
-                      <component :is="log.device.includes('iPhone') ? DevicePhoneMobileIcon : ComputerDesktopIcon" class="text-muted-foreground h-5 w-5 shrink-0" />
-                      <div class="min-w-0 flex-1">
-                        <p class="text-sm font-medium">{{ log.device }}</p>
-                        <p class="text-muted-foreground text-xs">IP: {{ log.ip }} · {{ log.time }}</p>
-                      </div>
-                      <Badge v-if="log.current" variant="outline" class="shrink-0 gap-1 border-green-200 bg-green-50 text-green-600">
-                        <CheckCircleIcon class="h-3 w-3" />
-                        当前会话
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+      <!-- Right: All Settings Stacked -->
+      <div class="space-y-4 lg:col-span-8">
+        <!-- Basic Info -->
+        <Card>
+          <CardHeader class="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>基本信息</CardTitle>
+              <CardDescription>查看和修改您的个人资料</CardDescription>
             </div>
-          </TabsContent>
+            <Button variant="outline" size="sm" @click="editingBasic = !editingBasic">
+              <PencilSquareIcon class="mr-1 h-3 w-3" />
+              {{ editingBasic ? '取消' : '编辑' }}
+            </Button>
+          </CardHeader>
+          <CardContent class="space-y-4">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="space-y-2">
+                <Label for="profileName">姓名</Label>
+                <Input id="profileName" v-model="profileForm.name" :disabled="!editingBasic" />
+              </div>
+              <div class="space-y-2">
+                <Label for="profileDept">部门</Label>
+                <Input id="profileDept" v-model="profileForm.department" :disabled="!editingBasic" />
+              </div>
+              <div class="space-y-2">
+                <Label for="profileEmail">邮箱</Label>
+                <Input id="profileEmail" type="email" v-model="profileForm.email" :disabled="!editingBasic" />
+              </div>
+              <div class="space-y-2">
+                <Label for="profilePhone">手机号码</Label>
+                <Input id="profilePhone" v-model="profileForm.phone" :disabled="!editingBasic" />
+              </div>
+            </div>
+            <div v-if="editingBasic" class="flex justify-end gap-2">
+              <Button variant="outline" @click="editingBasic = false">取消</Button>
+              <Button @click="editingBasic = false">保存修改</Button>
+            </div>
+          </CardContent>
+        </Card>
 
-          <!-- Tab: Notifications -->
-          <TabsContent value="notifications">
-            <Card>
-              <CardHeader>
-                <CardTitle>消息通知</CardTitle>
-                <CardDescription>自定义您希望接收的通知类型</CardDescription>
-              </CardHeader>
-              <CardContent class="space-y-5">
-                <div class="flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <Label>邮件通知</Label>
-                    <p class="text-muted-foreground text-xs">接收系统发送的邮件提醒</p>
+        <!-- Security -->
+        <Card>
+          <CardHeader class="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>安全设置</CardTitle>
+              <CardDescription>管理密码与登录安全</CardDescription>
+            </div>
+            <Button variant="outline" size="sm" @click="showPasswordDialog = true">
+              <KeyIcon class="mr-1 h-3 w-3" />
+              修改密码
+            </Button>
+          </CardHeader>
+          <CardContent class="space-y-4">
+            <div class="bg-muted/40 flex items-center gap-3 rounded-lg p-4">
+              <LockClosedIcon class="text-muted-foreground h-5 w-5" />
+              <div>
+                <p class="text-sm font-medium">密码安全等级</p>
+                <p class="text-muted-foreground text-xs">当前密码强度：中等</p>
+              </div>
+              <Badge variant="secondary" class="ml-auto">已设置</Badge>
+            </div>
+            <Separator />
+            <div>
+              <p class="mb-3 text-sm font-medium">登录记录</p>
+              <div class="space-y-3">
+                <div v-for="log in loginHistory" :key="log.time" class="border-border flex items-center gap-3 rounded-lg border p-3">
+                  <component :is="log.device.includes('iPhone') ? DevicePhoneMobileIcon : ComputerDesktopIcon" class="text-muted-foreground h-5 w-5 shrink-0" />
+                  <div class="min-w-0 flex-1">
+                    <p class="text-sm font-medium">{{ log.device }}</p>
+                    <p class="text-muted-foreground text-xs">IP: {{ log.ip }} · {{ log.time }}</p>
                   </div>
-                  <Switch v-model:checked="notifications.email" />
+                  <Badge v-if="log.current" variant="outline" class="shrink-0 gap-1 border-green-200 bg-green-50 text-green-600">
+                    <CheckCircleIcon class="h-3 w-3" />
+                    当前会话
+                  </Badge>
                 </div>
-                <Separator />
-                <div class="flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <Label>系统消息</Label>
-                    <p class="text-muted-foreground text-xs">接收平台公告、功能更新等系统消息</p>
-                  </div>
-                  <Switch v-model:checked="notifications.system" />
-                </div>
-                <Separator />
-                <div class="flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <Label>服务告警</Label>
-                    <p class="text-muted-foreground text-xs">API 异常、服务中断、额度不足等告警</p>
-                  </div>
-                  <Switch v-model:checked="notifications.serviceAlert" />
-                </div>
-                <Separator />
-                <div class="flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <Label>账单提醒</Label>
-                    <p class="text-muted-foreground text-xs">账单生成、扣费成功、余额不足提醒</p>
-                  </div>
-                  <Switch v-model:checked="notifications.billing" />
-                </div>
-                <Separator />
-                <div class="flex items-center justify-between">
-                  <div class="space-y-0.5">
-                    <Label>营销推送</Label>
-                    <p class="text-muted-foreground text-xs">优惠活动、产品推荐等营销信息</p>
-                  </div>
-                  <Switch v-model:checked="notifications.marketing" />
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
 
@@ -295,4 +227,4 @@ const initials = auth.user?.name?.charAt(0) ?? '张';
     </Dialog>
   </div>
 </template>
-// [AI_END LINES=282 TIMESTAMP=2025-07-15 07:00:00]
+// [AI_END LINES=273 TIMESTAMP=2025-07-15 09:00:00]
