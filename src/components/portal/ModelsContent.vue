@@ -1,33 +1,30 @@
 <!-- [AI_START TIMESTAMP=2025-06-16 08:00:00] -->
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import {
-  MagnifyingGlassIcon, CpuChipIcon, EyeIcon, ArrowTopRightOnSquareIcon, RectangleStackIcon, HashtagIcon,
-  CurrencyDollarIcon, SparklesIcon, GlobeAltIcon, BoltIcon,
-} from '@heroicons/vue/24/outline'
+import { ref, computed } from 'vue';
+import { MagnifyingGlassIcon, CpuChipIcon, EyeIcon, ArrowTopRightOnSquareIcon, RectangleStackIcon, HashtagIcon, CurrencyDollarIcon, SparklesIcon, GlobeAltIcon, BoltIcon } from '@heroicons/vue/24/outline';
 
 interface TierPricing {
-  prompt: number
-  completion: number
+  prompt: number;
+  completion: number;
 }
 
 interface ModelPricing {
-  basic: TierPricing
-  advanced: TierPricing
-  premium: TierPricing
+  basic: TierPricing;
+  advanced: TierPricing;
+  premium: TierPricing;
 }
 
 interface Model {
-  id: string
-  name: string
-  provider: string
-  description: string
-  tags: string[]
-  contextLength: number
-  maxOutput: number
-  pricing: ModelPricing
-  capabilities: string[]
-  modality: string
+  id: string;
+  name: string;
+  provider: string;
+  description: string;
+  tags: string[];
+  contextLength: number;
+  maxOutput: number;
+  pricing: ModelPricing;
+  capabilities: string[];
+  modality: string;
 }
 
 const models: Model[] = [
@@ -287,121 +284,96 @@ const models: Model[] = [
     capabilities: ['Text Generation', 'Code Generation', 'Function Calling', 'Streaming'],
     modality: 'Text',
   },
-]
+];
 
 const providers = computed(() => {
-  const set = new Set(models.map(m => m.provider))
-  return Array.from(set)
-})
+  const set = new Set(models.map((m) => m.provider));
+  return Array.from(set);
+});
 
-const searchQuery = ref('')
-const selectedProvider = ref<string>('全部')
-const selectedTier = ref<'basic' | 'advanced' | 'premium'>('basic')
-const selectedModel = ref<Model | null>(null)
-const detailOpen = ref(false)
+const searchQuery = ref('');
+const selectedProvider = ref<string>('全部');
+const selectedTier = ref<'basic' | 'advanced' | 'premium'>('basic');
+const selectedModel = ref<Model | null>(null);
+const detailOpen = ref(false);
 
 const tierLabels: Record<string, string> = {
   basic: '基础版',
   advanced: '高级版',
   premium: '尊享版',
-}
+};
 
 const tierBadgeClasses: Record<string, string> = {
   basic: 'bg-slate-100 text-slate-700',
   advanced: 'bg-indigo-100 text-indigo-700',
   premium: 'bg-amber-100 text-amber-700',
-}
+};
 
 const filteredModels = computed(() => {
-  let result = models
+  let result = models;
   if (selectedProvider.value !== '全部') {
-    result = result.filter(m => m.provider === selectedProvider.value)
+    result = result.filter((m) => m.provider === selectedProvider.value);
   }
   if (searchQuery.value.trim()) {
-    const q = searchQuery.value.toLowerCase()
-    result = result.filter(
-      m =>
-        m.name.toLowerCase().includes(q) ||
-        m.provider.toLowerCase().includes(q) ||
-        m.description.toLowerCase().includes(q) ||
-        m.tags.some(t => t.toLowerCase().includes(q))
-    )
+    const q = searchQuery.value.toLowerCase();
+    result = result.filter((m) => m.name.toLowerCase().includes(q) || m.provider.toLowerCase().includes(q) || m.description.toLowerCase().includes(q) || m.tags.some((t) => t.toLowerCase().includes(q)));
   }
-  return result
-})
+  return result;
+});
 
 function openDetail(model: Model) {
-  selectedModel.value = model
-  detailOpen.value = true
+  selectedModel.value = model;
+  detailOpen.value = true;
 }
 
 function formatPrice(price: number) {
-  return `$${price.toFixed(4)}`
+  return `$${price.toFixed(4)}`;
 }
 
 function formatContext(len: number) {
-  if (len >= 10000) return `${(len / 1000).toFixed(0)}K`
-  return `${len}`
+  if (len >= 10000) return `${(len / 1000).toFixed(0)}K`;
+  return `${len}`;
 }
 
 function discountRate(basic: number, tier: number) {
-  return Math.round((tier / basic) * 100)
+  return Math.round((tier / basic) * 100);
 }
 
 const providerColors: Record<string, string> = {
-  '火山引擎': 'bg-red-100 text-red-700',
-  '华为云': 'bg-blue-100 text-blue-700',
-}
+  火山引擎: 'bg-red-100 text-red-700',
+  华为云: 'bg-blue-100 text-blue-700',
+};
 </script>
 
 <template>
   <div class="space-y-8">
     <!-- Header -->
     <div class="flex flex-col gap-2">
-      <h2 class="text-2xl font-semibold text-foreground">模型广场</h2>
+      <h2 class="text-foreground text-2xl font-semibold">模型广场</h2>
       <p class="text-muted-foreground">浏览和比较平台接入的各类大语言模型，查看详细规格与分级定价信息</p>
     </div>
 
     <!-- Filters -->
     <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
       <div class="relative w-full lg:w-80">
-        <MagnifyingGlassIcon class="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <MagnifyingGlassIcon class="text-muted-foreground absolute top-3 left-3 h-4 w-4" />
         <Input v-model="searchQuery" placeholder="搜索模型名称、提供商或标签..." class="h-10 pl-9 text-sm" />
       </div>
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs text-muted-foreground">查看价格：</span>
+        <span class="text-muted-foreground text-xs">查看价格：</span>
         <button
           v-for="tier in ['basic', 'advanced', 'premium'] as const"
           :key="tier"
           @click="selectedTier = tier"
-          :class="[
-            'rounded-full px-4 py-1.5 text-xs font-medium transition-colors',
-            selectedTier === tier ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-          ]"
+          :class="['rounded-full px-4 py-1.5 text-xs font-medium transition-colors', selectedTier === tier ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground']"
         >
           {{ tierLabels[tier] }}
         </button>
       </div>
       <div class="flex flex-wrap items-center gap-3">
-        <span class="text-xs text-muted-foreground">提供方：</span>
-        <button
-          @click="selectedProvider = '全部'"
-          :class="[
-            'rounded-full px-4 py-1.5 text-xs font-medium transition-colors',
-            selectedProvider === '全部' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-          ]"
-        >
-          全部
-        </button>
-        <button
-          v-for="p in providers"
-          :key="p"
-          @click="selectedProvider = p"
-          :class="[
-            'rounded-full px-4 py-1.5 text-xs font-medium transition-colors',
-            selectedProvider === p ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-          ]"
-        >
+        <span class="text-muted-foreground text-xs">提供方：</span>
+        <button @click="selectedProvider = '全部'" :class="['rounded-full px-4 py-1.5 text-xs font-medium transition-colors', selectedProvider === '全部' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground']">全部</button>
+        <button v-for="p in providers" :key="p" @click="selectedProvider = p" :class="['rounded-full px-4 py-1.5 text-xs font-medium transition-colors', selectedProvider === p ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground']">
           {{ p }}
         </button>
       </div>
@@ -409,37 +381,26 @@ const providerColors: Record<string, string> = {
 
     <!-- Model Cards -->
     <div>
-      <div class="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
-        <CpuChipIcon class="h-5 w-5 text-primary" />
+      <div class="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
+        <CpuChipIcon class="text-primary h-5 w-5" />
         模型列表
-        <span class="text-sm font-normal text-muted-foreground">（共 {{ filteredModels.length }} 个）</span>
-        <span :class="['ml-2 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', tierBadgeClasses[selectedTier]]">
-          {{ tierLabels[selectedTier] }}价格
-        </span>
+        <span class="text-muted-foreground text-sm font-normal">（共 {{ filteredModels.length }} 个）</span>
+        <span :class="['ml-2 inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium', tierBadgeClasses[selectedTier]]"> {{ tierLabels[selectedTier] }}价格 </span>
       </div>
       <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        <Card
-          v-for="model in filteredModels"
-          :key="model.id"
-          class="flex cursor-pointer flex-col transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
-          @click="openDetail(model)"
-        >
-          <CardHeader class="pb-3 pt-5">
+        <Card v-for="model in filteredModels" :key="model.id" class="flex cursor-pointer flex-col transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg" @click="openDetail(model)">
+          <CardHeader class="pt-5 pb-3">
             <div class="flex items-start justify-between">
               <div class="flex items-center gap-3">
-                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                  <CpuChipIcon class="h-5 w-5 text-primary" />
+                <div class="bg-primary/10 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg">
+                  <CpuChipIcon class="text-primary h-5 w-5" />
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
                     <CardTitle class="text-base">{{ model.name }}</CardTitle>
-                    <span v-if="model.tags.includes('推荐')" class="inline-flex items-center rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700">
-                      <SparklesIcon class="mr-0.5 h-3 w-3" />推荐
-                    </span>
+                    <span v-if="model.tags.includes('推荐')" class="inline-flex items-center rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-700"> <SparklesIcon class="mr-0.5 h-3 w-3" />推荐 </span>
                   </div>
-                  <CardDescription class="mt-0.5 text-xs">
-                    {{ model.modality }} · {{ formatContext(model.contextLength) }}
-                  </CardDescription>
+                  <CardDescription class="mt-0.5 text-xs"> {{ model.modality }} · {{ formatContext(model.contextLength) }} </CardDescription>
                 </div>
               </div>
             </div>
@@ -449,25 +410,25 @@ const providerColors: Record<string, string> = {
               <span :class="['inline-flex items-center rounded-md px-2.5 py-1 text-xs font-medium', providerColors[model.provider] || 'bg-muted text-muted-foreground']">
                 {{ model.provider }}
               </span>
-              <Badge v-for="tag in model.tags.filter(t => t !== '推荐')" :key="tag" variant="secondary" class="text-[10px]">
+              <Badge v-for="tag in model.tags.filter((t) => t !== '推荐')" :key="tag" variant="secondary" class="text-[10px]">
                 {{ tag }}
               </Badge>
             </div>
-            <p class="line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+            <p class="text-muted-foreground line-clamp-2 flex-1 text-sm leading-relaxed">
               {{ model.description }}
             </p>
-            <div class="grid grid-cols-2 gap-3 rounded-lg bg-muted/40 p-3">
+            <div class="bg-muted/40 grid grid-cols-2 gap-3 rounded-lg p-3">
               <div>
-                <div class="text-[10px] text-muted-foreground">Prompt / 1M</div>
-                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing[selectedTier].prompt) }}</div>
+                <div class="text-muted-foreground text-[10px]">Prompt / 1M</div>
+                <div class="text-foreground mt-0.5 font-mono text-sm font-semibold">{{ formatPrice(model.pricing[selectedTier].prompt) }}</div>
               </div>
               <div>
-                <div class="text-[10px] text-muted-foreground">Completion / 1M</div>
-                <div class="mt-0.5 font-mono text-sm font-semibold text-foreground">{{ formatPrice(model.pricing[selectedTier].completion) }}</div>
+                <div class="text-muted-foreground text-[10px]">Completion / 1M</div>
+                <div class="text-foreground mt-0.5 font-mono text-sm font-semibold">{{ formatPrice(model.pricing[selectedTier].completion) }}</div>
               </div>
             </div>
             <div class="flex items-center justify-between">
-              <span class="text-xs text-muted-foreground">上下文 {{ model.contextLength.toLocaleString() }} Tokens</span>
+              <span class="text-muted-foreground text-xs">上下文 {{ model.contextLength.toLocaleString() }} Tokens</span>
               <Button variant="ghost" size="sm" class="h-7 gap-1 text-xs" @click.stop="openDetail(model)">
                 <EyeIcon class="h-3.5 w-3.5" />
                 详情
@@ -476,20 +437,16 @@ const providerColors: Record<string, string> = {
           </CardContent>
         </Card>
       </div>
-      <div v-if="filteredModels.length === 0" class="py-16 text-center text-muted-foreground">
-        未找到匹配的模型
-      </div>
+      <div v-if="filteredModels.length === 0" class="text-muted-foreground py-16 text-center">未找到匹配的模型</div>
     </div>
 
     <!-- Price Legend -->
-    <div class="rounded-lg border border-border bg-muted/30 p-5">
-      <div class="flex items-center gap-2 text-sm font-medium text-foreground">
+    <div class="border-border bg-muted/30 rounded-lg border p-5">
+      <div class="text-foreground flex items-center gap-2 text-sm font-medium">
         <CurrencyDollarIcon class="h-4 w-4" />
         计费说明
       </div>
-      <p class="mt-2 text-xs leading-relaxed text-muted-foreground">
-        价格单位：每百万 Tokens（1M Tokens）。基础版按标准价计费，高级版享约 9 折优惠，尊享版享约 8 折优惠。实际费用按调用量实时结算。
-      </p>
+      <p class="text-muted-foreground mt-2 text-xs leading-relaxed">价格单位：每百万 Tokens（1M Tokens）。基础版按标准价计费，高级版享约 9 折优惠，尊享版享约 8 折优惠。实际费用按调用量实时结算。</p>
     </div>
 
     <!-- Detail Dialog -->
@@ -497,16 +454,16 @@ const providerColors: Record<string, string> = {
       <DialogContent class="max-w-2xl">
         <DialogHeader>
           <div class="flex items-center gap-3">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-              <CpuChipIcon class="h-5 w-5 text-primary" />
+            <div class="bg-primary/10 flex h-10 w-10 items-center justify-center rounded-lg">
+              <CpuChipIcon class="text-primary h-5 w-5" />
             </div>
             <div>
               <DialogTitle class="text-xl">{{ selectedModel?.name }}</DialogTitle>
               <DialogDescription class="flex items-center gap-2">
-                <span :class="['inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium', selectedModel ? (providerColors[selectedModel.provider] || 'bg-muted text-muted-foreground') : '']">
+                <span :class="['inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium', selectedModel ? providerColors[selectedModel.provider] || 'bg-muted text-muted-foreground' : '']">
                   {{ selectedModel?.provider }}
                 </span>
-                <span class="text-xs text-muted-foreground">{{ selectedModel?.modality }}</span>
+                <span class="text-muted-foreground text-xs">{{ selectedModel?.modality }}</span>
               </DialogDescription>
             </div>
           </div>
@@ -514,7 +471,7 @@ const providerColors: Record<string, string> = {
 
         <div v-if="selectedModel" class="space-y-6 py-2">
           <!-- Description -->
-          <p class="text-sm leading-relaxed text-foreground">{{ selectedModel.description }}</p>
+          <p class="text-foreground text-sm leading-relaxed">{{ selectedModel.description }}</p>
 
           <!-- Tags -->
           <div class="flex flex-wrap gap-2">
@@ -523,78 +480,78 @@ const providerColors: Record<string, string> = {
 
           <!-- Specs Grid -->
           <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
-            <div class="rounded-lg border border-border bg-muted/30 p-3">
-              <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div class="border-border bg-muted/30 rounded-lg border p-3">
+              <div class="text-muted-foreground flex items-center gap-1.5 text-xs">
                 <RectangleStackIcon class="h-3.5 w-3.5" />
                 上下文长度
               </div>
-              <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.contextLength.toLocaleString() }} Tokens</p>
+              <p class="text-foreground mt-1 text-sm font-semibold">{{ selectedModel.contextLength.toLocaleString() }} Tokens</p>
             </div>
-            <div class="rounded-lg border border-border bg-muted/30 p-3">
-              <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div class="border-border bg-muted/30 rounded-lg border p-3">
+              <div class="text-muted-foreground flex items-center gap-1.5 text-xs">
                 <HashtagIcon class="h-3.5 w-3.5" />
                 最大输出
               </div>
-              <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.maxOutput.toLocaleString() }} Tokens</p>
+              <p class="text-foreground mt-1 text-sm font-semibold">{{ selectedModel.maxOutput.toLocaleString() }} Tokens</p>
             </div>
-            <div class="rounded-lg border border-border bg-muted/30 p-3">
-              <div class="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <div class="border-border bg-muted/30 rounded-lg border p-3">
+              <div class="text-muted-foreground flex items-center gap-1.5 text-xs">
                 <GlobeAltIcon class="h-3.5 w-3.5" />
                 模态
               </div>
-              <p class="mt-1 text-sm font-semibold text-foreground">{{ selectedModel.modality }}</p>
+              <p class="text-foreground mt-1 text-sm font-semibold">{{ selectedModel.modality }}</p>
             </div>
           </div>
 
           <!-- Tiered Pricing -->
           <div class="space-y-3">
-            <h4 class="text-sm font-semibold text-foreground">分级定价（每 1M Tokens）</h4>
+            <h4 class="text-foreground text-sm font-semibold">分级定价（每 1M Tokens）</h4>
             <div class="grid grid-cols-3 gap-3">
-              <div class="rounded-lg border border-border p-3">
+              <div class="border-border rounded-lg border p-3">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs text-muted-foreground">基础版</div>
+                  <div class="text-muted-foreground text-xs">基础版</div>
                   <Badge variant="secondary" class="text-[10px]">标准价</Badge>
                 </div>
                 <div class="mt-2 space-y-1">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Prompt</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.basic.prompt) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Prompt</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.basic.prompt) }}</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Completion</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.basic.completion) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Completion</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.basic.completion) }}</span>
                   </div>
                 </div>
               </div>
-              <div class="rounded-lg border border-border p-3">
+              <div class="border-border rounded-lg border p-3">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs text-muted-foreground">高级版</div>
+                  <div class="text-muted-foreground text-xs">高级版</div>
                   <Badge variant="secondary" class="text-[10px]">约 {{ discountRate(selectedModel.pricing.basic.prompt, selectedModel.pricing.advanced.prompt) }}%</Badge>
                 </div>
                 <div class="mt-2 space-y-1">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Prompt</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.advanced.prompt) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Prompt</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.advanced.prompt) }}</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Completion</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.advanced.completion) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Completion</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.advanced.completion) }}</span>
                   </div>
                 </div>
               </div>
-              <div class="rounded-lg border border-border p-3">
+              <div class="border-border rounded-lg border p-3">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs text-muted-foreground">尊享版</div>
+                  <div class="text-muted-foreground text-xs">尊享版</div>
                   <Badge variant="secondary" class="text-[10px]">约 {{ discountRate(selectedModel.pricing.basic.prompt, selectedModel.pricing.premium.prompt) }}%</Badge>
                 </div>
                 <div class="mt-2 space-y-1">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Prompt</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.premium.prompt) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Prompt</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.premium.prompt) }}</span>
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] text-muted-foreground">Completion</span>
-                    <span class="font-mono text-sm font-semibold text-foreground">{{ formatPrice(selectedModel.pricing.premium.completion) }}</span>
+                    <span class="text-muted-foreground text-[10px]">Completion</span>
+                    <span class="text-foreground font-mono text-sm font-semibold">{{ formatPrice(selectedModel.pricing.premium.completion) }}</span>
                   </div>
                 </div>
               </div>
@@ -603,13 +560,9 @@ const providerColors: Record<string, string> = {
 
           <!-- Capabilities -->
           <div class="space-y-3">
-            <h4 class="text-sm font-semibold text-foreground">能力支持</h4>
+            <h4 class="text-foreground text-sm font-semibold">能力支持</h4>
             <div class="flex flex-wrap gap-2">
-              <span
-                v-for="cap in selectedModel.capabilities"
-                :key="cap"
-                class="inline-flex items-center gap-1 rounded-md bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary"
-              >
+              <span v-for="cap in selectedModel.capabilities" :key="cap" class="bg-primary/10 text-primary inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium">
                 <BoltIcon class="h-3 w-3" />
                 {{ cap }}
               </span>
@@ -617,7 +570,7 @@ const providerColors: Record<string, string> = {
           </div>
         </div>
 
-        <DialogFooter class="gap-2 sm:gap-0">
+        <DialogFooter class="sm:gap-0 md:gap-2">
           <Button variant="outline" @click="detailOpen = false">关闭</Button>
           <Button class="gap-1">
             <ArrowTopRightOnSquareIcon class="h-4 w-4" />
